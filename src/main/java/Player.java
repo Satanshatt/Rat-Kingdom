@@ -1,7 +1,7 @@
 
 
 public class Player {
-
+//ändring 2
     private int health;
     private int mana;
     private int strength;
