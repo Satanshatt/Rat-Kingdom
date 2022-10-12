@@ -47,4 +47,32 @@ public class Player {
     public int getLevel() {
         return level;
     }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public void setMana(int mana) {
+        this.mana = mana;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public void setDexterity(int dexterity) {
+        this.dexterity = dexterity;
+    }
+
+    public void setIntelligence(int intelligence) {
+        this.intelligence = intelligence;
+    }
+
+    public void setXp(int xp) {
+        this.xp = xp;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 }
