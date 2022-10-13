@@ -1,4 +1,5 @@
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
 //ändring 2
@@ -9,6 +10,11 @@ public class Player {
     private int intelligence;
     private int xp;
     private int level;
+    private Race race;
+    private Trade trade;
+
+    private String [] abilities = {"walk", "run", "jump", "fret", "boxing", "whip"};
+    private ArrayList <String> equipment = new ArrayList<>();
 
     public Player() {
         this.health = 100;
@@ -48,6 +54,14 @@ public class Player {
         return level;
     }
 
+    public Race getRace() {
+        return race;
+    }
+
+    public Trade getTrade() {
+        return trade;
+    }
+
     public void setHealth(int health) {
         this.health = health;
     }
@@ -75,4 +89,21 @@ public class Player {
     public void setLevel(int level) {
         this.level = level;
     }
+
+    public void setRace(Race race) {
+        this.race = race;
+    }
+
+    public void setTrade(Trade trade) {
+        this.trade = trade;
+    }
+
+    public void addEquipment (String equipment) {
+
+    }
+
+    public List<String> getEquipment () {
+        return equipment;
+    }
+
 }
