@@ -35,6 +35,10 @@ public class Player {
   /*  public Trade chooseTrade(String chosenTrade){
         if (chosenTrade.equalsIgnoreCase("Builder")){
             return new BuilderTrade();
+        } else if (chosenTrade.equalsIgnoreCase("Circus artist")){
+            return new CircusArtistTrade();
+        } else if (chosenTrade.equalsIgnoreCase("Storyteller")){
+            return new StorytellerTrade();
         } else return null;
     }
 

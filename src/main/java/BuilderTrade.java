@@ -11,6 +11,6 @@ public class BuilderTrade extends Trade {
 
     @Override
     String getName() {
-        return null;
+        return NAME;
     }
 }
