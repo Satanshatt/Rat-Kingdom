@@ -16,7 +16,7 @@ public class Player {
     private String [] abilities = {"walk", "run", "jump", "fret", "boxing", "whip"};
     private ArrayList <String> equipment = new ArrayList<>();
 
-    public Player() {
+    public Player(String trade) {
         this.health = 100;
         this.mana = 100;
         this.strength = 10;
@@ -24,6 +24,14 @@ public class Player {
         this.intelligence = 10;
         this.xp = 0;
         this.level = 0;
+        this.trade = chooseTrade(trade);
+        this.trade.raiseAttribute(this);
+    }
+
+    public Trade chooseTrade(String chosenTrade){
+        if (chosenTrade.equalsIgnoreCase("Builder")){
+            return new BuilderTrade();
+        } else return null;
     }
 
     public int getHealth() {
@@ -92,10 +100,6 @@ public class Player {
 
     public void setRace(Race race) {
         this.race = race;
-    }
-
-    public void setTrade(Trade trade) {
-        this.trade = trade;
     }
 
     public void addEquipment (String equipment) {
