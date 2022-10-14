@@ -6,5 +6,7 @@ abstract class Race {
         this.name = name;
     }
 
-    abstract String getName();
+    public String getName(){
+        return name;
+    }
 }

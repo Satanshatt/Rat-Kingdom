@@ -7,7 +7,7 @@ class TradeTest {
 
     @Test
     void checkStrengthBuilder(){
-        player1 = new Player(new BuilderTrade(player1), new BrownRatRace());
+        player1 = new Player(new BuilderTrade(player1), new BrownRat(player1));
         assertEquals(12, player1.getStrength());
     }
 

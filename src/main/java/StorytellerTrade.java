@@ -7,9 +7,4 @@ public class StorytellerTrade extends Trade{
     void raiseAttribute(Player player) {
         player.setIntelligence(player.getIntelligence() + attribute);
     }
-
-    @Override
-    String getName() {
-        return NAME;
-    }
 }

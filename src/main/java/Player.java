@@ -23,7 +23,7 @@ public class Player {
         this.intelligence = 10;
         this.xp = 0;
         this.level = 0;
-        //this.race = race;
+        this.race = race;
         if(trade != null)
             this.trade = trade;
         else
