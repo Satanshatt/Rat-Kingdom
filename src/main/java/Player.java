@@ -23,7 +23,7 @@ public class Player {
         this.intelligence = 10;
         this.xp = 0;
         this.level = 0;
-        this.race =race;
+        //this.race = race;
         if(trade != null)
             this.trade = trade;
         else
@@ -34,7 +34,7 @@ public class Player {
 
   /*  public Trade chooseTrade(String chosenTrade){
         if (chosenTrade.equalsIgnoreCase("Builder")){
-            return new BuilderTrade();
+            return new BuilderTrade(this);
         } else if (chosenTrade.equalsIgnoreCase("Circus artist")){
             return new CircusArtistTrade();
         } else if (chosenTrade.equalsIgnoreCase("Storyteller")){
