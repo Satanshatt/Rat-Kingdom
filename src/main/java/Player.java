@@ -13,10 +13,9 @@ public class Player {
     private Race race;
     private Trade trade;
 
-    private String [] abilities = {"walk", "run", "jump", "fret", "boxing", "whip"};
     private ArrayList <String> equipment = new ArrayList<>();
 
-    public Player(String trade) {
+    public Player(Trade trade, Race race) {
         this.health = 100;
         this.mana = 100;
         this.strength = 10;
@@ -24,15 +23,25 @@ public class Player {
         this.intelligence = 10;
         this.xp = 0;
         this.level = 0;
-        this.trade = chooseTrade(trade);
-        this.trade.raiseAttribute(this);
+        this.race =race;
+        if(trade != null)
+            this.trade = trade;
+        else
+            throw new IllegalStateException();
+        //this.trade = chooseTrade(trade);
+        //this.trade.raiseAttribute(this);
     }
 
-    public Trade chooseTrade(String chosenTrade){
+  /*  public Trade chooseTrade(String chosenTrade){
         if (chosenTrade.equalsIgnoreCase("Builder")){
             return new BuilderTrade();
         } else return null;
     }
+
+    Kommenterar bort tillfälligt.
+    Varför gå igenom en metod, när vi kan skicka in yrket direkt?
+    Är det möjligt att ha ett yrke som är null?
+   */
 
     public int getHealth() {
         return health;
@@ -109,5 +118,31 @@ public class Player {
     public List<String> getEquipment () {
         return equipment;
     }
+
+    public void walk () {
+
+    }
+
+    public void run () {
+
+    }
+
+    public void jump () {
+
+    }
+
+    public void fret () {
+
+    }
+
+    public void boxing () {
+
+    }
+
+    public void whip () {
+
+    }
+
+    //private String [] abilities = {"walk", "run", "jump", "fret", "boxing", "whip"}; +die
 
 }
