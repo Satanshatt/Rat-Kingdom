@@ -1,3 +1,10 @@
+abstract class Race {
+    String name;
+    final int attribute = 20;
 
-public class Race {
+    public Race(String name) {
+        this.name = name;
+    }
+
+    abstract String getName();
 }

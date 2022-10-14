@@ -1,8 +1,9 @@
 public class BuilderTrade extends Trade {
 
     public static final String NAME = "Builder";
-    BuilderTrade() {
+    BuilderTrade(Player player) {
         super(NAME);
+        player.setStrength(player.getStrength() + attribute);
     }
     @Override
     void raiseAttribute(Player player) {
