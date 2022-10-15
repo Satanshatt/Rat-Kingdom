@@ -147,6 +147,6 @@ public class Player {
 
     }
 
-    //private String [] abilities = {"walk", "run", "jump", "fret", "boxing", "whip"}; +die
+    public void die () {}
 
 }
