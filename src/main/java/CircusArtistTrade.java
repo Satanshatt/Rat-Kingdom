@@ -7,9 +7,4 @@ public class CircusArtistTrade extends Trade{
     void raiseAttribute(Player player) {
         player.setDexterity(player.getDexterity() + attribute);
     }
-
-    @Override
-    String getName() {
-        return NAME;
-    }
 }

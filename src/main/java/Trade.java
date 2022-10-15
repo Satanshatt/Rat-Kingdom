@@ -9,5 +9,7 @@ abstract class Trade {
 
     abstract void raiseAttribute(Player player);
 
-    abstract String getName();
+    public String getName(){
+        return name;
+    }
 }
