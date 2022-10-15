@@ -1,9 +1,9 @@
 public class BlackRat extends Race {
     private static final String NAME = "Black rat";
 
-    BlackRat(Player player){
-        super(NAME);
-        player.setHealth(player.getHealth() + (attribute / 2));
-        player.setMana(player.getMana() + (attribute / 2));
+    BlackRat(Player1 newPlayer){
+        super(newPlayer, NAME);
+        newPlayer.setHealth(newPlayer.getHealth() + (attribute / 2));
+        newPlayer.setMana(newPlayer.getMana() + (attribute / 2));
     }
 }

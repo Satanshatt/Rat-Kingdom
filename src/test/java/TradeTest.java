@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class TradeTest {
     private Player player1;
 
-    @Test
+    /*@Test
     void checkStrengthBuilder(){
         player1 = new Player(new BuilderTrade(player1), new BrownRat(player1));
         assertEquals(12, player1.getStrength());
-    }
+    }*/
 
     /*@Test
     void checkDexterityCircusArtist(){

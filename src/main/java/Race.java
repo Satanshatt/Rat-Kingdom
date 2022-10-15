@@ -1,8 +1,9 @@
-abstract class Race {
+abstract class Race extends PlayerDecorator {
     String name;
     final int attribute = 20;
 
-    public Race(String name) {
+    public Race(Player1 newPlayer, String name) {
+        super(newPlayer);
         this.name = name;
     }
 
