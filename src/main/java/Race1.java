@@ -1,4 +1,4 @@
-public class Race1 extends DecoratorPlayer{
+public class Race1 extends PlayerDecorator {
 
     protected Player1 player1;
 
@@ -6,11 +6,5 @@ public class Race1 extends DecoratorPlayer{
         super(newPlayer);
         player1 = newPlayer;
     }
-
-    @Override
-    void addStrength(int strength) {
-        player1.setStrength(strength);
-    }
-
 
 }
