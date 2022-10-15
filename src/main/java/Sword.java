@@ -1,21 +1,29 @@
 public class Sword extends Weapon{
     private static final String NAME = "Sword";
-    private static final int DAMAGE = 2;
-    private static final int SPEED = 4;
+    private final int weaponLevel;
+    private final int damage;
+    private final int speed;
 
-    public Sword(){
-        super(NAME, DAMAGE, SPEED);
+    public Sword(Player1 newPlayer){
+        super(newPlayer, NAME);
+        this.weaponLevel = levelRandomizer();
+        this.damage = weaponLevel + 2;
+        this.speed = weaponLevel + 4;
     }
 
-    @Override
-    public void mainAttack(Player player) {
-        int attackDamage = player.getStrength() + DAMAGE;
-        int attackSpeed = player.getDexterity() + SPEED;
+    public int attackDamage(){
+        return tempPlayer.getStrength() + damage;
     }
 
-    @Override
-    public void secondaryAttack(Player player){
-        int attackDamage = player.getStrength() + (DAMAGE * 2);
-        int attackSpeed = player.getDexterity();
+    public int attackSpeed(){
+        return tempPlayer.getDexterity() + speed;
+    }
+
+    public int getDamage(){
+        return damage;
+    }
+
+    public int getSpeed(){
+        return speed;
     }
 }

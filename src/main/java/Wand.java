@@ -1,21 +1,29 @@
 public class Wand extends Weapon {
     private static final String NAME = "Wand";
-    private static final int DAMAGE = 3;
-    private static final int SPEED = 3;
+    private final int weaponLevel;
+    private final int damage;
+    private final int speed;
 
-    public Wand(){
-        super(NAME, DAMAGE, SPEED);
+    public Wand(Player1 newPlayer){
+        super(newPlayer, NAME);
+        this.weaponLevel = levelRandomizer();
+        this.damage = weaponLevel + 3;
+        this.speed = weaponLevel + 3;
     }
 
-    @Override
-    public void mainAttack(Player player) {
-        int attackDamage = player.getIntelligence() + DAMAGE;
-        int attackSpeed = player.getDexterity() + SPEED;
+    public int attackDamage(){
+        return tempPlayer.getIntelligence() + damage;
     }
 
-    @Override
-    public void secondaryAttack(Player player){
-        int attackDamage = player.getIntelligence() + (DAMAGE * 2);
-        int attackSpeed = player.getDexterity();
+    public int attackSpeed(){
+        return tempPlayer.getDexterity() + speed;
+    }
+
+    public int getDamage(){
+        return damage;
+    }
+
+    public int getSpeed(){
+        return speed;
     }
 }

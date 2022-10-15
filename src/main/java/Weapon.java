@@ -1,27 +1,33 @@
-abstract class Weapon {
+abstract class Weapon extends PlayerDecorator {
     String name;
-    int damage;
-    int speed;
 
-    public Weapon(String name, int damage, int speed){
+    public Weapon(Player1 newPlayer, String name){
+        super(newPlayer);
         this.name = name;
-        this.damage = damage;
-        this.speed = speed;
     }
 
-    abstract void mainAttack(Player player);
+    public int levelRandomizer(){
+        return (int)(Math.random() * 10) + 1;
+    }
 
-    abstract void secondaryAttack(Player player);
+    abstract int attackDamage();
+
+    abstract int attackSpeed();
 
     public String getName(){
         return name;
     }
 
-    public int getDamage(){
-        return damage;
+
+    /*@Override
+    public void mainAttack() {
+        int attackDamage = tempPlayer.getStrength() + DAMAGE;
+        int attackSpeed = tempPlayer.getDexterity() + SPEED;
     }
 
-    public int getSpeed(){
-        return speed;
-    }
+    @Override
+    public void secondaryAttack(){
+        int attackDamage = tempPlayer.getStrength() + (DAMAGE * 2);
+        int attackSpeed = (tempPlayer.getDexterity() / 2) + SPEED;
+    }*/
 }
