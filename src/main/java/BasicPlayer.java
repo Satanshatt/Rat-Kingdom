@@ -88,4 +88,30 @@ public class BasicPlayer implements Player1 {
         this.level = level;
     }
 
+    private void walk () {
+
+    }
+
+    private void run () {
+
+    }
+
+    private void jump () {
+
+    }
+
+    private void fret () {
+
+    }
+
+    private void boxing () {
+
+    }
+
+    private void whip () {
+
+    }
+
+    private void die () {}
+
 }
