@@ -1,7 +1,7 @@
-public class BuilderTrade extends Trade {
+public class Builder extends Trade {
 
     private static final String NAME = "Builder";
-    BuilderTrade(Player1 newPlayer) {
+    Builder(Player1 newPlayer) {
         super(newPlayer, NAME);
         newPlayer.setStrength(newPlayer.getStrength() + attribute);
     }

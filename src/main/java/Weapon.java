@@ -1,22 +1,16 @@
-abstract class Weapon extends PlayerDecorator {
-    String name;
+abstract class Weapon extends Equipment {
 
-    public Weapon(Player1 newPlayer, String name){
-        super(newPlayer);
-        this.name = name;
+    public Weapon(Player1 newPlayer, String name) {
+        super(newPlayer, name);
     }
 
-    public int levelRandomizer(){
-        return (int)(Math.random() * 10) + 1;
+    protected int levelRandomizer() {
+        return (int) (Math.random() * 10) + 1;
     }
 
     abstract int attackDamage();
 
     abstract int attackSpeed();
-
-    public String getName(){
-        return name;
-    }
 
 
     /*@Override
