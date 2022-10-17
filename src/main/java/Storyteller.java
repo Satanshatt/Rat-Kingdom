@@ -1,6 +1,6 @@
-public class StorytellerTrade extends Trade{
+public class Storyteller extends Trade{
     public static final String NAME = "Storyteller";
-    StorytellerTrade(Player1 newPlayer) {
+    Storyteller(Player1 newPlayer) {
         super(newPlayer, NAME);
         newPlayer.setIntelligence(newPlayer.getIntelligence() + attribute);
     }

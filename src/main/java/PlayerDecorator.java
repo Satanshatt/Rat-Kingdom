@@ -41,7 +41,6 @@ public abstract class PlayerDecorator implements Player1 {
         return tempPlayer.getLevel();
     }
 
-
     @Override
     public void setStrength(int strength) {
         tempPlayer.setStrength(strength);
