@@ -1,3 +1,5 @@
+import java.util.List;
+
 public interface Player1 {
     int getStrength();
     int getHealth();
@@ -6,6 +8,8 @@ public interface Player1 {
     int getIntelligence();
     int getXp();
     int getLevel();
+    List <Equipment> getEquipment();
+    void addEquipment(Equipment ... equipment);
     void setStrength(int strength);
     void setHealth(int health);
     void setMana(int mana);

@@ -1,3 +1,5 @@
+import java.util.List;
+
 public abstract class PlayerDecorator implements Player1 {
 
     protected Player1 tempPlayer;
@@ -39,6 +41,15 @@ public abstract class PlayerDecorator implements Player1 {
     @Override
     public int getLevel() {
         return tempPlayer.getLevel();
+    }
+
+    @Override
+    public List<Equipment> getEquipment() {
+        return null;
+    }
+
+    @Override
+    public void addEquipment(Equipment... equipment) {
     }
 
     @Override
