@@ -9,6 +9,7 @@ public class BasicPlayer implements Player {
     private int intelligence;
     private int xp;
     private int level;
+    private Equipment activeWeapon;
 
     private ArrayList<Equipment> equipment = new ArrayList<>(); //equipmentBag, backpack ....?
 
@@ -21,7 +22,6 @@ public class BasicPlayer implements Player {
         xp = 0;
         level = 1;
     }
-
 
     @Override
     public int getHealth() {
@@ -65,7 +65,6 @@ public class BasicPlayer implements Player {
 
     @Override
     public void addEquipment(Equipment... equipment) {
-
     }
 
     @Override
@@ -103,7 +102,19 @@ public class BasicPlayer implements Player {
         this.level = level;
     }
 
-    private void walk () {
+    private void walkRight () {
+
+    }
+
+    private void walkLeft() {
+
+    }
+
+    private void walkForward() {
+
+    }
+
+    private void walkBackwards() {
 
     }
 
@@ -116,7 +127,8 @@ public class BasicPlayer implements Player {
     }
 
     private void fret () {
-
+        //skada NPC
+        //Level, styrka, typ av NPC etc...
     }
 
     private void boxing () {
@@ -128,5 +140,6 @@ public class BasicPlayer implements Player {
     }
 
     private void die () {}
+
 
 }
