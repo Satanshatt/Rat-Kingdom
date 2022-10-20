@@ -8,6 +8,8 @@ public interface Player {
     int getIntelligence();
     int getXp();
     int getLevel();
+    int getPosX();
+    int getPosY();
     List <Equipment> getEquipment();
     void addEquipment(Equipment ... equipment);
     void setStrength(int strength);
@@ -17,5 +19,7 @@ public interface Player {
     void setIntelligence(int intelligence);
     void setXp(int xp);
     void setLevel(int level);
+    void walkLeft(int steps);
+    void walkRight(int steps);
 
 }

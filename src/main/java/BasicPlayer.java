@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BasicPlayer implements Player {
+
+    private static final int START_POS_X = 0;
+    private static final int START_POS_Y = 0;
+
     private int health;
     private int mana;
     private int strength;
@@ -10,6 +14,8 @@ public class BasicPlayer implements Player {
     private int xp;
     private int level;
     private Equipment activeWeapon;
+    private int posX;
+    private int posY;
 
     private ArrayList<Equipment> equipment = new ArrayList<>(); //equipmentBag, backpack ....?
 
@@ -21,6 +27,8 @@ public class BasicPlayer implements Player {
         intelligence = 10;
         xp = 0;
         level = 1;
+        this.posX = START_POS_X;
+        this.posY = START_POS_Y;
     }
 
     @Override
@@ -56,6 +64,16 @@ public class BasicPlayer implements Player {
     @Override
     public int getLevel() {
         return this.level;
+    }
+
+    @Override
+    public int getPosX() {
+        return this.posX;
+    }
+
+    @Override
+    public int getPosY() {
+        return this.posY;
     }
 
     @Override
@@ -102,44 +120,48 @@ public class BasicPlayer implements Player {
         this.level = level;
     }
 
-    private void walkRight () {
+    @Override
+    public void walkLeft(int steps) {
 
     }
 
-    private void walkLeft() {
+    @Override
+    public void walkRight(int steps) {
 
     }
 
-    private void walkForward() {
+
+    public void walkForward() {
 
     }
 
-    private void walkBackwards() {
+    public void walkBackwards() {
 
     }
 
-    private void run () {
+    public void run () {
 
     }
 
-    private void jump () {
+    public void jump () {
 
     }
 
-    private void fret () {
+    public void fret () {
         //skada NPC
         //Level, styrka, typ av NPC etc...
     }
 
-    private void boxing () {
+    public void boxing () {
 
     }
 
-    private void whip () {
+    public void whip () {
 
     }
 
-    private void die () {}
+    public void die () {}
 
+    public void useDoor() {}
 
 }

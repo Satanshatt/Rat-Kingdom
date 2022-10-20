@@ -44,6 +44,17 @@ public abstract class PlayerDecorator implements Player {
     }
 
     @Override
+    public int getPosX() {
+        return tempPlayer.getPosX();
+    }
+
+    @Override
+    public int getPosY() {
+        return tempPlayer.getPosY();
+    }
+
+
+    @Override
     public List<Equipment> getEquipment() {
         return null;
     }
@@ -86,4 +97,13 @@ public abstract class PlayerDecorator implements Player {
     public void setLevel(int level) {
         tempPlayer.setLevel(level);
     }
+
+    @Override
+    public void walkLeft(int steps) {
+
+    }
+
+    @Override
+    public void walkRight(int steps) {}
+
 }
