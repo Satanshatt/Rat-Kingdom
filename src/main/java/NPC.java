@@ -16,18 +16,20 @@ abstract class NPC {
         this.level = level;
     }
 
-    public void die() {
+    public abstract void battle ();
+
+    public abstract void moveForBattle ();
+
+    public abstract void spawn ();
+
+    public boolean die() {
+        return true;
     }
 
-        public abstract void battle ();
-
-        public abstract void moveForBattle ();
-
-        public abstract void spawn ();
-
-        public int takeDamage ( int damageFromPlayer){
+    public int takeDamage ( int damageFromPlayer){
             return 2;
-        }
+    }
+
 
         public String getName () {
             return name;
