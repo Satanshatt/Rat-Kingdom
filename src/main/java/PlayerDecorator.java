@@ -1,8 +1,10 @@
-public abstract class PlayerDecorator implements Player1 {
+import java.util.List;
 
-    protected Player1 tempPlayer;
+public abstract class PlayerDecorator implements Player {
 
-    public PlayerDecorator(Player1 newPlayer) {
+    protected Player tempPlayer;
+
+    public PlayerDecorator(Player newPlayer) {
         this.tempPlayer = newPlayer;
     }
 
@@ -39,6 +41,15 @@ public abstract class PlayerDecorator implements Player1 {
     @Override
     public int getLevel() {
         return tempPlayer.getLevel();
+    }
+
+    @Override
+    public List<Equipment> getEquipment() {
+        return null;
+    }
+
+    @Override
+    public void addEquipment(Equipment... equipment) {
     }
 
     @Override

@@ -1,4 +1,7 @@
-public class BasicPlayer implements Player1 {
+import java.util.ArrayList;
+import java.util.List;
+
+public class BasicPlayer implements Player {
     private int health;
     private int mana;
     private int strength;
@@ -6,6 +9,8 @@ public class BasicPlayer implements Player1 {
     private int intelligence;
     private int xp;
     private int level;
+
+    private ArrayList<Equipment> equipment = new ArrayList<>(); //equipmentBag, backpack ....?
 
     public BasicPlayer(){
         health = 100;
@@ -51,6 +56,16 @@ public class BasicPlayer implements Player1 {
     @Override
     public int getLevel() {
         return this.level;
+    }
+
+    @Override
+    public List<Equipment> getEquipment() {
+        return null;
+    }
+
+    @Override
+    public void addEquipment(Equipment... equipment) {
+
     }
 
     @Override

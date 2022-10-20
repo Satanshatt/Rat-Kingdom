@@ -4,7 +4,7 @@ public class Sword extends Weapon{
     private final int damage;
     private final int speed;
 
-    public Sword(Player1 newPlayer){
+    public Sword(Player newPlayer){
         super(newPlayer, NAME);
         this.weaponLevel = levelRandomizer();
         this.damage = weaponLevel + 2;
