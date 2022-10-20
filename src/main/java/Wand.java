@@ -4,7 +4,7 @@ public class Wand extends Weapon {
     private final int damage;
     private final int speed;
 
-    public Wand(Player1 newPlayer){
+    public Wand(Player newPlayer){
         super(newPlayer, NAME);
         this.weaponLevel = levelRandomizer();
         this.damage = weaponLevel + 3;

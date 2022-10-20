@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class BasicPlayer implements Player1 {
+public class BasicPlayer implements Player {
     private int health;
     private int mana;
     private int strength;

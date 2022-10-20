@@ -4,7 +4,7 @@ public class Axe extends Weapon {
     private final int damage;
     private final int speed;
 
-    public Axe(Player1 newPlayer){
+    public Axe(Player newPlayer){
         super(newPlayer, NAME);
         this.weaponLevel = levelRandomizer();
         this.damage = weaponLevel + 4;

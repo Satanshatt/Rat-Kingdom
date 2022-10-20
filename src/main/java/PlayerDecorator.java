@@ -1,10 +1,10 @@
 import java.util.List;
 
-public abstract class PlayerDecorator implements Player1 {
+public abstract class PlayerDecorator implements Player {
 
-    protected Player1 tempPlayer;
+    protected Player tempPlayer;
 
-    public PlayerDecorator(Player1 newPlayer) {
+    public PlayerDecorator(Player newPlayer) {
         this.tempPlayer = newPlayer;
     }
 

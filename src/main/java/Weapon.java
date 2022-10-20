@@ -1,6 +1,6 @@
 abstract class Weapon extends Equipment {
 
-    public Weapon(Player1 newPlayer, String name) {
+    public Weapon(Player newPlayer, String name) {
         super(newPlayer, name);
     }
 
