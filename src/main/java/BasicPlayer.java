@@ -78,11 +78,14 @@ public class BasicPlayer implements Player {
 
     @Override
     public List<Equipment> getEquipment() {
-        return null;
+        return this.equipment;
     }
 
     @Override
     public void addEquipment(Equipment... equipment) {
+        if(equipment == null)
+            throw new IllegalArgumentException("Equipment cannot be null!");
+        this.equipment.addAll(List.of(equipment));
     }
 
     @Override
@@ -122,20 +125,22 @@ public class BasicPlayer implements Player {
 
     @Override
     public void walkLeft(int steps) {
-
+        if (steps < 0)
+            throw new IllegalArgumentException("Negative steps not possible!");
+        else if (steps == 0)
+            throw new IllegalArgumentException("0 steps will not move the player");
+        else
+            this.posX = posX - steps;
     }
 
     @Override
     public void walkRight(int steps) {
-
+        this.posX = posX + steps;
     }
 
-
-    public void walkForward() {
-
-    }
-
-    public void walkBackwards() {
+    @Override
+    public void walkForward(int steps) {
+        this.posY = posY + steps;
 
     }
 
