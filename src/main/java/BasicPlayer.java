@@ -138,7 +138,12 @@ public class BasicPlayer implements Player {
 
     @Override
     public void walkRight(int steps) {
-        this.posX = posX + steps;
+        if (steps < 0)
+            throw new IllegalArgumentException("Negative steps not possible!");
+        else if (steps == 0)
+            throw new IllegalArgumentException("0 steps will not move the player");
+        else
+            this.posX = posX + steps;
     }
 
     @Override
