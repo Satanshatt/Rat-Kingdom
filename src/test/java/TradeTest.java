@@ -4,6 +4,17 @@ import static org.junit.jupiter.api.Assertions.*;
 class TradeTest {
 
     @Test
+    public void testGetName(){
+        Trade tradeBuilder = new Builder(new BasicPlayer());
+        Trade tradeCircusArtist = new CircusArtist(new BasicPlayer());
+        Trade tradeStoryteller = new Storyteller(new BasicPlayer());
+        assertEquals("Builder", tradeBuilder.getName());
+        assertEquals("Circus artist", tradeCircusArtist.getName());
+        assertEquals("Storyteller", tradeStoryteller.getName());
+
+    }
+
+    @Test
     public void choosingTradeBuilder(){
         Player player = new Builder(new BasicPlayer());
         assertEquals(12, player.getStrength());

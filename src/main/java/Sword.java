@@ -26,4 +26,8 @@ public class Sword extends Weapon{
     public int getSpeed(){
         return speed;
     }
+
+    public int getWeaponLevel(){
+        return weaponLevel;
+    }
 }

@@ -19,7 +19,7 @@ public class BasicPlayer implements Player {
 
     private ArrayList<Equipment> equipment = new ArrayList<>(); //equipmentBag, backpack ....?
 
-    public BasicPlayer(){
+    public BasicPlayer() {
         health = 100;
         mana = 100;
         strength = 10;
@@ -139,29 +139,31 @@ public class BasicPlayer implements Player {
 
     }
 
-    public void run () {
+    public void run() {
 
     }
 
-    public void jump () {
+    public void jump() {
 
     }
 
-    public void fret () {
+    public void fret() {
         //skada NPC
         //Level, styrka, typ av NPC etc...
     }
 
-    public void boxing () {
+    public void boxing() {
 
     }
 
-    public void whip () {
+    public void whip() {
 
     }
 
-    public void die () {}
+    public void die() {
+    }
 
-    public void useDoor() {}
+    public void useDoor() {
+    }
 
 }
