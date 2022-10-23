@@ -24,5 +24,7 @@ public interface Player {
     void walkRight(int steps);
     void walkForward(int steps);
     void useWeaponOnNPC(Weapon weapon, NPC npc);
+    boolean isDead();
+    void die();
 
 }

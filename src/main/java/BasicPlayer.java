@@ -16,6 +16,7 @@ public class BasicPlayer implements Player {
     private Equipment activeWeapon;
     private int posX;
     private int posY;
+    private boolean isDead;
 
     private ArrayList<Equipment> equipment = new ArrayList<>(); //equipmentBag, backpack ....?
 
@@ -184,10 +185,17 @@ public class BasicPlayer implements Player {
 
     }
 
+    @Override
     public void die() {
+        this.isDead = true;
     }
 
     public void useDoor() {
+    }
+
+    @Override
+    public boolean isDead () {
+        return isDead;
     }
 
 }

@@ -203,6 +203,8 @@ public class BasicPlayerTest {
 
     @Test
     public void player_Dies () {
+        Player player = new BasicPlayer();
+        player.die();
         assertTrue(player.isDead());
     }
 

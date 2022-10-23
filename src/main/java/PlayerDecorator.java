@@ -111,4 +111,12 @@ public abstract class PlayerDecorator implements Player {
 
     @Override
     public void useWeaponOnNPC(Weapon weapon, NPC npc) {}
+
+    @Override
+    public void die () {}
+
+    @Override
+    public boolean isDead() {
+        return tempPlayer.isDead();
+    }
 }
