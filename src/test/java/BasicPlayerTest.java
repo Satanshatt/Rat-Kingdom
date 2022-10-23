@@ -202,7 +202,9 @@ public class BasicPlayerTest {
     }
 
     @Test
-    public void player_Dies () {}
+    public void player_Dies () {
+        assertTrue(player.isDead());
+    }
 
     @Test
     public void player_Use_Door () {}
