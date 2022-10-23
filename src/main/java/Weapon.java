@@ -1,7 +1,7 @@
 abstract class Weapon extends Equipment {
 
-    public Weapon(Player newPlayer, String name) {
-        super(newPlayer, name);
+    public Weapon(Player player, String name) {
+        super(player, name);
     }
 
     protected int levelRandomizer() {
@@ -12,16 +12,9 @@ abstract class Weapon extends Equipment {
 
     abstract int attackSpeed();
 
+    abstract int getDamage();
 
-    /*@Override
-    public void mainAttack() {
-        int attackDamage = tempPlayer.getStrength() + DAMAGE;
-        int attackSpeed = tempPlayer.getDexterity() + SPEED;
-    }
+    abstract int getSpeed();
 
-    @Override
-    public void secondaryAttack(){
-        int attackDamage = tempPlayer.getStrength() + (DAMAGE * 2);
-        int attackSpeed = (tempPlayer.getDexterity() / 2) + SPEED;
-    }*/
+    abstract int getWeaponLevel();
 }
