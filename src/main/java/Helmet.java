@@ -3,8 +3,8 @@ public class Helmet extends Armor {
     private final int protectionValue;
     private final int armorLevel;
 
-    public Helmet(Player newPlayer){
-        super(newPlayer, NAME);
+    public Helmet(Player player){
+        super(player, NAME);
         this.armorLevel = levelRandomizer();
         this.protectionValue = armorLevel * 2;
     }

@@ -4,10 +4,6 @@ abstract class Weapon extends Equipment {
         super(player, name);
     }
 
-    protected int levelRandomizer() {
-        return (int) (Math.random() * 10) + 1;
-    }
-
     abstract int attackDamage();
 
     abstract int attackSpeed();
