@@ -64,38 +64,38 @@ public abstract class PlayerDecorator implements Player {
     }
 
     @Override
-    public void setStrength(int strength) {
-        tempPlayer.setStrength(strength);
+    public void increaseStrength(int strength) {
+        tempPlayer.increaseStrength(strength);
     }
 
     @Override
-    public void setHealth(int health) {
-        tempPlayer.setHealth(health);
+    public void increaseHealth(int health) {
+        tempPlayer.increaseHealth(health);
     }
 
     @Override
-    public void setMana(int mana) {
-        tempPlayer.setMana(mana);
+    public void increaseMana(int mana) {
+        tempPlayer.increaseMana(mana);
     }
 
     @Override
-    public void setDexterity(int dexterity) {
-        tempPlayer.setDexterity(dexterity);
+    public void increaseDexterity(int dexterity) {
+        tempPlayer.increaseDexterity(dexterity);
     }
 
     @Override
-    public void setIntelligence(int intelligence) {
-        tempPlayer.setIntelligence(intelligence);
+    public void increaseIntelligence(int intelligence) {
+        tempPlayer.increaseIntelligence(intelligence);
     }
 
     @Override
-    public void setXp(int xP) {
-        tempPlayer.setXp(xP);
+    public void increaseXp(int xP) {
+        tempPlayer.increaseXp(xP);
     }
 
     @Override
-    public void setLevel(int level) {
-        tempPlayer.setLevel(level);
+    public void levelUpgrade() {
+        tempPlayer.levelUpgrade();
     }
 
     @Override
@@ -108,4 +108,7 @@ public abstract class PlayerDecorator implements Player {
 
     @Override
     public void walkForward(int steps) {}
+
+    @Override
+    public void killNPC() {}
 }

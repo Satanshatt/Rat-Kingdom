@@ -52,6 +52,9 @@ public class BasicPlayerTest {
     }
 
     @Test
+    public void test_Add_Object_When_List_Is_Full_Error () {}
+
+    @Test
     public void basicPlayer_defaultValue_Is_Correct () {
         Player player = new BasicPlayer();
         assertEquals(DEFAULT_VALUE_HEALTH, player.getHealth());
@@ -176,6 +179,59 @@ public class BasicPlayerTest {
         });
     }
 
+    @Test
+    public void player_Try_Walk_Outside_Map_Error () {
 
+    }
+
+    @Test
+    public void player_Try_Walk_To_Occupied_Coordinate_Error () {
+
+    }
+
+    @Test
+    public void player_Can_Jump () {}
+
+    @Test
+    public void player_Can_Jump_Over_Obsticle () {}
+
+    @Test
+    public void player_Try_Jump_Over_Too_High_Obsticle_Error () {
+
+    }
+
+    @Test
+    public void player_Dies () {}
+
+    @Test
+    public void player_Use_Door () {}
+
+    @Test
+    public void player_Fret_NPC () {}
+
+    @Test
+    public void player_Gets_Hurt_By_NPC () {}
+
+    @Test
+    public void health_Add_Over_Maxvalue_100_Error () {}
+
+    @Test
+    public void health_Goes_Under_Zero_Player_Dies () {}
+
+    @Test
+    public void mana_Increase_By_Level () {}
+
+    @Test
+    public void kill_NPC_Success () {
+        Enemy enemy = new Enemy("Fiende", "type", 10, 10, 2, 1, 2, 3);
+        enemy.takeDamage(10);
+
+    }
+
+    @Test
+    public void kill_NPC_And_Increase_Xp () {} //Eller annat än xp
+
+    @Test
+    public void level_Upgrade_With_Xp_Success(){}
 
 }

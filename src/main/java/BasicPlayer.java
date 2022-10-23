@@ -89,39 +89,42 @@ public class BasicPlayer implements Player {
     }
 
     @Override
-    public void setHealth(int health) {
+    public void increaseHealth(int health) {
         this.health = health;
     }
 
     @Override
-    public void setMana(int mana) {
+    public void increaseMana(int mana) {
         this.mana = mana;
     }
 
     @Override
-    public void setStrength(int strength) {
+    public void increaseStrength(int strength) {
         this.strength = strength;
     }
 
     @Override
-    public void setDexterity(int dexterity) {
+    public void increaseDexterity(int dexterity) {
         this.dexterity = dexterity;
     }
 
     @Override
-    public void setIntelligence(int intelligence) {
+    public void increaseIntelligence(int intelligence) {
         this.intelligence = intelligence;
     }
 
     @Override
-    public void setXp(int xp) {
+    public void increaseXp(int xp) {
         this.xp = xp;
     }
 
     @Override
-    public void setLevel(int level) {
-        this.level = level;
+    public void levelUpgrade() {
+        this.level = level + 1;
     }
+
+    @Override
+    public void killNPC() {}
 
     @Override
     public void walkLeft(int steps) {
