@@ -221,7 +221,12 @@ public class BasicPlayerTest {
     public void health_Add_Over_Maxvalue_100_Error () {}
 
     @Test
-    public void health_Goes_Under_Zero_Player_Dies () {}
+    public void health_Goes_Under_Zero_Player_Dies () {
+        Player player = new BasicPlayer();
+        int currentHealth = player.getHealth();
+        player.setHealth(currentHealth-1);
+        assertTrue(player.isDead());
+    }
 
     @Test
     public void mana_Increase_By_Level () {}

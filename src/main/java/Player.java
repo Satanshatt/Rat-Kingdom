@@ -14,7 +14,7 @@ public interface Player {
     List <Equipment> getEquipment();
     void addEquipment(Equipment ... equipment);
     void increaseStrength(int strength);
-    void increaseHealth(int health);
+    void setHealth(int health);
     void increaseMana(int mana);
     void increaseDexterity(int dexterity);
     void increaseIntelligence(int intelligence);

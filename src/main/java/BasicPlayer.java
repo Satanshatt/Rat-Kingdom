@@ -90,7 +90,7 @@ public class BasicPlayer implements Player {
     }
 
     @Override
-    public void increaseHealth(int health) {
+    public void setHealth(int health) {
         this.health = health;
     }
 
@@ -188,6 +188,7 @@ public class BasicPlayer implements Player {
     @Override
     public void die() {
         this.isDead = true;
+        restartSameLevel();
     }
 
     public void useDoor() {
@@ -196,6 +197,17 @@ public class BasicPlayer implements Player {
     @Override
     public boolean isDead () {
         return isDead;
+    }
+
+    public void restartSameLevel () {
+        health = 100;
+        mana = 100;
+        strength = 10;
+        dexterity = 10;
+        intelligence = 10;
+        xp = 0;
+        this.posX = START_POS_X;
+        this.posY = START_POS_Y;
     }
 
 }

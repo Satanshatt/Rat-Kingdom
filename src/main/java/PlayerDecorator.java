@@ -69,8 +69,8 @@ public abstract class PlayerDecorator implements Player {
     }
 
     @Override
-    public void increaseHealth(int health) {
-        tempPlayer.increaseHealth(health);
+    public void setHealth(int health) {
+        tempPlayer.setHealth(health);
     }
 
     @Override
