@@ -15,6 +15,7 @@ public class BasicPlayerTest {
     private static final int DEFAULT_VALUE_XP = 0;
     private static final int DEFAULT_VALUE_LEVEL = 1;
     private static final String SWORD_EQUIPMENT = "Sword";
+    private static final int XP_MAX_VALUE = 100;
 
     @Test
     public void list_Should_Be_Empty () {
@@ -232,6 +233,12 @@ public class BasicPlayerTest {
     public void kill_NPC_And_Increase_Xp () {} //Eller annat än xp
 
     @Test
-    public void level_Upgrade_With_Xp_Success(){}
+    public void level_Upgrade_With_Xp_Success(){
+        Player player = new BasicPlayer();
+        int levelUp = 1;
+        player.increaseXp(XP_MAX_VALUE);
+        assertEquals(DEFAULT_VALUE_LEVEL + levelUp, player.getLevel());
+
+    }
 
 }

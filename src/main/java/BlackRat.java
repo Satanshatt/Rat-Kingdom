@@ -3,7 +3,7 @@ public class BlackRat extends Race {
 
     BlackRat(Player player){
         super(player, NAME);
-        player.setHealth(player.getHealth() + (attribute / 2));
-        player.setMana(player.getMana() + (attribute / 2));
+        player.increaseHealth(player.getHealth() + (attribute / 2));
+        player.increaseMana(player.getMana() + (attribute / 2));
     }
 }

@@ -3,6 +3,6 @@ public class WhiteRat extends Race {
 
     WhiteRat(Player player){
         super(player, NAME);
-        player.setMana(player.getMana() + attribute);
+        player.increaseMana(player.getMana() + attribute);
     }
 }
