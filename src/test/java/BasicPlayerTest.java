@@ -224,8 +224,16 @@ public class BasicPlayerTest {
 
     @Test
     public void kill_NPC_Success () {
-        Enemy enemy = new Enemy("Fiende", "type", 10, 10, 2, 1, 2, 3);
-        enemy.takeDamage(10);
+        NPC enemy = new Enemy("Fiende", "type", 10, 10, 2, 1, 0, 0);
+        Player player = new BasicPlayer();
+        Weapon sword = new Sword(player);
+        /*
+        while (!enemy.getIsDead) {
+            player.useWeapon(sword, enemy);
+        }
+        assertTrue(enemy.isDead);
+         */
+
 
     }
 

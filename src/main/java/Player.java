@@ -23,6 +23,6 @@ public interface Player {
     void walkLeft(int steps);
     void walkRight(int steps);
     void walkForward(int steps);
-    void killNPC ();
+    void useWeaponOnNPC(Weapon weapon, NPC npc);
 
 }

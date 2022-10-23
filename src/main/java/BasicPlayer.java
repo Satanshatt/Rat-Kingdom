@@ -127,9 +127,6 @@ public class BasicPlayer implements Player {
     }
 
     @Override
-    public void killNPC() {}
-
-    @Override
     public void walkLeft(int steps) {
         if (steps < 0)
             throw new IllegalArgumentException("Negative steps not possible!");
@@ -161,6 +158,12 @@ public class BasicPlayer implements Player {
     public void fret() {
         //skada NPC
         //Level, styrka, typ av NPC etc...
+    }
+
+    @Override
+    public void useWeaponOnNPC (Weapon weapon, NPC npc) {
+        int damage = weapon.attackDamage();
+        //npc.setDamage(damage);
     }
 
     public void boxing() {

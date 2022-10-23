@@ -110,5 +110,5 @@ public abstract class PlayerDecorator implements Player {
     public void walkForward(int steps) {}
 
     @Override
-    public void killNPC() {}
+    public void useWeaponOnNPC(Weapon weapon, NPC npc) {}
 }
