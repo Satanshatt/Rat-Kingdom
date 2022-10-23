@@ -116,6 +116,9 @@ public class BasicPlayer implements Player {
     @Override
     public void increaseXp(int xp) {
         this.xp = xp;
+        if(this.xp >= 100) {
+            this.levelUpgrade();
+        }
     }
 
     @Override
