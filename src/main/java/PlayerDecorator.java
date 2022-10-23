@@ -15,7 +15,7 @@ public abstract class PlayerDecorator implements Player {
 
     @Override
     public int getHealth() {
-        return tempPlayer.getStrength();
+        return tempPlayer.getHealth();
     }
 
     @Override
