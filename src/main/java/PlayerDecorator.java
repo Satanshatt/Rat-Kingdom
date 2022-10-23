@@ -106,4 +106,6 @@ public abstract class PlayerDecorator implements Player {
     @Override
     public void walkRight(int steps) {}
 
+    @Override
+    public void walkForward(int steps) {}
 }

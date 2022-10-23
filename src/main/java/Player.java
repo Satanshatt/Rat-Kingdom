@@ -21,5 +21,6 @@ public interface Player {
     void setLevel(int level);
     void walkLeft(int steps);
     void walkRight(int steps);
+    void walkForward(int steps);
 
 }
