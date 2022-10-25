@@ -17,15 +17,15 @@ public class Room {
         this.height = tiles[0].length;
     }
 
-    public int width() { return width; }
-    public int height() { return height; }
+    public int getWidth() { return width; }
+    public int getHeight() { return height; }
 
     public void addEntity(Enemy enemy){
         this.enemies.add(enemy);
     }
 
     public Tile getTile(int x, int y){
-        if (x < 0 || x <= width || y < 0 || y >= height)
+        if (x < 0 || x >= width || y < 0 || y >= height)
             return null;
         else
             return tiles[x][y];
