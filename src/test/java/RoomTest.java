@@ -9,7 +9,7 @@ class RoomTest {
 
     private static final int MAP_WIDTH = 20;
     private static final int MAP_HEIGHT = 20;
-    private  Set<Enemy> enemies = new HashSet<>();
+    private  Set<Entity> entities = new HashSet<>();
 
     @Test
     public void correctSizeOfRoom(){

@@ -6,13 +6,13 @@ public class RoomGenerator {
     private int width;
     private int height;
     private Tile[][] tiles;
-    private Set<Enemy> enemies;
+    private Set<Entity> entities;
 
     public RoomGenerator(int width, int height){
         this.width = width;
         this.height = height;
         this.tiles = new Tile[width][height];
-        this.enemies = new HashSet<Enemy>();
+        this.entities = new HashSet<Entity>();
     }
 
     public Tile generateTile(String type, int x, int y){
@@ -35,7 +35,7 @@ public class RoomGenerator {
     }
 
     public Room generate(){
-        return new Room(tiles, enemies);
+        return new Room(tiles, entities);
     }
 
 }
