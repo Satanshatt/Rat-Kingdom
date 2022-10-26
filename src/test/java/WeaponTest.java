@@ -56,9 +56,8 @@ public class WeaponTest {
     public void testPickUpWeaponSuccess(){
         Weapon sword = new Sword(player);
         Weapon axe = new Axe(player);
-        sword.setWeaponLevel(1);
-        axe.setWeaponLevel(2);
-        player.setLevel(2);
+        sword.setWeaponLevel(0);
+        axe.setWeaponLevel(1);
         player.setActiveWeapon(sword);
         player.pickUpWeapon(axe);
         assertSame(axe, player.getActiveWeapon());
@@ -67,9 +66,8 @@ public class WeaponTest {
     @Test void testPickUpWeaponFail(){
         Weapon sword = new Sword(player);
         Weapon axe = new Axe(player);
-        sword.setWeaponLevel(2);
-        axe.setWeaponLevel(1);
-        player.setLevel(2);
+        sword.setWeaponLevel(1);
+        axe.setWeaponLevel(0);
         player.setActiveWeapon(sword);
         player.pickUpWeapon(axe);
         assertSame(sword, player.getActiveWeapon());
