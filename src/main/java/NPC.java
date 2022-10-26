@@ -1,4 +1,4 @@
-abstract class NPC {
+abstract class NPC extends Entity{
 
     String name = "";
     String type = "";
@@ -7,7 +7,8 @@ abstract class NPC {
     int health = 2;
     int level = 2;
 
-    NPC(String name, String type, int health, int damage, int size, int level) {
+    NPC(String name, String type, int health, int damage, int size, int level, int posX, int posY) {
+        super(type, posX, posY);
         this.name = name;
         this.type = type;
         this.health = health;

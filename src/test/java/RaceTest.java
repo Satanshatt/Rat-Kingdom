@@ -1,0 +1,34 @@
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+public class RaceTest {
+
+    @Test
+    public void testGetName(){
+        Race raceBlackRat = new BlackRat(new BasicPlayer());
+        Race raceBrownRat = new BrownRat(new BasicPlayer());
+        Race raceWhiteRat = new WhiteRat(new BasicPlayer());
+        assertEquals("Black rat", raceBlackRat.getName());
+        assertEquals("Brown rat", raceBrownRat.getName());
+        assertEquals("White rat", raceWhiteRat.getName());
+    }
+
+    @Test
+    public void choosingBlackRat(){
+        Player player = new BlackRat(new BasicPlayer());
+        assertEquals(110, player.getHealth());
+        assertEquals(110, player.getMana());
+    }
+
+    @Test
+    public void choosingRaceBrownRat(){
+        Player player = new BrownRat(new BasicPlayer());
+        assertEquals(120, player.getHealth());
+    }
+
+    @Test
+    public void choosingRaceWhiteRat(){
+        Player player = new WhiteRat(new BasicPlayer());
+        assertEquals(120, player.getMana());
+    }
+}
