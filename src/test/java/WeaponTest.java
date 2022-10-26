@@ -51,4 +51,13 @@ public class WeaponTest {
         assertEquals(10 + wand.getDamage(), wand.attackDamage());
         assertEquals(10 + wand.getSpeed(), wand.attackSpeed());
     }
+
+    @Test
+    public void testPickUpWeapon(){
+        Weapon sword = new Sword(player);
+        Weapon axe = new Axe(player);
+        player.setActiveWeapon(sword);
+        player.pickUpWeapon(axe);
+        assertEquals(player.getActiveWeapon, axe);
+    }
 }
