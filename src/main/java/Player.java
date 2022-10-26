@@ -11,10 +11,12 @@ public interface Player {
     int getLevel();
     int getPosX();
     int getPosY();
+    Weapon getActiveWeapon();
     List <Equipment> getEquipment();
     void addEquipment(Equipment ... equipment);
     void increaseStrength(int strength);
     void setHealth(int health);
+    void setActiveWeapon(Weapon weapon);
     void increaseMana(int mana);
     void increaseDexterity(int dexterity);
     void increaseIntelligence(int intelligence);
@@ -26,5 +28,6 @@ public interface Player {
     void useWeaponOnNPC(Weapon weapon, NPC npc);
     boolean isDead();
     void die();
+    void pickUpWeapon(Weapon weapon);
 
 }

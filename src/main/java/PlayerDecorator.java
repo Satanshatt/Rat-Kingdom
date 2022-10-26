@@ -53,6 +53,10 @@ public abstract class PlayerDecorator implements Player {
         return tempPlayer.getPosY();
     }
 
+    @Override
+    public Weapon getActiveWeapon(){
+        return tempPlayer.getActiveWeapon();
+    }
 
     @Override
     public List<Equipment> getEquipment() {
@@ -71,6 +75,11 @@ public abstract class PlayerDecorator implements Player {
     @Override
     public void setHealth(int health) {
         tempPlayer.setHealth(health);
+    }
+
+    @Override
+    public void setActiveWeapon(Weapon weapon){
+        tempPlayer.setActiveWeapon(weapon);
     }
 
     @Override
@@ -119,4 +128,7 @@ public abstract class PlayerDecorator implements Player {
     public boolean isDead() {
         return tempPlayer.isDead();
     }
+
+    @Override
+    public void pickUpWeapon(Weapon weapon) {}
 }

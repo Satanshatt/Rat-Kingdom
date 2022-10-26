@@ -13,7 +13,7 @@ public class BasicPlayer implements Player {
     private int intelligence;
     private int xp;
     private int level;
-    private Equipment activeWeapon;
+    private Weapon activeWeapon;
     private int posX;
     private int posY;
     private boolean isDead;
@@ -78,6 +78,11 @@ public class BasicPlayer implements Player {
     }
 
     @Override
+    public Weapon getActiveWeapon(){
+        return this.activeWeapon;
+    }
+
+    @Override
     public List<Equipment> getEquipment() {
         return this.equipment;
     }
@@ -92,6 +97,11 @@ public class BasicPlayer implements Player {
     @Override
     public void setHealth(int health) {
         this.health = health;
+    }
+
+    @Override
+    public void setActiveWeapon(Weapon weapon){
+        this.activeWeapon = weapon;
     }
 
     @Override
@@ -208,6 +218,13 @@ public class BasicPlayer implements Player {
         xp = 0;
         this.posX = START_POS_X;
         this.posY = START_POS_Y;
+    }
+
+    @Override
+    public void pickUpWeapon(Weapon weapon){
+        if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel()){
+            this.setActiveWeapon(weapon);
+        }
     }
 
 }

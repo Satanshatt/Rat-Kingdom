@@ -1,11 +1,11 @@
 public class Wand extends Weapon {
     private static final String NAME = "Wand";
-    private final int weaponLevel;
     private final int damage;
     private final int speed;
+    private int weaponLevel;
 
-    public Wand(Player newPlayer){
-        super(newPlayer, NAME);
+    public Wand(Player player){
+        super(player);
         this.weaponLevel = levelRandomizer();
         this.damage = weaponLevel + 3;
         this.speed = weaponLevel + 3;
@@ -27,7 +27,15 @@ public class Wand extends Weapon {
         return speed;
     }
 
+    public String getName(){
+        return NAME;
+    }
+
     public int getWeaponLevel(){
         return weaponLevel;
+    }
+
+    public void setWeaponLevel(int weaponLevel){
+        this.weaponLevel = weaponLevel;
     }
 }
