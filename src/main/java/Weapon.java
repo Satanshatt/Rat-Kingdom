@@ -1,7 +1,6 @@
-abstract class Weapon extends PlayerDecorator {
+abstract class Weapon {
 
-    public Weapon(Player player) {
-        super(player);
+    public Weapon() {
     }
 
     protected int levelRandomizer() {
@@ -19,6 +18,8 @@ abstract class Weapon extends PlayerDecorator {
     abstract String getName();
 
     abstract int getWeaponLevel();
+
+    abstract void setPlayer(Player player);
 
     //Only for test
     abstract void setWeaponLevel(int weaponLevel);

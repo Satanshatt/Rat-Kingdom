@@ -3,20 +3,20 @@ public class Wand extends Weapon {
     private final int damage;
     private final int speed;
     private int weaponLevel;
+    private Player player;
 
-    public Wand(Player player){
-        super(player);
+    public Wand(){
         this.weaponLevel = levelRandomizer();
         this.damage = weaponLevel + 3;
         this.speed = weaponLevel + 3;
     }
 
     public int attackDamage(){
-        return tempPlayer.getIntelligence() + damage;
+        return player.getIntelligence() + damage;
     }
 
     public int attackSpeed(){
-        return tempPlayer.getDexterity() + speed;
+        return player.getDexterity() + speed;
     }
 
     public int getDamage(){
@@ -37,5 +37,9 @@ public class Wand extends Weapon {
 
     public void setWeaponLevel(int weaponLevel){
         this.weaponLevel = weaponLevel;
+    }
+
+    public void setPlayer(Player player){
+        this.player = player;
     }
 }
