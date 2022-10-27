@@ -57,7 +57,7 @@ public abstract class PlayerDecorator implements Player {
     public Weapon getActiveWeapon(){
         return tempPlayer.getActiveWeapon();
     }
-
+/*
     @Override
     public List<Equipment> getEquipment() {
         return null;
@@ -67,6 +67,8 @@ public abstract class PlayerDecorator implements Player {
     public void addEquipment(Equipment... equipment) {
     }
 
+
+ */
     @Override
     public void increaseStrength(int strength) {
         tempPlayer.increaseStrength(strength);
@@ -103,8 +105,8 @@ public abstract class PlayerDecorator implements Player {
     }
 
     @Override
-    public void levelUpgrade() {
-        tempPlayer.levelUpgrade();
+    public void increaseLevel() {
+        tempPlayer.increaseLevel();
     }
 
     @Override

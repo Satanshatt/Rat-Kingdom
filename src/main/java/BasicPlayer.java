@@ -17,8 +17,9 @@ public class BasicPlayer implements Player {
     private int posX;
     private int posY;
     private boolean isDead;
+    private int jumpHeight;
 
-    private ArrayList<Equipment> equipment = new ArrayList<>(); //equipmentBag, backpack ....?
+    //private ArrayList<Equipment> equipment = new ArrayList<>(); //equipmentBag, backpack ....?
 
     public BasicPlayer() {
         health = 100;
@@ -82,6 +83,10 @@ public class BasicPlayer implements Player {
         return this.activeWeapon;
     }
 
+    public int getJumpHeight() {
+        return this.jumpHeight;
+    }
+/*
     @Override
     public List<Equipment> getEquipment() {
         return this.equipment;
@@ -94,9 +99,13 @@ public class BasicPlayer implements Player {
         this.equipment.addAll(List.of(equipment));
     }
 
+ */
+
     @Override
     public void setHealth(int health) {
         this.health = health;
+        if (this.health <= 0)
+            this.die();
     }
 
     @Override
@@ -128,12 +137,12 @@ public class BasicPlayer implements Player {
     public void increaseXp(int xp) {
         this.xp = xp;
         if(this.xp >= 100) {
-            this.levelUpgrade();
+            this.increaseLevel();
         }
     }
 
     @Override
-    public void levelUpgrade() {
+    public void increaseLevel() {
         this.level = level + 1;
     }
 
@@ -176,9 +185,10 @@ public class BasicPlayer implements Player {
 
     }
 
-    public void fret() {
+    public void fret(NPC npc) {
         //skada NPC
         //Level, styrka, typ av NPC etc...
+
     }
 
     @Override
@@ -186,6 +196,7 @@ public class BasicPlayer implements Player {
         int damage = weapon.attackDamage();
         //npc.setDamage(damage);
     }
+
 
     public void boxing() {
 
@@ -198,7 +209,6 @@ public class BasicPlayer implements Player {
     @Override
     public void die() {
         this.isDead = true;
-        restartSameLevel();
     }
 
     public void useDoor() {
@@ -209,13 +219,15 @@ public class BasicPlayer implements Player {
         return isDead;
     }
 
-    public void restartSameLevel () {
+    public void restartGame () {
         health = 100;
         mana = 100;
         strength = 10;
         dexterity = 10;
         intelligence = 10;
         xp = 0;
+        level = 1;
+        activeWeapon = null;
         this.posX = START_POS_X;
         this.posY = START_POS_Y;
     }

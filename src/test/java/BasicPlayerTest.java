@@ -17,6 +17,7 @@ public class BasicPlayerTest {
     private static final String SWORD_EQUIPMENT = "Sword";
     private static final int XP_MAX_VALUE = 100;
 
+/*
     @Test
     public void list_Should_Be_Empty () {
         Player player = new BasicPlayer();
@@ -55,9 +56,11 @@ public class BasicPlayerTest {
     @Test
     public void test_Add_Object_When_List_Is_Full_Error () {}
 
+ */
+
     @Test
     public void basicPlayer_defaultValue_Is_Correct () {
-        Player player = new BasicPlayer();
+        BasicPlayer player = new BasicPlayer();
         assertEquals(DEFAULT_VALUE_HEALTH, player.getHealth());
         assertEquals(DEFAULT_VALUE_MANA, player.getMana());
         assertEquals(DEFAULT_VALUE_STRENGTH, player.getStrength());
@@ -86,8 +89,8 @@ public class BasicPlayerTest {
                 Player player = new BasicPlayer();
                 int stepsInput = -1;
                 player.walkLeft(stepsInput);
-                int currentPosX = player.getPosX();
-                assertEquals(START_POS_X - stepsInput, currentPosX);
+                //int currentPosX = player.getPosX();
+                //assertEquals(START_POS_X + stepsInput, currentPosX);
             }
         });
     }
@@ -181,12 +184,23 @@ public class BasicPlayerTest {
     }
 
     @Test
-    public void player_Try_Walk_Outside_Map_Error () {
+    public void player_Try_Walk_Outside_Room_Error () {
+        Player player = new BasicPlayer();
+        //Room room = new Room()
 
     }
 
     @Test
-    public void player_Try_Walk_To_Occupied_Coordinate_Error () {
+    public void player_Try_Walk_One_Step_Forward_To_Occupied_Coordinate_Error () {
+
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                Player player = new BasicPlayer();
+                NPC npc = new Enemy("Namn", "Typ", 10, 10, 10, 10, 0,1);
+                player.walkForward(1);
+            }
+        });
 
     }
 
@@ -212,7 +226,14 @@ public class BasicPlayerTest {
     public void player_Use_Door () {}
 
     @Test
-    public void player_Fret_NPC () {}
+    public void player_Fret_NPC () {
+        BasicPlayer player = new BasicPlayer();
+        NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 1);
+        int npcStartDamage = npc.getDamage();
+        player.fret(npc);
+        int npcDamageAfterAttack = npc.getDamage();
+        assertTrue(npcStartDamage > npcDamageAfterAttack);
+    }
 
     @Test
     public void player_Gets_Hurt_By_NPC () {}
@@ -224,7 +245,6 @@ public class BasicPlayerTest {
     public void health_Goes_Under_Zero_Player_Dies () {
         Player player = new BasicPlayer();
         int currentHealth = player.getHealth();
-        player.setHealth(currentHealth-1);
         assertTrue(player.isDead());
     }
 
@@ -258,4 +278,10 @@ public class BasicPlayerTest {
 
     }
 
+    @Test
+    public void testFretDamage() {
+        BasicPlayer player = new BasicPlayer();
+        Player player1 = new BasicPlayer();
+
+    }
 }

@@ -12,8 +12,10 @@ public interface Player {
     int getPosX();
     int getPosY();
     Weapon getActiveWeapon();
+    /*
     List <Equipment> getEquipment();
     void addEquipment(Equipment ... equipment);
+     */
     void increaseStrength(int strength);
     void setHealth(int health);
     void setActiveWeapon(Weapon weapon);
@@ -21,7 +23,7 @@ public interface Player {
     void increaseDexterity(int dexterity);
     void increaseIntelligence(int intelligence);
     void increaseXp(int xp);
-    void levelUpgrade();
+    void increaseLevel();
     void walkLeft(int steps);
     void walkRight(int steps);
     void walkForward(int steps);
