@@ -16,7 +16,7 @@ public class RaceTest {
     @Test
     public void choosingBlackRat(){
         Player player = new BasicPlayer();
-        player.chooseTrade("Black rat");
+        player.chooseRace("Black rat");
         assertEquals(110, player.getHealth());
         assertEquals(110, player.getMana());
     }
@@ -24,14 +24,14 @@ public class RaceTest {
     @Test
     public void choosingRaceBrownRat(){
         Player player = new BasicPlayer();
-        player.chooseTrade("Brown rat");
+        player.chooseRace("Brown rat");
         assertEquals(120, player.getHealth());
     }
 
     @Test
     public void choosingRaceWhiteRat(){
         Player player = new BasicPlayer();
-        player.chooseTrade("White rat");
+        player.chooseRace("White rat");
         assertEquals(120, player.getMana());
     }
 
