@@ -17,6 +17,8 @@ public class BasicPlayer implements Player {
     private int posX;
     private int posY;
     private boolean isDead;
+    private Trade trade;
+    private Race race;
 
     private ArrayList<Equipment> equipment = new ArrayList<>(); //equipmentBag, backpack ....?
 
@@ -221,10 +223,30 @@ public class BasicPlayer implements Player {
     }
 
     @Override
-    public void pickUpWeapon(Weapon weapon){
-        if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel()){
+    public void getWeapon(Weapon weapon){
+        if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel() || this.activeWeapon == null ){
             this.setActiveWeapon(weapon);
+            weapon.setPlayer(this);
         }
     }
 
+    public void chooseTrade(String tradeName){
+        if (tradeName.equals("Builder")){
+            this.trade = new Builder(this);
+        } else if (tradeName.equals("Circus artist")) {
+            this.trade = new CircusArtist(this);
+        } else if (tradeName.equals("Storyteller")) {
+            this.trade = new Storyteller(this);
+        }
+    }
+
+    public void chooseRace(String raceName){
+        if (raceName.equals("Black rat")){
+            this.race = new BlackRat(this);
+        } else if (raceName.equals("Brown rat")) {
+            this.race = new BrownRat(this);
+        } else if (raceName.equals("White rat")) {
+            this.race = new WhiteRat(this);
+        }
+    }
 }
