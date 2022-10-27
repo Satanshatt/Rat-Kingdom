@@ -16,19 +16,22 @@ class TradeTest {
 
     @Test
     public void choosingTradeBuilder(){
-        Player player = new Builder(new BasicPlayer());
+        Player player = new BasicPlayer();
+        player.chooseTrade("Builder");
         assertEquals(12, player.getStrength());
     }
 
     @Test
     public void choosingTradeCircusArtist(){
-        Player player = new CircusArtist(new BasicPlayer());
+        Player player = new BasicPlayer();
+        player.chooseTrade("Circus artist");
         assertEquals(12, player.getDexterity());
     }
 
     @Test
     public void choosingTradeStoryteller(){
-        Player player = new Storyteller(new BasicPlayer());
+        Player player = new BasicPlayer();
+        player.chooseTrade("Storyteller");
         assertEquals(12, player.getIntelligence());
     }
 }

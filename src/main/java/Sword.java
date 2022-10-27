@@ -3,20 +3,20 @@ public class Sword extends Weapon{
     private final int damage;
     private final int speed;
     private int weaponLevel;
+    private Player player;
 
-    public Sword(Player player){
-        super(player);
+    public Sword(){
         this.weaponLevel = levelRandomizer();
         this.damage = weaponLevel + 2;
         this.speed = weaponLevel + 4;
     }
 
     public int attackDamage(){
-        return tempPlayer.getStrength() + damage;
+        return player.getStrength() + damage;
     }
 
     public int attackSpeed(){
-        return tempPlayer.getDexterity() + speed;
+        return player.getDexterity() + speed;
     }
 
     public int getDamage(){
@@ -37,5 +37,9 @@ public class Sword extends Weapon{
 
     public void setWeaponLevel(int weaponLevel){
         this.weaponLevel = weaponLevel;
+    }
+
+    public void setPlayer(Player player){
+        this.player = player;
     }
 }

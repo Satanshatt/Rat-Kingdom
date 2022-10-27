@@ -23,6 +23,7 @@ abstract class NPC extends Entity{
 
     public abstract void spawn ();
 
+    //skapa randomizer för när NPCs dör, 1 av 10 att vapen ges
     public boolean die() {
         return true;
     }

@@ -1,4 +1,4 @@
-abstract class Trade extends PlayerDecorator {
+abstract class Trade extends PlayerDecorator{
 
     String name;
     final int attribute = 2;

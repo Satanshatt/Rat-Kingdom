@@ -1,4 +1,5 @@
+abstract class Magic {
 
-public class Magic {
-    
+    public Magic(){
+    }
 }
