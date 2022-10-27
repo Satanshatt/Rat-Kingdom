@@ -56,4 +56,6 @@ abstract class NPC extends Entity{
             return level;
         }
 
+
+
 }

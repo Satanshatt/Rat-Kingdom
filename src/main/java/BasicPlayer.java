@@ -186,8 +186,8 @@ public class BasicPlayer implements Player {
     }
 
     public void fret(NPC npc) {
-        //skada NPC
-        //Level, styrka, typ av NPC etc...
+        //npc.decraseDamage(2);
+
 
     }
 

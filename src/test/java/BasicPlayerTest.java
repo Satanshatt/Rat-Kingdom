@@ -236,6 +236,31 @@ public class BasicPlayerTest {
     }
 
     @Test
+    public void player_Try_Fret_NPC_Out_Of_Range_Error () {
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                BasicPlayer player = new BasicPlayer();
+                NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 2);
+                player.fret(npc);
+            }
+        });
+    }
+
+    //Kommer en npc kunna möta en npc som inte är samma level? Testa i npc-klassen?
+    @Test
+    public void player_Level_And_NPC_Level_Not_The_Same_Error () {
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                BasicPlayer player = new BasicPlayer();
+                NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 2, 0, 1);
+
+            }
+        });
+    }
+
+    @Test
     public void player_Gets_Hurt_By_NPC () {}
 
     @Test
