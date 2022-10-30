@@ -103,6 +103,10 @@ public class Player extends Entity {
 
     }
 
+    public void damagePlayer (int damage) {
+        this.health = health - damage;
+    }
+
     public void walkLeft(int steps) {
         if (steps < 0)
             throw new IllegalArgumentException("Negative steps not possible!");

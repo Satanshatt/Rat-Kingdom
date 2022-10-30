@@ -220,7 +220,7 @@ public class PlayerTest {
     @Test
     public void health_Goes_Under_Zero_Player_Dies () {
         Player player = new Player();
-        int currentHealth = player.getHealth();
+        player.damagePlayer(player.getHealth() - 1);
         assertTrue(player.isDead());
     }
 
