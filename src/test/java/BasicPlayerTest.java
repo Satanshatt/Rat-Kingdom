@@ -60,7 +60,7 @@ public class BasicPlayerTest {
 
     @Test
     public void basicPlayer_defaultValue_Is_Correct () {
-        BasicPlayer player = new BasicPlayer();
+        Player player = new Player();
         assertEquals(DEFAULT_VALUE_HEALTH, player.getHealth());
         assertEquals(DEFAULT_VALUE_MANA, player.getMana());
         assertEquals(DEFAULT_VALUE_STRENGTH, player.getStrength());
@@ -74,7 +74,7 @@ public class BasicPlayerTest {
 
     @Test
     public void player_Walk_One_Step_Left () {
-        Player player = new BasicPlayer();
+        OldPlayer player = new Player();
         int stepsInput = 1;
         player.walkLeft(stepsInput);
         int currentPosX = player.getPosX();
@@ -86,7 +86,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Player player = new BasicPlayer();
+                OldPlayer player = new Player();
                 int stepsInput = -1;
                 player.walkLeft(stepsInput);
                 //int currentPosX = player.getPosX();
@@ -100,7 +100,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Player player = new BasicPlayer();
+                OldPlayer player = new Player();
                 int stepsInput = 0;
                 player.walkLeft(stepsInput);
                 int currentPosX = player.getPosX();
@@ -111,7 +111,7 @@ public class BasicPlayerTest {
 
     @Test
     public void player_Walk_One_Step_Right () {
-        Player player = new BasicPlayer();
+        OldPlayer player = new Player();
         int stepsInput = 1;
         player.walkRight(stepsInput);
         int currentPosX = player.getPosX();
@@ -123,7 +123,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Player player = new BasicPlayer();
+                OldPlayer player = new Player();
                 int stepsInput = -1;
                 player.walkRight(stepsInput);
                 int currentPosX = player.getPosX();
@@ -137,7 +137,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Player player = new BasicPlayer();
+                OldPlayer player = new Player();
                 int stepsInput = 0;
                 player.walkRight(stepsInput);
                 int currentPosX = player.getPosX();
@@ -148,7 +148,7 @@ public class BasicPlayerTest {
 
     @Test
     public void player_Walk_One_Step_Forward () {
-        Player player = new BasicPlayer();
+        OldPlayer player = new Player();
         int stepsInput = 1;
         player.walkForward(stepsInput);
         int currentPosY = player.getPosY();
@@ -160,7 +160,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Player player = new BasicPlayer();
+                OldPlayer player = new Player();
                 int stepsInput = -1;
                 player.walkForward(stepsInput);
                 int currentPosY = player.getPosY();
@@ -174,7 +174,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Player player = new BasicPlayer();
+                OldPlayer player = new Player();
                 int stepsInput = 0;
                 player.walkForward(stepsInput);
                 int currentPosY = player.getPosY();
@@ -185,7 +185,7 @@ public class BasicPlayerTest {
 
     @Test
     public void player_Try_Walk_Outside_Room_Error () {
-        Player player = new BasicPlayer();
+        OldPlayer player = new Player();
         //Room room = new Room()
 
     }
@@ -196,7 +196,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Player player = new BasicPlayer();
+                OldPlayer player = new Player();
                 NPC npc = new Enemy("Namn", "Typ", 10, 10, 10, 10, 0,1);
                 player.walkForward(1);
             }
@@ -205,19 +205,8 @@ public class BasicPlayerTest {
     }
 
     @Test
-    public void player_Can_Jump () {}
-
-    @Test
-    public void player_Can_Jump_Over_Obsticle () {}
-
-    @Test
-    public void player_Try_Jump_Over_Too_High_Obsticle_Error () {
-
-    }
-
-    @Test
     public void player_Dies () {
-        Player player = new BasicPlayer();
+        OldPlayer player = new Player();
         player.die();
         assertTrue(player.isDead());
     }
@@ -227,10 +216,10 @@ public class BasicPlayerTest {
 
     @Test
     public void player_Fret_NPC () {
-        BasicPlayer player = new BasicPlayer();
+        Player player = new Player();
         NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 1);
         int npcStartDamage = npc.getDamage();
-        player.fret(npc);
+        //player.fret(npc);
         int npcDamageAfterAttack = npc.getDamage();
         assertTrue(npcStartDamage > npcDamageAfterAttack);
     }
@@ -240,9 +229,9 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                BasicPlayer player = new BasicPlayer();
+                Player player = new Player();
                 NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 2);
-                player.fret(npc);
+                //player.fret(npc);
             }
         });
     }
@@ -253,7 +242,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                BasicPlayer player = new BasicPlayer();
+                Player player = new Player();
                 NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 2, 0, 1);
 
             }
@@ -268,7 +257,7 @@ public class BasicPlayerTest {
 
     @Test
     public void health_Goes_Under_Zero_Player_Dies () {
-        Player player = new BasicPlayer();
+        OldPlayer player = new Player();
         int currentHealth = player.getHealth();
         assertTrue(player.isDead());
     }
@@ -279,7 +268,7 @@ public class BasicPlayerTest {
     @Test
     public void kill_NPC_Success () {
         NPC enemy = new Enemy("Fiende", "type", 10, 10, 2, 1, 0, 0);
-        Player player = new BasicPlayer();
+        OldPlayer player = new Player();
         Weapon sword = new Sword();
         /*
         while (!enemy.getIsDead) {
@@ -296,7 +285,7 @@ public class BasicPlayerTest {
 
     @Test
     public void level_Upgrade_With_Xp_Success(){
-        Player player = new BasicPlayer();
+        OldPlayer player = new Player();
         int levelUp = 1;
         player.increaseXp(XP_MAX_VALUE);
         assertEquals(DEFAULT_VALUE_LEVEL + levelUp, player.getLevel());
@@ -305,8 +294,6 @@ public class BasicPlayerTest {
 
     @Test
     public void testFretDamage() {
-        BasicPlayer player = new BasicPlayer();
-        Player player1 = new BasicPlayer();
 
     }
 }

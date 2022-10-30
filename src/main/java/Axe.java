@@ -3,7 +3,7 @@ public class Axe extends Weapon {
     private final int damage;
     private final int speed;
     private int weaponLevel;
-    private Player player;
+    private OldPlayer player;
 
     public Axe(){
         this.weaponLevel = levelRandomizer();
@@ -35,7 +35,7 @@ public class Axe extends Weapon {
         return weaponLevel;
     }
 
-    public void setPlayer(Player player){
+    public void setPlayer(OldPlayer player){
         this.player = player;
     }
 

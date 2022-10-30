@@ -1,6 +1,6 @@
-abstract class Magic extends PlayerDecorator {
+abstract class Magic extends OldPlayerDecorator {
 
-    public Magic(Player player){
+    public Magic(OldPlayer player){
         super(player);
     }
 

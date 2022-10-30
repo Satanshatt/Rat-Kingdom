@@ -1,9 +1,9 @@
-abstract class Trade extends PlayerDecorator{
+abstract class Trade extends OldPlayerDecorator {
 
     String name;
     final int attribute = 2;
 
-    public Trade(Player player, String name) {
+    public Trade(OldPlayer player, String name) {
         super(player);
         this.name = name;
     }
