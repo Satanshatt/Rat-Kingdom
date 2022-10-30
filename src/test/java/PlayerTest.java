@@ -263,4 +263,14 @@ public class PlayerTest {
         assertEquals(DEFAULT_VALUE_LEVEL + levelUp, player.getLevel());
 
     }
+
+    @Test
+    public void pick_Up_Weapon_And_Activate () {
+        Player player = new Player();
+        Weapon weapon = Mockito.mock(Weapon.class, Mockito.CALLS_REAL_METHODS);
+        player.pickUpWeapon(weapon);
+        assertEquals(weapon, player.getActiveWeapon());
+    }
+
+
 }
