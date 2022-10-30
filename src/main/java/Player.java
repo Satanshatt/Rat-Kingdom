@@ -66,9 +66,11 @@ public class Player extends Entity {
     }
 
     public void increaseHealth(int addedHealth) {
-        if((this.health =+ addedHealth) >= 100)  {
+        if (addedHealth < 0)
+            throw new IllegalArgumentException("Negative input not possible");
+        else if((this.health =+ addedHealth) >= 100)
             this.health = 100;
-        } else
+        else
             this.health =+ addedHealth;
     }
 
@@ -188,7 +190,7 @@ public class Player extends Entity {
     }
 
     public void pickUpWeapon(Weapon weapon) {
-        this.activeWeapon = weapon;
+        setActiveWeapon(weapon);
     }
 
     public void useDoor() {

@@ -18,6 +18,7 @@ public class PlayerTest {
     private static final String SWORD_EQUIPMENT = "Sword";
     private static final int XP_MAX_VALUE = 100;
     private static final int HEALTH_MAX_VALUE = 100;
+    private static final int NEGATIVE_INPUT = -1;
 
     @Test
     public void player_defaultValue_Is_Correct () {
@@ -271,6 +272,20 @@ public class PlayerTest {
         player.pickUpWeapon(weapon);
         assertEquals(weapon, player.getActiveWeapon());
     }
+
+    @Test
+    public void increase_With_Negative_Health_input_Error () {
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                Player player = new Player();
+                player.increaseHealth(NEGATIVE_INPUT);
+            }
+        });
+
+    }
+
+
 
 
 }
