@@ -178,7 +178,7 @@ public class PlayerTest {
             public void execute() throws Throwable {
                 Player player = new Player();
                 NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 2);
-                //player.fret(npc);
+                player.fret(npc);
             }
         });
     }

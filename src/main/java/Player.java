@@ -139,8 +139,6 @@ public class Player extends Entity {
     }
 
     public void fret(NPC npc) {
-        //skada NPC
-        //Level, styrka, typ av NPC etc...
     }
 
     public void useWeaponOnNPC (Weapon weapon, NPC npc) {
