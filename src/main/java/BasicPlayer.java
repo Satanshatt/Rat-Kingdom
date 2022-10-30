@@ -224,7 +224,7 @@ public class BasicPlayer implements Player {
 
     @Override
     public void pickUpWeapon(Weapon weapon){
-        if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel() || this.activeWeapon == null ){
+        if (weapon.getWeaponLevel() <= this.level && this.activeWeapon == null || weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel()){
             this.setActiveWeapon(weapon);
             weapon.setPlayer(this);
         }
