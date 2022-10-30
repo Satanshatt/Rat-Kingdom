@@ -223,7 +223,7 @@ public class BasicPlayer implements Player {
     }
 
     @Override
-    public void getWeapon(Weapon weapon){
+    public void pickUpWeapon(Weapon weapon){
         if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel() || this.activeWeapon == null ){
             this.setActiveWeapon(weapon);
             weapon.setPlayer(this);

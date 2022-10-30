@@ -28,7 +28,7 @@ public interface Player {
     void useWeaponOnNPC(Weapon weapon, NPC npc);
     boolean isDead();
     void die();
-    void getWeapon(Weapon weapon);
+    void pickUpWeapon(Weapon weapon);
     void chooseTrade(String tradeName);
     void chooseRace(String raceName);
 }
