@@ -138,7 +138,31 @@ public class Player extends Entity {
 
     }
 
+    private boolean isEnemyOutOfReach (NPC npc) {
+
+        int npcXCoordinate = npc.posX;
+        int npcYCoordinate = npc.posY;
+        int playerXCoordinate = posX;
+        int playerYCoordinate = posY;
+
+        if((playerYCoordinate == npcYCoordinate) &&
+                ((playerXCoordinate == (npcXCoordinate + 1)) ||  (playerXCoordinate == npcXCoordinate - 1))){
+            return false;
+        } else if ((playerXCoordinate == npcXCoordinate) &&
+                ((playerYCoordinate == (npcYCoordinate + 1)) ||  (playerYCoordinate == npcYCoordinate - 1))) {
+            return false;
+        }
+
+        return true;
+    }
+
     public void fret(NPC npc) {
+
+        if(isEnemyOutOfReach(npc)) {
+            throw new IllegalArgumentException("NPC out of reach");
+        }
+
+
     }
 
     public void useWeaponOnNPC (Weapon weapon, NPC npc) {
