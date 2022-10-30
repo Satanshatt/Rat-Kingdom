@@ -65,11 +65,11 @@ public class Player extends Entity {
         return this.activeWeapon;
     }
 
-    public void increaseHealth(int extraHealth) {
-        if((this.health =+ extraHealth) > 100)  {
+    public void increaseHealth(int addedHealth) {
+        if((this.health =+ addedHealth) >= 100)  {
             this.health = 100;
-        }
-        this.health =+ extraHealth;
+        } else
+            this.health =+ addedHealth;
     }
 
     public void setActiveWeapon(Weapon weapon){
