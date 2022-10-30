@@ -105,6 +105,8 @@ public class Player extends Entity {
 
     public void damagePlayer (int damage) {
         this.health = health - damage;
+        if (this.health <= 0)
+            die();
     }
 
     public void walkLeft(int steps) {
