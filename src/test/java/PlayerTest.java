@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -164,10 +165,11 @@ public class PlayerTest {
     @Test
     public void player_Fret_NPC () {
         Player player = new Player();
-        NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 1);
-        int npcStartDamage = npc.getDamage();
+        //NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 1);
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        int npcStartDamage = npc.getHealth();
         player.fret(npc);
-        int npcDamageAfterAttack = npc.getDamage();
+        int npcDamageAfterAttack = npc.getHealth();
         assertTrue(npcStartDamage > npcDamageAfterAttack);
     }
 
@@ -177,7 +179,7 @@ public class PlayerTest {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 2);
+                NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
                 player.fret(npc);
             }
         });
@@ -190,7 +192,7 @@ public class PlayerTest {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 2, 0, 1);
+                NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
 
             }
         });

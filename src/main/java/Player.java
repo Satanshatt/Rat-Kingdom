@@ -138,7 +138,7 @@ public class Player extends Entity {
 
     }
 
-    private boolean isEnemyOutOfReach (NPC npc) {
+    private boolean isNPCOutOfReach (NPC npc) {
 
         int npcXCoordinate = npc.posX;
         int npcYCoordinate = npc.posY;
@@ -158,17 +158,17 @@ public class Player extends Entity {
 
     public void fret(NPC npc) {
 
-        if(isEnemyOutOfReach(npc)) {
+        if(isNPCOutOfReach(npc)) {
             throw new IllegalArgumentException("NPC out of reach");
         }
-
+        npc.takeDamage(2);
 
     }
 
     public void useWeaponOnNPC (Weapon weapon, NPC npc) {
         //kolla så NPc står på rätt position
         int damage = weapon.attackDamage();
-        //npc.takeDamage(); //Skickar in damage på npc:en
+        npc.takeDamage(8); //Skickar in damage på npc:en
     }
 
     public void boxing() {
