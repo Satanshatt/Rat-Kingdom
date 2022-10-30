@@ -230,27 +230,35 @@ public class PlayerTest {
     }
 
     @Test
-    public void kill_NPC_Success () {
+    public void kill_NPC_With_Weapon_Increase_Xp () {
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
         Player player = new Player();
         Weapon sword = new Sword();
-        boolean npcIsDead = npc.getHealth()<= 0;
-        while (!npcIsDead) {
-            player.useWeaponOnNPC(sword, npc);
-        }
-        assertTrue(npcIsDead);
 
+        int xPBefore = player.getXp();
+        player.killNPCWithWeapon(npc, sword);
+        int xPAfter = player.getXp();
 
+        assertTrue(xPBefore < xPAfter);
     }
 
     @Test
-    public void kill_NPC_And_Increase_Xp () {} //Eller annat än xp
+    public void kill_NPC_And_Increase_Xp () {
+        Player player = new Player();
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+
+        int xPBefore = player.getXp();
+        player.killNPCWithoutWeapon(npc);
+        int xPAfter = player.getXp();
+
+        assertTrue(xPBefore < xPAfter);
+    } //Eller annat än xp
 
     @Test
     public void level_Upgrade_With_Xp_Success(){
         Player player = new Player();
         int levelUp = 1;
-        player.increaseXp(XP_MAX_VALUE);
+        player.increaseXp( XP_MAX_VALUE +1);
         assertEquals(DEFAULT_VALUE_LEVEL + levelUp, player.getLevel());
 
     }

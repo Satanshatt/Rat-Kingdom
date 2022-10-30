@@ -92,15 +92,29 @@ public class Player extends Entity {
         this.intelligence = intelligence;
     }
 
-    public void increaseXp(int xp) {
-        this.xp = xp;
+    public void increaseXp(int addXp) {
+        this.xp =+ addXp;
         if(this.xp >= 100) {
-            this.increaseLevel();
+            increaseLevel();
         }
     }
 
     public void increaseLevel() {
+        this.level = level + 1;
+    }
 
+    public void killNPCWithWeapon (NPC npc, Weapon weapon) {
+        while (npc.getHealth() > 0)
+         useWeaponOnNPC(weapon, npc);
+        if (npc.getHealth() <= 0)
+            increaseXp(10);
+    }
+
+    public void killNPCWithoutWeapon (NPC npc) {
+        while (npc.getHealth() > 0)
+            fret(npc);
+        if (npc.getHealth() <= 0)
+            increaseXp(10);
     }
 
     public void damagePlayer (int damage) {
@@ -166,14 +180,6 @@ public class Player extends Entity {
         //kolla så NPC står inom räckhåll
         int damage = weapon.attackDamage();
         npc.takeDamage(damage);
-    }
-
-    public void boxing() {
-
-    }
-
-    public void whip() {
-
     }
 
     public void die() {
