@@ -166,7 +166,7 @@ public class PlayerTest {
         Player player = new Player();
         NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 1);
         int npcStartDamage = npc.getDamage();
-        //player.fret(npc);
+        player.fret(npc);
         int npcDamageAfterAttack = npc.getDamage();
         assertTrue(npcStartDamage > npcDamageAfterAttack);
     }

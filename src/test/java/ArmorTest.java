@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ArmorTest {
-    OldPlayer player;
+    Player player;
 
     @BeforeEach
     void setup(){

@@ -135,16 +135,18 @@ public class Player extends Entity {
         else
             this.posY = posY + steps;
 
+
     }
 
-    public void fret() {
+    public void fret(NPC npc) {
         //skada NPC
         //Level, styrka, typ av NPC etc...
     }
 
     public void useWeaponOnNPC (Weapon weapon, NPC npc) {
+        //kolla så NPc står på rätt position
         int damage = weapon.attackDamage();
-        //npc.setDamage(damage);
+        //npc.takeDamage(); //Skickar in damage på npc:en
     }
 
     public void boxing() {
@@ -191,9 +193,12 @@ public class Player extends Entity {
          */
     }
 
-    public void chooseTrade(String tradeName){
-        /*
-        if (tradeName.equals("Builder")){
+    public Trade getTrade () {
+        return this.trade;
+    }
+
+    public void chooseTrade(String tradeName) {
+        if (tradeName.equals("Builder")) {
             this.trade = new Builder(this);
         } else if (tradeName.equals("Circus artist")) {
             this.trade = new CircusArtist(this);
@@ -201,23 +206,19 @@ public class Player extends Entity {
             this.trade = new Storyteller(this);
         }
 
-         */
-    }
-
-    public void chooseRace(String raceName){
-        /*
-        if (raceName.equals("Black rat")){
-            this.race = new BlackRat(this);
-        } else if (raceName.equals("Brown rat")) {
-            this.race = new BrownRat(this);
-        } else if (raceName.equals("White rat")) {
-            this.race = new WhiteRat(this);
         }
 
-         */
+        public void chooseRace (String raceName){
+
+            if (raceName.equals("Black rat")) {
+                this.race = new BlackRat(this);
+            } else if (raceName.equals("Brown rat")) {
+                this.race = new BrownRat(this);
+            } else if (raceName.equals("White rat")) {
+                this.race = new WhiteRat(this);
+            }
 
 
-
-    }
+        }
 
 }
