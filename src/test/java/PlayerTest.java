@@ -17,47 +17,6 @@ public class PlayerTest {
     private static final String SWORD_EQUIPMENT = "Sword";
     private static final int XP_MAX_VALUE = 100;
 
-/*
-    @Test
-    public void list_Should_Be_Empty () {
-        Player player = new BasicPlayer();
-        assertTrue( player.getEquipment().isEmpty());
-    }
-
-    @Test
-    public void test_Add_Object_To_List_Success () {
-        Player player = new BasicPlayer();
-        Equipment e = new Equipment(player, SWORD_EQUIPMENT);
-        player.addEquipment(e);
-        assertTrue (player.getEquipment().contains(e));
-    }
-
-    @Test
-    public void add_Duplicates_To_List_Success () {
-        Player player = new BasicPlayer();
-        Equipment e = new Equipment(player, SWORD_EQUIPMENT);
-        Equipment e2 = new Equipment(player, SWORD_EQUIPMENT);
-        player.addEquipment(e, e2);
-        assertTrue(player.getEquipment().contains(e) &&
-                player.getEquipment().contains(e2));
-    }
-
-    @Test
-    public void test_Add_Null_To_List_Get_Error () {
-        assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                Player player = new BasicPlayer();
-                player.addEquipment(null);
-            }
-        });
-    }
-
-    @Test
-    public void test_Add_Object_When_List_Is_Full_Error () {}
-
- */
-
     @Test
     public void player_defaultValue_Is_Correct () {
         Player player = new Player();
@@ -89,8 +48,6 @@ public class PlayerTest {
                 Player player = new Player();
                 int stepsInput = -1;
                 player.walkLeft(stepsInput);
-                //int currentPosX = player.getPosX();
-                //assertEquals(START_POS_X + stepsInput, currentPosX);
             }
         });
     }
@@ -103,8 +60,6 @@ public class PlayerTest {
                 Player player = new Player();
                 int stepsInput = 0;
                 player.walkLeft(stepsInput);
-                int currentPosX = player.getPosX();
-                assertEquals(START_POS_X - stepsInput, currentPosX);
             }
         });
     }
@@ -126,8 +81,6 @@ public class PlayerTest {
                 Player player = new Player();
                 int stepsInput = -1;
                 player.walkRight(stepsInput);
-                int currentPosX = player.getPosX();
-                assertEquals(START_POS_X + stepsInput, currentPosX);
             }
         });
     }
@@ -140,8 +93,6 @@ public class PlayerTest {
                 Player player = new Player();
                 int stepsInput = 0;
                 player.walkRight(stepsInput);
-                int currentPosX = player.getPosX();
-                assertEquals(START_POS_X + stepsInput, currentPosX);
             }
         });
     }
@@ -177,17 +128,13 @@ public class PlayerTest {
                 Player player = new Player();
                 int stepsInput = 0;
                 player.walkForward(stepsInput);
-                int currentPosY = player.getPosY();
-                assertEquals(START_POS_Y + stepsInput, currentPosY);
             }
         });
     }
 
+    //Snacka med Hannes
     @Test
     public void player_Try_Walk_Outside_Room_Error () {
-        Player player = new Player();
-        //Room room = new Room()
-
     }
 
     @Test
@@ -197,7 +144,7 @@ public class PlayerTest {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                NPC npc = new Enemy("Namn", "Typ", 10, 10, 10, 10, 0,1);
+                NPC npc = new Enemy("Namn", "Typ", 10, 10, 10, 1, 0,1);
                 player.walkForward(1);
             }
         });

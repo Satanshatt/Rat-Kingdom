@@ -1,4 +1,6 @@
-public class Player extends Entity{
+import java.awt.*;
+
+public class Player extends Entity {
 
     private static final int START_POS_X = 0;
     private static final int START_POS_Y = 0;
@@ -16,6 +18,8 @@ public class Player extends Entity{
     private boolean isDead;
     private Trade trade;
     private Race race;
+
+
 
     public Player() {
         super("Player", START_POS_X, START_POS_Y);
@@ -177,15 +181,18 @@ public class Player extends Entity{
         this.posX = START_POS_X;
         this.posY = START_POS_Y;
     }
-/*
+
     public void getWeapon(Weapon weapon){
+        /*
         if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel() || this.activeWeapon == null ){
             this.setActiveWeapon(weapon);
             weapon.setPlayer(this);
         }
+         */
     }
 
     public void chooseTrade(String tradeName){
+        /*
         if (tradeName.equals("Builder")){
             this.trade = new Builder(this);
         } else if (tradeName.equals("Circus artist")) {
@@ -193,9 +200,12 @@ public class Player extends Entity{
         } else if (tradeName.equals("Storyteller")) {
             this.trade = new Storyteller(this);
         }
+
+         */
     }
 
     public void chooseRace(String raceName){
+        /*
         if (raceName.equals("Black rat")){
             this.race = new BlackRat(this);
         } else if (raceName.equals("Brown rat")) {
@@ -203,7 +213,11 @@ public class Player extends Entity{
         } else if (raceName.equals("White rat")) {
             this.race = new WhiteRat(this);
         }
+
+         */
+
+
+
     }
 
- */
 }
