@@ -62,7 +62,7 @@ public class WeaponTest {
         sword.setWeaponLevel(0);
         axe.setWeaponLevel(1);
         player.setActiveWeapon(sword);
-        player.getWeapon(axe);
+        player.pickUpWeapon(axe);
         assertSame(axe, player.getActiveWeapon());
     }
 
@@ -72,7 +72,7 @@ public class WeaponTest {
         sword.setWeaponLevel(1);
         axe.setWeaponLevel(0);
         player.setActiveWeapon(sword);
-        player.getWeapon(axe);
+        player.pickUpWeapon(axe);
         assertSame(sword, player.getActiveWeapon());
     }
 

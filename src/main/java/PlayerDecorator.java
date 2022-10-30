@@ -132,7 +132,7 @@ public abstract class PlayerDecorator implements Player {
     }
 
     @Override
-    public void getWeapon(Weapon weapon) {}
+    public void pickUpWeapon(Weapon weapon) {}
 
     @Override
     public void chooseTrade(String tradeName){}
