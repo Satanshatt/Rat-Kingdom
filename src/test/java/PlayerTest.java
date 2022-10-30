@@ -17,6 +17,7 @@ public class PlayerTest {
     private static final int DEFAULT_VALUE_LEVEL = 1;
     private static final String SWORD_EQUIPMENT = "Sword";
     private static final int XP_MAX_VALUE = 100;
+    private static final int HEALTH_MAX_VALUE = 100;
 
     @Test
     public void player_defaultValue_Is_Correct () {
@@ -193,16 +194,28 @@ public class PlayerTest {
             public void execute() throws Throwable {
                 Player player = new Player();
                 NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-
+                player.increaseLevel();
             }
         });
     }
 
+    //Ej klar, behöver metod i NPC som skadar en player
     @Test
-    public void player_Gets_Hurt_By_NPC () {}
+    public void player_Gets_Hurt_By_NPC () {
+        Player player = new Player();
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        int playerStartHealth = player.getHealth();
+        // npc.hurtPlayer(Player player); Eller liknande
+        int playerHealthAfterAttack = player.getHealth();
+        assertTrue(playerStartHealth > playerHealthAfterAttack);
+    }
 
     @Test
-    public void health_Add_Over_Maxvalue_100_Error () {}
+    public void add_Over_Health_Maxvalue_Health_Value_Is_Maxvalue () {
+        Player player = new Player();
+        player.increaseHealth(HEALTH_MAX_VALUE + 1);
+        assertEquals(HEALTH_MAX_VALUE, player.getHealth());
+    }
 
     @Test
     public void health_Goes_Under_Zero_Player_Dies () {

@@ -65,8 +65,11 @@ public class Player extends Entity {
         return this.activeWeapon;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void increaseHealth(int extraHealth) {
+        if((this.health =+ extraHealth) > 100)  {
+            this.health = 100;
+        }
+        this.health =+ extraHealth;
     }
 
     public void setActiveWeapon(Weapon weapon){
@@ -130,7 +133,6 @@ public class Player extends Entity {
     }
 
     private boolean isNPCOutOfReach (NPC npc) {
-
         int npcPosX = npc.posX;
         int npcPosY = npc.posY;
         int playerPosX = this.posX;

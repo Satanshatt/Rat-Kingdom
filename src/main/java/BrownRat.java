@@ -3,6 +3,6 @@ public class BrownRat extends Race {
 
     BrownRat(Player player){
         super(player, NAME);
-        player.setHealth(player.getHealth() + attribute);
+        player.increaseHealth(player.getHealth() + attribute);
     }
 }
