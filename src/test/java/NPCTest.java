@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
+import java.util.Random;
 import org.mockito.Mockito;
 
 class NPCTest {
@@ -12,23 +13,20 @@ class NPCTest {
     }
 
     @Test
-    void battle() {
-    }
-
-    @Test
-    void moveForBattle() {
-    }
-
-    @Test
     void spawn() {
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        npc.spawn();
+        int expectedXPosition = npc.getPosX();
+        int expectedYPosition = npc.getPosY();
+        //kontrollera med Hannes metod att den spawnas
     }
 
     @Test
     void NPCtakesDamageTest() {
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        //int dealtDamage = health - npc.getDamage()
-        //assertEquals(dealtDamage, npc.getDamage());
-
+        int enemyHealth = npc.getHealth();
+        int enemyDealtDamage = npc.getDamage();
+        assertEquals(npc.takeDamage(), (enemyHealth - enemyDealtDamage));
     }
 
     @Test

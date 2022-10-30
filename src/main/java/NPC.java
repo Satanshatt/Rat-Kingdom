@@ -21,14 +21,20 @@ abstract class NPC extends Entity{
 
     public abstract void moveForBattle ();
 
-    public abstract void spawn ();
+    public void spawn(){
+
+    }
 
     //skapa randomizer för när NPCs dör, 1 av 10 att vapen ges
     public boolean die() {
-        return true;
+        if (this.health <= 0){
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public int takeDamage ( int damageFromPlayer){
+    public int takeDamage(){
             return 2;
     }
 
