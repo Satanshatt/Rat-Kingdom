@@ -15,7 +15,7 @@ public class RaceTest {
 
     @Test
     public void choosingBlackRat(){
-        OldPlayer player = new Player();
+        Player player = new Player();
         player.chooseRace("Black rat");
         assertEquals(110, player.getHealth());
         assertEquals(110, player.getMana());
@@ -23,14 +23,14 @@ public class RaceTest {
 
     @Test
     public void choosingRaceBrownRat(){
-        OldPlayer player = new Player();
+        Player player = new Player();
         player.chooseRace("Brown rat");
         assertEquals(120, player.getHealth());
     }
 
     @Test
     public void choosingRaceWhiteRat(){
-        OldPlayer player = new Player();
+        Player player = new Player();
         player.chooseRace("White rat");
         assertEquals(120, player.getMana());
     }

@@ -7,7 +7,7 @@ public class MagicTest {
 
     @BeforeEach
     void setup(){
-        player = new BasicPlayer();
+        player = new Player();
     }
 
     @Test

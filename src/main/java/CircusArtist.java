@@ -1,7 +1,7 @@
 public class CircusArtist extends Trade{
     public static final String NAME = "Circus artist";
-    CircusArtist(OldPlayer newPlayer) {
-        super(newPlayer,NAME);
-        newPlayer.increaseDexterity(newPlayer.getDexterity() + attribute);
+    CircusArtist(Player player) {
+        super(NAME);
+        player.increaseDexterity(player.getDexterity() + attribute);
     }
 }

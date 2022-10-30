@@ -1,6 +1,6 @@
 abstract class Armor extends Equipment {
 
-    public Armor(OldPlayer player, String name) {
+    public Armor(Player player, String name) {
         super(player, name);
     }
 

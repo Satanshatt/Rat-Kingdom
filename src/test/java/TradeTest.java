@@ -20,28 +20,28 @@ class TradeTest {
 
     @Test
     public void choosingTradeBuilder(){
-        OldPlayer player = new Player();
+        Player player = new Player();
         player.chooseTrade("Builder");
         assertEquals(12, player.getStrength());
     }
 
     @Test
     public void choosingTradeCircusArtist(){
-        OldPlayer player = new Player();
+        Player player = new Player();
         player.chooseTrade("Circus artist");
         assertEquals(12, player.getDexterity());
     }
 
     @Test
     public void choosingTradeStoryteller(){
-        OldPlayer player = new Player();
+        Player player = new Player();
         player.chooseTrade("Storyteller");
         assertEquals(12, player.getIntelligence());
     }
 
     @Test
     public void choosingTradeBuilderWithMatchers(){
-        Player player= new BasicPlayer();
+        Player player= new Player();
         player.chooseTrade("Builder");
         assertThat(12, is(equalTo(player.getStrength())));
     }

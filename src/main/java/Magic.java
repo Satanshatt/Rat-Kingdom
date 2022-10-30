@@ -1,7 +1,7 @@
-abstract class Magic extends OldPlayerDecorator {
+abstract class Magic extends Player {
 
-    public Magic(OldPlayer player){
-        super(player);
+    public Magic(Player player){
+        super();
     }
 
     abstract void spellOne();
