@@ -12,6 +12,7 @@ public class Enemy extends NPC
   public void moveForBattle() {
   }
 
+
   public void spawn() {
   }
 
