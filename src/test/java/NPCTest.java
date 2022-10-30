@@ -5,6 +5,9 @@ import org.mockito.Mockito;
 
 class NPCTest {
 
+    int XPOSITION = 2;
+    int YPOSITION = 4;
+
     @Test
     void isDeadTest() {
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
@@ -13,12 +16,16 @@ class NPCTest {
     }
 
     @Test
-    void spawn() {
+    void spawnNPCControlledPositionTest() {
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        npc.spawn();
-        int expectedXPosition = npc.getPosX();
-        int expectedYPosition = npc.getPosY();
-        //kontrollera med Hannes metod att den spawnas
+        npc.spawnNPC(XPOSITION, YPOSITION);
+        assertEquals(XPOSITION, npc.getPosX());
+        assertEquals(YPOSITION, npc.getPosY());
+    }
+
+    @Test
+    void spawnNPCRandomPositionTest() {
+
     }
 
     @Test

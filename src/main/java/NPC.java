@@ -21,7 +21,11 @@ abstract class NPC extends Entity{
 
     public abstract void moveForBattle ();
 
-    public void spawn(){
+    public void spawnNPC(int xCoordinate, int yCoordinate){
+
+    }
+
+    public void spawnNPCRandomPosition(){
 
     }
 
