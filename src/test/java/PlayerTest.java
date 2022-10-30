@@ -225,19 +225,20 @@ public class PlayerTest {
     }
 
     @Test
-    public void mana_Increase_By_Level () {}
+    public void mana_Increase_By_Level () {
+
+    }
 
     @Test
     public void kill_NPC_Success () {
-        NPC enemy = new Enemy("Fiende", "type", 10, 10, 2, 1, 0, 0);
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
         Player player = new Player();
         Weapon sword = new Sword();
-        /*
-        while (!enemy.getIsDead) {
-            player.useWeapon(sword, enemy);
+        boolean npcIsDead = npc.getHealth()<= 0;
+        while (!npcIsDead) {
+            player.useWeaponOnNPC(sword, npc);
         }
-        assertTrue(enemy.isDead);
-         */
+        assertTrue(npcIsDead);
 
 
     }
