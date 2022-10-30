@@ -1,4 +1,4 @@
-public class Player {
+public class Player extends Entity{
 
     private static final int START_POS_X = 0;
     private static final int START_POS_Y = 0;
@@ -18,6 +18,7 @@ public class Player {
     private Race race;
 
     public Player() {
+        super("Player", START_POS_X, START_POS_Y);
         health = 100;
         mana = 100;
         strength = 10;
