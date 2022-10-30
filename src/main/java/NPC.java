@@ -50,8 +50,8 @@ abstract class NPC extends Entity{
         this.setHealth(newHealth);
     }
 
-    public int damagePlayer(){
-        return 2;
+    public void damagePlayer(Player player){
+        player.damagePlayer(this.getDamage());
     };
 
 
