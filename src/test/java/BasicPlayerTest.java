@@ -20,13 +20,13 @@ public class BasicPlayerTest {
 /*
     @Test
     public void list_Should_Be_Empty () {
-        Player player = new BasicPlayer();
+        Player player = new Player();
         assertTrue( player.getEquipment().isEmpty());
     }
 
     @Test
     public void test_Add_Object_To_List_Success () {
-        Player player = new BasicPlayer();
+        Player player = new Player();
         Equipment e = new Equipment(player, SWORD_EQUIPMENT);
         player.addEquipment(e);
         assertTrue (player.getEquipment().contains(e));
@@ -34,7 +34,7 @@ public class BasicPlayerTest {
 
     @Test
     public void add_Duplicates_To_List_Success () {
-        Player player = new BasicPlayer();
+        Player player = new Player();
         Equipment e = new Equipment(player, SWORD_EQUIPMENT);
         Equipment e2 = new Equipment(player, SWORD_EQUIPMENT);
         player.addEquipment(e, e2);
@@ -47,7 +47,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                Player player = new BasicPlayer();
+                Player player = new Player();
                 player.addEquipment(null);
             }
         });
@@ -74,7 +74,7 @@ public class BasicPlayerTest {
 
     @Test
     public void player_Walk_One_Step_Left () {
-        OldPlayer player = new Player();
+        Player player = new Player();
         int stepsInput = 1;
         player.walkLeft(stepsInput);
         int currentPosX = player.getPosX();
@@ -86,7 +86,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                OldPlayer player = new Player();
+                Player player = new Player();
                 int stepsInput = -1;
                 player.walkLeft(stepsInput);
                 //int currentPosX = player.getPosX();
@@ -100,7 +100,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                OldPlayer player = new Player();
+                Player player = new Player();
                 int stepsInput = 0;
                 player.walkLeft(stepsInput);
                 int currentPosX = player.getPosX();
@@ -111,7 +111,7 @@ public class BasicPlayerTest {
 
     @Test
     public void player_Walk_One_Step_Right () {
-        OldPlayer player = new Player();
+        Player player = new Player();
         int stepsInput = 1;
         player.walkRight(stepsInput);
         int currentPosX = player.getPosX();
@@ -123,7 +123,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                OldPlayer player = new Player();
+                Player player = new Player();
                 int stepsInput = -1;
                 player.walkRight(stepsInput);
                 int currentPosX = player.getPosX();
@@ -137,7 +137,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                OldPlayer player = new Player();
+                Player player = new Player();
                 int stepsInput = 0;
                 player.walkRight(stepsInput);
                 int currentPosX = player.getPosX();
@@ -148,7 +148,7 @@ public class BasicPlayerTest {
 
     @Test
     public void player_Walk_One_Step_Forward () {
-        OldPlayer player = new Player();
+        Player player = new Player();
         int stepsInput = 1;
         player.walkForward(stepsInput);
         int currentPosY = player.getPosY();
@@ -160,7 +160,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                OldPlayer player = new Player();
+                Player player = new Player();
                 int stepsInput = -1;
                 player.walkForward(stepsInput);
                 int currentPosY = player.getPosY();
@@ -174,7 +174,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                OldPlayer player = new Player();
+                Player player = new Player();
                 int stepsInput = 0;
                 player.walkForward(stepsInput);
                 int currentPosY = player.getPosY();
@@ -185,7 +185,7 @@ public class BasicPlayerTest {
 
     @Test
     public void player_Try_Walk_Outside_Room_Error () {
-        OldPlayer player = new Player();
+        Player player = new Player();
         //Room room = new Room()
 
     }
@@ -196,7 +196,7 @@ public class BasicPlayerTest {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
-                OldPlayer player = new Player();
+                Player player = new Player();
                 NPC npc = new Enemy("Namn", "Typ", 10, 10, 10, 10, 0,1);
                 player.walkForward(1);
             }
@@ -206,7 +206,7 @@ public class BasicPlayerTest {
 
     @Test
     public void player_Dies () {
-        OldPlayer player = new Player();
+        Player player = new Player();
         player.die();
         assertTrue(player.isDead());
     }
@@ -257,7 +257,7 @@ public class BasicPlayerTest {
 
     @Test
     public void health_Goes_Under_Zero_Player_Dies () {
-        OldPlayer player = new Player();
+        Player player = new Player();
         int currentHealth = player.getHealth();
         assertTrue(player.isDead());
     }
@@ -268,7 +268,7 @@ public class BasicPlayerTest {
     @Test
     public void kill_NPC_Success () {
         NPC enemy = new Enemy("Fiende", "type", 10, 10, 2, 1, 0, 0);
-        OldPlayer player = new Player();
+        Player player = new Player();
         Weapon sword = new Sword();
         /*
         while (!enemy.getIsDead) {
@@ -285,7 +285,7 @@ public class BasicPlayerTest {
 
     @Test
     public void level_Upgrade_With_Xp_Success(){
-        OldPlayer player = new Player();
+        Player player = new Player();
         int levelUp = 1;
         player.increaseXp(XP_MAX_VALUE);
         assertEquals(DEFAULT_VALUE_LEVEL + levelUp, player.getLevel());

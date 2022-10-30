@@ -19,7 +19,7 @@ abstract class Weapon {
 
     abstract int getWeaponLevel();
 
-    abstract void setPlayer(OldPlayer player);
+    abstract void setPlayer(Player player);
 
     //Only for test
     abstract void setWeaponLevel(int weaponLevel);

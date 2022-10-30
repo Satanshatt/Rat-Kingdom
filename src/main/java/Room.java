@@ -6,7 +6,7 @@ public class Room {
     private int width;
     private int height;
 
-    public OldPlayer player;
+    public Player player;
     public Set<Entity> entities;
 
     public Room(Tile[][] tiles, Set<Entity> entities){

@@ -176,9 +176,9 @@ public class Player {
         this.posX = START_POS_X;
         this.posY = START_POS_Y;
     }
-/*
+
     public void getWeapon(Weapon weapon){
-        if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel() || this.activeWeapon == null ){
+        if (weapon.getWeaponLevel() <= this.level && this.activeWeapon == null || weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel()){
             this.setActiveWeapon(weapon);
             weapon.setPlayer(this);
         }
@@ -203,6 +203,4 @@ public class Player {
             this.race = new WhiteRat(this);
         }
     }
-
- */
 }

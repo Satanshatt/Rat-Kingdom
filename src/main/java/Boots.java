@@ -3,7 +3,7 @@ public class Boots extends Armor {
     private final int protectionValue;
     private final int armorLevel;
 
-    public Boots(OldPlayer player){
+    public Boots(Player player){
         super(player, NAME);
         this.armorLevel = levelRandomizer();
         this.protectionValue = armorLevel * 3;
