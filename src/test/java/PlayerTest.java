@@ -146,7 +146,7 @@ public class PlayerTest {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                NPC npc = new Enemy("Namn", "Typ", 10, 10, 10, 1, 0,1);
+                NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
                 player.walkForward(1);
             }
         });
@@ -168,6 +168,7 @@ public class PlayerTest {
         Player player = new Player();
         //NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 1);
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        npc.setPosX(npc.getPosX()+1);
         int npcStartDamage = npc.getHealth();
         player.fret(npc);
         int npcDamageAfterAttack = npc.getHealth();
@@ -260,11 +261,6 @@ public class PlayerTest {
         int levelUp = 1;
         player.increaseXp( XP_MAX_VALUE +1);
         assertEquals(DEFAULT_VALUE_LEVEL + levelUp, player.getLevel());
-
-    }
-
-    @Test
-    public void testFretDamage() {
 
     }
 }
