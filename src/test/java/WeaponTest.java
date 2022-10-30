@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class WeaponTest {
-    OldPlayer player;
+    Player player;
 
     @BeforeEach
     void setup(){
-        player = new Player();
+        player = new BasicPlayer();
     }
 
     @Test

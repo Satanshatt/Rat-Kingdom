@@ -1,4 +1,8 @@
 import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TradeTest {
@@ -33,5 +37,12 @@ class TradeTest {
         OldPlayer player = new Player();
         player.chooseTrade("Storyteller");
         assertEquals(12, player.getIntelligence());
+    }
+
+    @Test
+    public void choosingTradeBuilderWithMatchers(){
+        Player player= new BasicPlayer();
+        player.chooseTrade("Builder");
+        assertThat(12, is(equalTo(player.getStrength())));
     }
 }
