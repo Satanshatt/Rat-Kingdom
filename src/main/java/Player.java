@@ -4,6 +4,7 @@ public class Player extends Entity {
 
     private static final int START_POS_X = 0;
     private static final int START_POS_Y = 0;
+    private static final int FRET_DAMAGE = 2;
 
     private int health;
     private int mana;
@@ -13,8 +14,6 @@ public class Player extends Entity {
     private int xp;
     private int level;
     private Weapon activeWeapon;
-    private int posX;
-    private int posY;
     private boolean isDead;
     private Trade trade;
     private Race race;
@@ -60,14 +59,6 @@ public class Player extends Entity {
 
     public int getLevel() {
         return this.level;
-    }
-
-    public int getPosX() {
-        return this.posX;
-    }
-
-    public int getPosY() {
-        return this.posY;
     }
 
     public Weapon getActiveWeapon(){
@@ -140,35 +131,33 @@ public class Player extends Entity {
 
     private boolean isNPCOutOfReach (NPC npc) {
 
-        int npcXCoordinate = npc.posX;
-        int npcYCoordinate = npc.posY;
-        int playerXCoordinate = posX;
-        int playerYCoordinate = posY;
+        int npcPosX = npc.posX;
+        int npcPosY = npc.posY;
+        int playerPosX = this.posX;
+        int playerPosY = this.posY;
 
-        if((playerYCoordinate == npcYCoordinate) &&
-                ((playerXCoordinate == (npcXCoordinate + 1)) ||  (playerXCoordinate == npcXCoordinate - 1))){
+        if((playerPosY == npcPosY) &&
+                ((playerPosX == (npcPosX + 1)) ||  (playerPosX == npcPosX - 1))){
             return false;
-        } else if ((playerXCoordinate == npcXCoordinate) &&
-                ((playerYCoordinate == (npcYCoordinate + 1)) ||  (playerYCoordinate == npcYCoordinate - 1))) {
+        } else if ((playerPosX == npcPosX) &&
+                ((playerPosY == (npcPosY + 1)) ||  (playerPosY == npcPosY - 1))) {
             return false;
         }
-
         return true;
     }
 
     public void fret(NPC npc) {
-
         if(isNPCOutOfReach(npc)) {
             throw new IllegalArgumentException("NPC out of reach");
         }
-        npc.takeDamage(2);
+        npc.takeDamage(FRET_DAMAGE);
 
     }
 
     public void useWeaponOnNPC (Weapon weapon, NPC npc) {
-        //kolla så NPc står på rätt position
+        //kolla så NPC står inom räckhåll
         int damage = weapon.attackDamage();
-        npc.takeDamage(8); //Skickar in damage på npc:en
+        npc.takeDamage(damage);
     }
 
     public void boxing() {
