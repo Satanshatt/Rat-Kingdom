@@ -188,7 +188,7 @@ public class Player extends Entity {
     }
 
     public void pickUpWeapon(Weapon weapon) {
-
+        this.activeWeapon = weapon;
     }
 
     public void useDoor() {
@@ -207,15 +207,6 @@ public class Player extends Entity {
         xp = 0;
         this.posX = START_POS_X;
         this.posY = START_POS_Y;
-    }
-
-    public void getWeapon(Weapon weapon){
-        /*
-        if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel() || this.activeWeapon == null ){
-            this.setActiveWeapon(weapon);
-            weapon.setPlayer(this);
-        }
-         */
     }
 
     public Trade getTrade () {
