@@ -1,3 +1,5 @@
+import java.util.Random;
+
 abstract class NPC extends Entity{
 
     String name = "";
@@ -17,18 +19,41 @@ abstract class NPC extends Entity{
         this.level = level;
     }
 
-    public void die() {
+    public abstract void battle ();
+
+    public abstract void moveForBattle ();
+
+    public void spawnNPC(int xCoordinate, int yCoordinate){
+        this.setPosX(xCoordinate);
+        this.setPosY(yCoordinate);
     }
 
-        public abstract void battle ();
+    public void spawnNPCRandomPosition(){
+        Random randomNumber = new Random();
+        int xPosition = randomNumber.nextInt(12);
+        int yPosition = randomNumber.nextInt(12);
+        spawnNPC(xPosition, yPosition);
+    }
 
-        public abstract void moveForBattle ();
-
-        public abstract void spawn ();
-
-        public int takeDamage ( int damageFromPlayer){
-            return 2;
+    //skapa randomizer för när NPCs dör, 1 av 10 att vapen ges
+    public boolean die() {
+        if (this.health <= 0){
+            return true;
+        } else {
+            return false;
         }
+    }
+
+    public void takeDamage(int damageFromPlayer){
+        int NPCOriginalHealth = this.getHealth();
+        int newHealth = (NPCOriginalHealth - damageFromPlayer);
+        this.setHealth(newHealth);
+    }
+
+    public void damagePlayer(Player player){
+        player.damagePlayer(this.getDamage());
+    };
+
 
         public String getName () {
             return name;
@@ -53,5 +78,13 @@ abstract class NPC extends Entity{
         public int getLevel () {
             return level;
         }
+
+        public void setHealth(int newHealth){
+            this.health = newHealth;
+        }
+
+        public void setDamage(int newDamage){ this.damage = newDamage; }
+
+
 
 }

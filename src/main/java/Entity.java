@@ -17,6 +17,14 @@ public class Entity {
         return posY;
     }
 
+    public void setPosX(int newXPosition){
+        posX = newXPosition;
+    };
+
+    public void setPosY(int newYPosition){
+        posY = newYPosition;
+    }
+
     public String getType() {
         return type;
     }

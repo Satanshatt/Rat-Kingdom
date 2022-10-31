@@ -1,30 +1,44 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
+
+@ExtendWith(MockitoExtension.class)
 public class WeaponTest {
-    Player player;
+    private Player player;
+
+    @Mock
+    Weapon sword;
+    @Mock
+    Weapon axe;
 
     @BeforeEach
-    void setup(){
-        player = new BasicPlayer();
+    void setup() {
+        player = new Player();
     }
 
     @Test
-    public void testLevelRandomizer(){
+    public void testLevelRandomizer() {
         ArrayList<Weapon> weapons = new ArrayList<>();
-        for (int i = 0; i < 100; i++){
-            weapons.add(new Axe(player));
+        for (int i = 0; i < 100; i++) {
+            weapons.add(new Axe());
         }
-        for (int i = 0; i < 100; i++){
+        for (int i = 0; i < 100; i++) {
             assertTrue(0 < weapons.get(i).getWeaponLevel() && weapons.get(i).getWeaponLevel() <= 10);
         }
     }
 
     @Test
-    public void testAxe(){
-        Weapon axe = new Axe(player);
+    public void testAxe() {
+        Weapon axe = new Axe();
+        axe.setPlayer(player);
         int weaponLevel = axe.getWeaponLevel();
         assertEquals(weaponLevel + 4, axe.getDamage());
         assertEquals(weaponLevel + 2, axe.getSpeed());
@@ -33,8 +47,9 @@ public class WeaponTest {
     }
 
     @Test
-    public void testSword(){
-        Weapon sword = new Sword(player);
+    public void testSword() {
+        Weapon sword = new Sword();
+        sword.setPlayer(player);
         int weaponLevel = sword.getWeaponLevel();
         assertEquals(weaponLevel + 2, sword.getDamage());
         assertEquals(weaponLevel + 4, sword.getSpeed());
@@ -43,12 +58,57 @@ public class WeaponTest {
     }
 
     @Test
-    public void testWand(){
-        Weapon wand = new Wand(player);
+    public void testWand() {
+        Weapon wand = new Wand();
+        wand.setPlayer(player);
         int weaponLevel = wand.getWeaponLevel();
         assertEquals(weaponLevel + 3, wand.getDamage());
         assertEquals(weaponLevel + 3, wand.getSpeed());
         assertEquals(10 + wand.getDamage(), wand.attackDamage());
         assertEquals(10 + wand.getSpeed(), wand.attackSpeed());
     }
+
+    @Test
+    public void testPickUpWeaponSuccess() {
+        Weapon sword = new Sword();
+        Weapon axe = new Axe();
+        sword.setWeaponLevel(0);
+        axe.setWeaponLevel(1);
+        player.setActiveWeapon(sword);
+        player.pickUpWeapon(axe);
+        assertSame(axe, player.getActiveWeapon());
+    }
+
+    @Test
+    public void testPickUpWeaponSuccessWithMock() {
+        when(sword.getWeaponLevel()).thenReturn(0);
+        when(axe.getWeaponLevel()).thenReturn(1);
+        player.pickUpWeapon(sword);
+        player.pickUpWeapon(axe);
+        assertSame(axe, player.getActiveWeapon());
+    }
+
+    @Test
+    public void testPickUpWeaponFailWithMock() {
+        when(sword.getWeaponLevel()).thenReturn(1);
+        when(axe.getWeaponLevel()).thenReturn(0);
+        player.pickUpWeapon(sword);
+        player.pickUpWeapon(axe);
+        assertSame(sword, player.getActiveWeapon());
+    }
+
+    @Test
+    void testPickUpWeaponFail() {
+        Weapon sword = new Sword();
+        Weapon axe = new Axe();
+        sword.setWeaponLevel(1);
+        axe.setWeaponLevel(0);
+        player.setActiveWeapon(sword);
+        player.pickUpWeapon(axe);
+        assertSame(sword, player.getActiveWeapon());
+    }
+
+    /*@Test void testWeaponDrop(){
+        NPC owl = new Owl();
+    }*/
 }

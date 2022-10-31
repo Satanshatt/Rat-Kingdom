@@ -1,8 +1,8 @@
-public class Equipment extends PlayerDecorator {
+public class Equipment extends Player {
     private String name;
 
     public Equipment(Player player, String name) {
-        super(player);
+        super();
         this.name = name;
     }
 

@@ -17,27 +17,9 @@ public class Friend extends NPC{
 
     }
 
-    public String getName() {
-        return name;
+    public void moveNoThreat(){
+
     }
 
-    public String getType() {
-        return type;
-    }
 
-    public int getSize() {
-        return size;
-    }
-
-    public int getDamage() {
-        return damage;
-    }
-
-    public int getHealth() {
-        return health;
-    }
-
-    public int getLevel() {
-        return level;
-    }
 }

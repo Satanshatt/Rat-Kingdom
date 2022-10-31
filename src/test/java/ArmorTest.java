@@ -1,17 +1,14 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ArmorTest {
     Player player;
 
     @BeforeEach
     void setup(){
-        player = new BasicPlayer();
+        player = new Player();
     }
 
     @Test

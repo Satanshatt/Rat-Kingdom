@@ -5,9 +5,9 @@ public class RaceTest {
 
     @Test
     public void testGetName(){
-        Race raceBlackRat = new BlackRat(new BasicPlayer());
-        Race raceBrownRat = new BrownRat(new BasicPlayer());
-        Race raceWhiteRat = new WhiteRat(new BasicPlayer());
+        Race raceBlackRat = new BlackRat(new Player());
+        Race raceBrownRat = new BrownRat(new Player());
+        Race raceWhiteRat = new WhiteRat(new Player());
         assertEquals("Black rat", raceBlackRat.getName());
         assertEquals("Brown rat", raceBrownRat.getName());
         assertEquals("White rat", raceWhiteRat.getName());
@@ -15,20 +15,24 @@ public class RaceTest {
 
     @Test
     public void choosingBlackRat(){
-        Player player = new BlackRat(new BasicPlayer());
+        Player player = new Player();
+        player.chooseRace("Black rat");
         assertEquals(110, player.getHealth());
         assertEquals(110, player.getMana());
     }
 
     @Test
     public void choosingRaceBrownRat(){
-        Player player = new BrownRat(new BasicPlayer());
+        Player player = new Player();
+        player.chooseRace("Brown rat");
         assertEquals(120, player.getHealth());
     }
 
     @Test
     public void choosingRaceWhiteRat(){
-        Player player = new WhiteRat(new BasicPlayer());
+        Player player = new Player();
+        player.chooseRace("White rat");
         assertEquals(120, player.getMana());
     }
+
 }

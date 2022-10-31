@@ -1,4 +1,10 @@
+abstract class Magic extends Player {
 
-public class Magic {
-    
+    public Magic(Player player){
+        super();
+    }
+
+    abstract void spellOne();
+    abstract void spellTwo();
+    abstract void spellThree();
 }
