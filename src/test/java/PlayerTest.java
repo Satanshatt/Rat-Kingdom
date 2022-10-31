@@ -3,7 +3,7 @@ import org.junit.jupiter.api.function.Executable;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BasicPlayerTest {
+public class PlayerTest {
 
     private static final int START_POS_X = 0;
     private static final int START_POS_Y = 0;
