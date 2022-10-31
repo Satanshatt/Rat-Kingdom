@@ -17,37 +17,33 @@ public class MagicRingTest {
     public void testFireRing(){
         fireRing = new FireRing();
         fireRing.setPlayer(player);
-        assertEquals(0, fireRing.attackDamage());
-        assertEquals(0, fireRing.attackSpeed());
+        //Player is level 1
+        assertEquals(11, fireRing.attackDamage());
+        assertEquals(11, fireRing.attackSpeed());
     }
 
     @Test
     public void testIceRing(){
         iceRing = new IceRing();
         iceRing.setPlayer(player);
-        assertEquals(0, iceRing.attackDamage());
-        assertEquals(0, iceRing.attackSpeed());
+        //Player is level 1
+        assertEquals(11, iceRing.attackDamage());
+        assertEquals(11, iceRing.attackSpeed());
     }
-
-    @Test
-    public void testFireRingAttack(){}
-
-    @Test
-    public void testIceRingAttack(){}
 
     @Test
     public void testChooseRingFirstTime(){
         fireRing = new FireRing();
-        player.chooseRing(fireRing);
-        assertSame(fireRing, player.getActiveRing());
+        player.pickUpMagicRing(fireRing);
+        assertSame(fireRing, player.getActiveMagicRing());
     }
 
     @Test
     public void testChooseRing(){
         fireRing = new FireRing();
         iceRing = new IceRing();
-        player.chooseRing(fireRing);
-        player.chooseRing(iceRing);
-        assertSame(fireRing, player.getActiveRing());
+        player.pickUpMagicRing(fireRing);
+        player.pickUpMagicRing(iceRing);
+        assertSame(iceRing, player.getActiveMagicRing());
     }
 }
