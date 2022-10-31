@@ -8,13 +8,10 @@ public class Enemy extends NPC
 
   public void battle() {
   }
-
   public void moveForBattle() {
   }
-
   public void spawn() {
   }
-
   public String getName() {
    return name;
   }
