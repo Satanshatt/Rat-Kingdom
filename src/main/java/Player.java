@@ -189,8 +189,11 @@ public class Player extends Entity {
         restartSameLevel();
     }
 
-    public void pickUpWeapon(Weapon weapon) {
-        setActiveWeapon(weapon);
+    public void pickUpWeapon(Weapon weapon){
+        if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel() || this.activeWeapon == null ){
+            this.setActiveWeapon(weapon);
+            weapon.setPlayer(this);
+        }
     }
 
     public void useDoor() {
