@@ -36,11 +36,18 @@ public class MagicRingTest {
     public void testIceRingAttack(){}
 
     @Test
+    public void testChooseRingFirstTime(){
+        fireRing = new FireRing();
+        player.chooseRing(fireRing);
+        assertSame(fireRing, player.getActiveRing());
+    }
+
+    @Test
     public void testChooseRing(){
         fireRing = new FireRing();
         iceRing = new IceRing();
         player.chooseRing(fireRing);
         player.chooseRing(iceRing);
-        assertSame();
+        assertSame(fireRing, player.getActiveRing());
     }
 }
