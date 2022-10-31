@@ -1,5 +1,6 @@
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,50 +17,11 @@ public class PlayerTest {
     private static final int DEFAULT_VALUE_LEVEL = 1;
     private static final String SWORD_EQUIPMENT = "Sword";
     private static final int XP_MAX_VALUE = 100;
-
-/*
-    @Test
-    public void list_Should_Be_Empty () {
-        Player player = new Player();
-        assertTrue( player.getEquipment().isEmpty());
-    }
+    private static final int HEALTH_MAX_VALUE = 100;
+    private static final int NEGATIVE_INPUT = -1;
 
     @Test
-    public void test_Add_Object_To_List_Success () {
-        Player player = new Player();
-        Equipment e = new Equipment(player, SWORD_EQUIPMENT);
-        player.addEquipment(e);
-        assertTrue (player.getEquipment().contains(e));
-    }
-
-    @Test
-    public void add_Duplicates_To_List_Success () {
-        Player player = new Player();
-        Equipment e = new Equipment(player, SWORD_EQUIPMENT);
-        Equipment e2 = new Equipment(player, SWORD_EQUIPMENT);
-        player.addEquipment(e, e2);
-        assertTrue(player.getEquipment().contains(e) &&
-                player.getEquipment().contains(e2));
-    }
-
-    @Test
-    public void test_Add_Null_To_List_Get_Error () {
-        assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                Player player = new Player();
-                player.addEquipment(null);
-            }
-        });
-    }
-
-    @Test
-    public void test_Add_Object_When_List_Is_Full_Error () {}
-
- */
-
-    @Test
-    public void basicPlayer_defaultValue_Is_Correct () {
+    public void player_defaultValue_Is_Correct () {
         Player player = new Player();
         assertEquals(DEFAULT_VALUE_HEALTH, player.getHealth());
         assertEquals(DEFAULT_VALUE_MANA, player.getMana());
@@ -89,8 +51,6 @@ public class PlayerTest {
                 Player player = new Player();
                 int stepsInput = -1;
                 player.walkLeft(stepsInput);
-                //int currentPosX = player.getPosX();
-                //assertEquals(START_POS_X + stepsInput, currentPosX);
             }
         });
     }
@@ -103,8 +63,6 @@ public class PlayerTest {
                 Player player = new Player();
                 int stepsInput = 0;
                 player.walkLeft(stepsInput);
-                int currentPosX = player.getPosX();
-                assertEquals(START_POS_X - stepsInput, currentPosX);
             }
         });
     }
@@ -126,8 +84,6 @@ public class PlayerTest {
                 Player player = new Player();
                 int stepsInput = -1;
                 player.walkRight(stepsInput);
-                int currentPosX = player.getPosX();
-                assertEquals(START_POS_X + stepsInput, currentPosX);
             }
         });
     }
@@ -140,8 +96,6 @@ public class PlayerTest {
                 Player player = new Player();
                 int stepsInput = 0;
                 player.walkRight(stepsInput);
-                int currentPosX = player.getPosX();
-                assertEquals(START_POS_X + stepsInput, currentPosX);
             }
         });
     }
@@ -177,17 +131,13 @@ public class PlayerTest {
                 Player player = new Player();
                 int stepsInput = 0;
                 player.walkForward(stepsInput);
-                int currentPosY = player.getPosY();
-                assertEquals(START_POS_Y + stepsInput, currentPosY);
             }
         });
     }
 
+    //Snacka med Hannes
     @Test
     public void player_Try_Walk_Outside_Room_Error () {
-        Player player = new Player();
-        //Room room = new Room()
-
     }
 
     @Test
@@ -197,7 +147,7 @@ public class PlayerTest {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                NPC npc = new Enemy("Namn", "Typ", 10, 10, 10, 10, 0,1);
+                NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
                 player.walkForward(1);
             }
         });
@@ -217,10 +167,12 @@ public class PlayerTest {
     @Test
     public void player_Fret_NPC () {
         Player player = new Player();
-        NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 1);
-        int npcStartDamage = npc.getDamage();
-        //player.fret(npc);
-        int npcDamageAfterAttack = npc.getDamage();
+        //NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 1);
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        npc.setPosX(npc.getPosX()+1);
+        int npcStartDamage = npc.getHealth();
+        player.fret(npc);
+        int npcDamageAfterAttack = npc.getHealth();
         assertTrue(npcStartDamage > npcDamageAfterAttack);
     }
 
@@ -230,8 +182,8 @@ public class PlayerTest {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 2);
-                //player.fret(npc);
+                NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+                player.fret(npc);
             }
         });
     }
@@ -243,57 +195,97 @@ public class PlayerTest {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 2, 0, 1);
-
+                NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+                player.increaseLevel();
             }
         });
     }
 
+    //Ej klar, behöver metod i NPC som skadar en player
     @Test
-    public void player_Gets_Hurt_By_NPC () {}
+    public void player_Gets_Hurt_By_NPC () {
+        Player player = new Player();
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        int playerStartHealth = player.getHealth();
+        // npc.hurtPlayer(Player player); Eller liknande
+        int playerHealthAfterAttack = player.getHealth();
+        assertTrue(playerStartHealth > playerHealthAfterAttack);
+    }
 
     @Test
-    public void health_Add_Over_Maxvalue_100_Error () {}
+    public void add_Over_Health_Maxvalue_Health_Value_Is_Maxvalue () {
+        Player player = new Player();
+        player.increaseHealth(HEALTH_MAX_VALUE + 1);
+        assertEquals(HEALTH_MAX_VALUE, player.getHealth());
+    }
 
     @Test
     public void health_Goes_Under_Zero_Player_Dies () {
         Player player = new Player();
-        int currentHealth = player.getHealth();
+        player.damagePlayer(player.getHealth() + 1);
         assertTrue(player.isDead());
     }
 
     @Test
-    public void mana_Increase_By_Level () {}
-
-    @Test
-    public void kill_NPC_Success () {
-        NPC enemy = new Enemy("Fiende", "type", 10, 10, 2, 1, 0, 0);
-        Player player = new Player();
-        Weapon sword = new Sword();
-        /*
-        while (!enemy.getIsDead) {
-            player.useWeapon(sword, enemy);
-        }
-        assertTrue(enemy.isDead);
-         */
-
+    public void mana_Increase_By_Level () {
 
     }
 
     @Test
-    public void kill_NPC_And_Increase_Xp () {} //Eller annat än xp
+    public void kill_NPC_With_Weapon_Increase_Xp () {
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        Player player = new Player();
+        Weapon sword = new Sword();
+
+        int xPBefore = player.getXp();
+        player.killNPCWithWeapon(npc, sword);
+        int xPAfter = player.getXp();
+
+        assertTrue(xPBefore < xPAfter);
+    }
+
+    @Test
+    public void kill_NPC_And_Increase_Xp () {
+        Player player = new Player();
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+
+        int xPBefore = player.getXp();
+        player.killNPCWithoutWeapon(npc);
+        int xPAfter = player.getXp();
+
+        assertTrue(xPBefore < xPAfter);
+    } //Eller annat än xp
 
     @Test
     public void level_Upgrade_With_Xp_Success(){
         Player player = new Player();
         int levelUp = 1;
-        player.increaseXp(XP_MAX_VALUE);
+        player.increaseXp( XP_MAX_VALUE +1);
         assertEquals(DEFAULT_VALUE_LEVEL + levelUp, player.getLevel());
 
     }
 
     @Test
-    public void testFretDamage() {
+    public void pick_Up_Weapon_And_Activate () {
+        Player player = new Player();
+        Weapon weapon = Mockito.mock(Weapon.class, Mockito.CALLS_REAL_METHODS);
+        player.pickUpWeapon(weapon);
+        assertEquals(weapon, player.getActiveWeapon());
+    }
+
+    @Test
+    public void increase_With_Negative_Health_input_Error () {
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                Player player = new Player();
+                player.increaseHealth(NEGATIVE_INPUT);
+            }
+        });
 
     }
+
+
+
+
 }

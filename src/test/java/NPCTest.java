@@ -7,6 +7,7 @@ class NPCTest {
 
     int XPOSITION = 2;
     int YPOSITION = 4;
+    int DAMAGE = 1;
 
     @Test
     void isDeadTest() {
@@ -24,16 +25,19 @@ class NPCTest {
     }
 
     @Test
-    void spawnNPCRandomPositionTest() {
-
+    void NPCtakesDamageTest() {
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        int NPCHealth = npc.getHealth();
+        int expectedHealth = (NPCHealth - DAMAGE);
+        npc.takeDamage(DAMAGE);
+        assertEquals(expectedHealth, npc.getHealth());
     }
 
     @Test
-    void NPCtakesDamageTest() {
+    void damagePlayerTest(){
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        int enemyHealth = npc.getHealth();
-        int enemyDealtDamage = npc.getDamage();
-        assertEquals(npc.takeDamage(), (enemyHealth - enemyDealtDamage));
+        npc.setDamage(DAMAGE);
+        //assertEquals(npc.damagePlayer(), DAMAGE);
     }
 
     @Test

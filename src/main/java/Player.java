@@ -1,7 +1,10 @@
-public class Player {
+import java.awt.*;
+
+public class Player extends Entity {
 
     private static final int START_POS_X = 0;
     private static final int START_POS_Y = 0;
+    private static final int FRET_DAMAGE = 2;
 
     private int health;
     private int mana;
@@ -11,13 +14,14 @@ public class Player {
     private int xp;
     private int level;
     private Weapon activeWeapon;
-    private int posX;
-    private int posY;
     private boolean isDead;
     private Trade trade;
     private Race race;
 
+
+
     public Player() {
+        super("Player", START_POS_X, START_POS_Y);
         health = 100;
         mana = 100;
         strength = 10;
@@ -57,20 +61,17 @@ public class Player {
         return this.level;
     }
 
-    public int getPosX() {
-        return this.posX;
-    }
-
-    public int getPosY() {
-        return this.posY;
-    }
-
     public Weapon getActiveWeapon(){
         return this.activeWeapon;
     }
 
-    public void setHealth(int health) {
-        this.health = health;
+    public void increaseHealth(int addedHealth) {
+        if (addedHealth < 0)
+            throw new IllegalArgumentException("Negative input not possible");
+        else if((this.health =+ addedHealth) >= 100)
+            this.health = 100;
+        else
+            this.health =+ addedHealth;
     }
 
     public void setActiveWeapon(Weapon weapon){
@@ -93,15 +94,35 @@ public class Player {
         this.intelligence = intelligence;
     }
 
-    public void increaseXp(int xp) {
-        this.xp = xp;
+    public void increaseXp(int addXp) {
+        this.xp =+ addXp;
         if(this.xp >= 100) {
-            this.increaseLevel();
+            increaseLevel();
         }
     }
 
     public void increaseLevel() {
+        this.level = level + 1;
+    }
 
+    public void killNPCWithWeapon (NPC npc, Weapon weapon) {
+        while (npc.getHealth() > 0)
+         useWeaponOnNPC(weapon, npc);
+        if (npc.getHealth() <= 0)
+            increaseXp(10);
+    }
+
+    public void killNPCWithoutWeapon (NPC npc) {
+        while (npc.getHealth() > 0)
+            fret(npc);
+        if (npc.getHealth() <= 0)
+            increaseXp(10);
+    }
+
+    public void damagePlayer (int damage) {
+        this.health = health - damage;
+        if (this.health <= 0)
+            die();
     }
 
     public void walkLeft(int steps) {
@@ -130,24 +151,37 @@ public class Player {
         else
             this.posY = posY + steps;
 
+
     }
 
-    public void fret() {
-        //skada NPC
-        //Level, styrka, typ av NPC etc...
+    private boolean isNPCOutOfReach (NPC npc) {
+        int npcPosX = npc.posX;
+        int npcPosY = npc.posY;
+        int playerPosX = this.posX;
+        int playerPosY = this.posY;
+
+        if((playerPosY == npcPosY) &&
+                ((playerPosX == (npcPosX + 1)) ||  (playerPosX == npcPosX - 1))){
+            return false;
+        } else if ((playerPosX == npcPosX) &&
+                ((playerPosY == (npcPosY + 1)) ||  (playerPosY == npcPosY - 1))) {
+            return false;
+        }
+        return true;
+    }
+
+    public void fret(NPC npc) {
+        if(isNPCOutOfReach(npc)) {
+            throw new IllegalArgumentException("NPC out of reach");
+        }
+        npc.takeDamage(FRET_DAMAGE);
+
     }
 
     public void useWeaponOnNPC (Weapon weapon, NPC npc) {
+        //kolla så NPC står inom räckhåll
         int damage = weapon.attackDamage();
-        //npc.setDamage(damage);
-    }
-
-    public void boxing() {
-
-    }
-
-    public void whip() {
-
+        npc.takeDamage(damage);
     }
 
     public void die() {
@@ -156,7 +190,7 @@ public class Player {
     }
 
     public void pickUpWeapon(Weapon weapon) {
-
+        setActiveWeapon(weapon);
     }
 
     public void useDoor() {
@@ -177,30 +211,32 @@ public class Player {
         this.posY = START_POS_Y;
     }
 
-    public void getWeapon(Weapon weapon){
-        if (weapon.getWeaponLevel() <= this.level && this.activeWeapon == null || weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel()){
-            this.setActiveWeapon(weapon);
-            weapon.setPlayer(this);
-        }
+    public Trade getTrade () {
+        return this.trade;
     }
 
-    public void chooseTrade(String tradeName){
-        if (tradeName.equals("Builder")){
+    public void chooseTrade(String tradeName) {
+        if (tradeName.equals("Builder")) {
             this.trade = new Builder(this);
         } else if (tradeName.equals("Circus artist")) {
             this.trade = new CircusArtist(this);
         } else if (tradeName.equals("Storyteller")) {
             this.trade = new Storyteller(this);
         }
-    }
 
-    public void chooseRace(String raceName){
-        if (raceName.equals("Black rat")){
-            this.race = new BlackRat(this);
-        } else if (raceName.equals("Brown rat")) {
-            this.race = new BrownRat(this);
-        } else if (raceName.equals("White rat")) {
-            this.race = new WhiteRat(this);
         }
-    }
+
+        public void chooseRace (String raceName){
+
+            if (raceName.equals("Black rat")) {
+                this.race = new BlackRat(this);
+            } else if (raceName.equals("Brown rat")) {
+                this.race = new BrownRat(this);
+            } else if (raceName.equals("White rat")) {
+                this.race = new WhiteRat(this);
+            }
+
+
+        }
+
 }

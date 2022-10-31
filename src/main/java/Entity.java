@@ -17,11 +17,11 @@ public class Entity {
         return posY;
     }
 
-    public void setPosY(int newXPosition){
+    public void setPosX(int newXPosition){
         posX = newXPosition;
     };
 
-    public void setPosX(int newYPosition){
+    public void setPosY(int newYPosition){
         posY = newYPosition;
     }
 
