@@ -206,9 +206,11 @@ public class PlayerTest {
     public void player_Gets_Hurt_By_NPC () {
         Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+
         int playerStartHealth = player.getHealth();
-        // npc.hurtPlayer(Player player); Eller liknande
+        npc.damagePlayer(player);
         int playerHealthAfterAttack = player.getHealth();
+
         assertTrue(playerStartHealth > playerHealthAfterAttack);
     }
 

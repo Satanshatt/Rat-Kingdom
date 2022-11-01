@@ -5,6 +5,9 @@ public class Player extends Entity {
     private static final int START_POS_X = 0;
     private static final int START_POS_Y = 0;
     private static final int FRET_DAMAGE = 2;
+    private static final int XP_KILLING_BONUS = 10;
+    private static final int HEALTH_MAX_VALUE = 100;
+    private static final int XP_MAX_VALUE = 100;
 
     private int health;
     private int mana;
@@ -72,10 +75,10 @@ public class Player extends Entity {
     public void increaseHealth(int addedHealth) {
         if (addedHealth < 0)
             throw new IllegalArgumentException("Negative input not possible");
-        else if ((this.health = +addedHealth) >= 100)
-            this.health = 100;
+        else if ((this.health =+ addedHealth) >= HEALTH_MAX_VALUE)
+            this.health = HEALTH_MAX_VALUE;
         else
-            this.health = +addedHealth;
+            this.health =+ addedHealth;
     }
 
     public void setActiveWeapon(Weapon weapon) {
@@ -99,8 +102,8 @@ public class Player extends Entity {
     }
 
     public void increaseXp(int addXp) {
-        this.xp = +addXp;
-        if (this.xp >= 100) {
+        this.xp =+ addXp;
+        if (this.xp >= XP_MAX_VALUE) {
             increaseLevel();
         }
     }
@@ -113,14 +116,14 @@ public class Player extends Entity {
         while (npc.getHealth() > 0)
             useWeaponOnNPC(weapon, npc);
         if (npc.getHealth() <= 0)
-            increaseXp(10);
+            increaseXp(XP_KILLING_BONUS);
     }
 
     public void killNPCWithoutWeapon(NPC npc) {
         while (npc.getHealth() > 0)
             fret(npc);
         if (npc.getHealth() <= 0)
-            increaseXp(10);
+            increaseXp(XP_KILLING_BONUS);
     }
 
     public void damagePlayer(int damage) {
@@ -154,8 +157,6 @@ public class Player extends Entity {
             throw new IllegalArgumentException("0 steps will not move the player");
         else
             this.posY = posY + steps;
-
-
     }
 
     private boolean isNPCOutOfReach(NPC npc) {
@@ -179,7 +180,6 @@ public class Player extends Entity {
             throw new IllegalArgumentException("NPC out of reach");
         }
         npc.takeDamage(FRET_DAMAGE);
-
     }
 
     public void useWeaponOnNPC(Weapon weapon, NPC npc) {
@@ -194,7 +194,8 @@ public class Player extends Entity {
     }
 
     public void pickUpWeapon(Weapon weapon) {
-        if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel() || this.activeWeapon == null) {
+        if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() >
+                this.activeWeapon.getWeaponLevel() || this.activeWeapon == null) {
             this.setActiveWeapon(weapon);
             weapon.setPlayer(this);
         }

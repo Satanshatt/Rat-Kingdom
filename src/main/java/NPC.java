@@ -52,7 +52,7 @@ abstract class NPC extends Entity{
 
     public void damagePlayer(Player player){
         player.damagePlayer(this.getDamage());
-    };
+    }
 
 
         public String getName () {
