@@ -43,6 +43,10 @@ abstract class NPC extends Entity{
         }
     }
 
+    public void NPCDies(){
+
+    }
+
     public void takeDamage(int damageFromPlayer){
         int NPCOriginalHealth = this.getHealth();
         int newHealth = (NPCOriginalHealth - damageFromPlayer);
@@ -96,6 +100,22 @@ abstract class NPC extends Entity{
 
         public void setName(String newName){
             this.name = newName;
+        }
+
+        public void setLevel(int newLevel){
+            this.level = newLevel;
+        }
+
+        public void setType(String newType){
+            this.type = newType;
+        }
+
+        public void setSize(int newSize){
+            this.size = newSize;
+        }
+
+        public void setDamage(int newDamage){
+            this.damage = newDamage;
         }
 
 

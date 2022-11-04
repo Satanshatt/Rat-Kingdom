@@ -8,7 +8,11 @@ class NPCTest {
     int XPOSITION = 2;
     int YPOSITION = 4;
     int DAMAGE = 1;
-    String NPCNAME = "NPC Name";
+    int NPC_HEALTH = 10;
+    int NPC_LEVEL = 10;
+    int NPC_SIZE = 10;
+    String NPC_NAME = "NPC Name";
+    String NPC_TYPE = "NPC Type";
 
     @Test
     void walkIntoWallTest(){
@@ -50,27 +54,42 @@ class NPCTest {
     @Test
     void getNameAndSetNameTest() {
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        String expectedName = npc.setName(NPCNAME);
-        assertEquals(npc.getName(), expectedName);
+        npc.setName(NPC_NAME);
+        assertEquals(npc.getName(), NPC_NAME);
     }
 
     @Test
-    void getType() {
+    void getTypeAndSetTypeTest() {
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        npc.setType(NPC_TYPE);
+        assertEquals(npc.getType(), NPC_TYPE);
     }
 
     @Test
-    void getSize() {
+    void getSizeAndSetSizeTest() {
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        npc.setSize(NPC_SIZE);
+        assertEquals(npc.getSize(), NPC_SIZE);
     }
 
     @Test
-    void getDamage() {
+    void getDamageAndSetDamageTest() {
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        npc.setDamage(DAMAGE);
+        assertEquals(npc.getDamage(), DAMAGE);
     }
 
     @Test
-    void getHealth() {
+    void getHealthAndSetHealthTest() {
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        npc.setHealth(NPC_HEALTH);
+        assertEquals(npc.getHealth(), NPC_HEALTH);
     }
 
     @Test
-    void getLevel() {
+    void getLevelAndSetLevelTest() {
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);npc.setType(NPC_TYPE);
+        npc.setLevel(NPC_LEVEL);
+        assertEquals(npc.getLevel(), NPC_LEVEL);
     }
 }
