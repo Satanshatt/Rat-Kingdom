@@ -32,7 +32,7 @@ public class Room {
     }
 
     public <T extends Entity> T getEntityAt(Class<T> type, int x, int y) {
-        if (type == Enemy.class) {
+        if (type == Enemy.class) { 
             Enemy enemy = enemies.stream()
                     .filter(enemies -> enemies.getPosX() == x && enemies.getPosY() == y)
                     .findFirst()

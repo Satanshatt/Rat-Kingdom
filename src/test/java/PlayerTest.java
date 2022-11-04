@@ -48,6 +48,24 @@ public class PlayerTest {
         assertTrue(xBefore != xAfter);
     }
 
+    @Test
+    public void player_Try_Move_To_Occupied_coordinate_Error () {
+
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                Player player = new Player();
+                NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+                Room room = new RoomGenerator(MAP_WIDTH, MAP_HEIGHT).generate();
+
+                npc.setPosX(START_POS_X + 1);
+                npc.setPosY(START_POS_Y);
+
+                player.move(room, START_POS_X + 1, START_POS_Y);
+
+            }
+        });
+    }
     //Snacka med Hannes
     @Test
     public void player_Try_Walk_Outside_Room_Error () {

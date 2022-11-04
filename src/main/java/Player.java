@@ -31,8 +31,6 @@ public class Player extends Entity {
         intelligence = 10;
         xp = 0;
         level = 1;
-        this.posX = START_POS_X;
-        this.posY = START_POS_Y;
     }
 
     public int getHealth() {
@@ -130,7 +128,9 @@ public class Player extends Entity {
     }
 
     public void move(Room room, int x, int y) {
-
+        this.setPosX(x);
+        this.setPosY(y);
+        //room.getEntityAt(Player.class, x, y);
     }
 
     private boolean isNPCOutOfReach(NPC npc) {
