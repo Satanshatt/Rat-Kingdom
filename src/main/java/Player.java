@@ -6,7 +6,6 @@ public class Player extends Entity {
     private static final int START_POS_Y = 0;
     private static final int FRET_DAMAGE = 2;
     private static final int XP_KILLING_BONUS = 10;
-    private static final int HEALTH_MAX_VALUE = 100;
     private static final int XP_MAX_VALUE = 100;
 
     private int health;
@@ -75,8 +74,6 @@ public class Player extends Entity {
     public void increaseHealth(int addedHealth) {
         if (addedHealth < 0)
             throw new IllegalArgumentException("Negative input not possible");
-        else if ((this.health =+ addedHealth) >= HEALTH_MAX_VALUE)
-            this.health = HEALTH_MAX_VALUE;
         else
             this.health =+ addedHealth;
     }
@@ -238,22 +235,18 @@ public class Player extends Entity {
     }
 
     public void chooseTrade(String tradeName) {
-        if (tradeName.equals("Builder")) {
-            this.trade = new Builder(this);
-        } else if (tradeName.equals("Circus artist")) {
-            this.trade = new CircusArtist(this);
-        } else if (tradeName.equals("Storyteller")) {
-            this.trade = new Storyteller(this);
+        switch (tradeName.toUpperCase()) {
+            case "BUILDER" -> this.trade = new Builder(this);
+            case "CIRCUS ARTIST" -> this.trade = new CircusArtist(this);
+            case "STORYTELLER" -> this.trade = new Storyteller(this);
         }
     }
 
     public void chooseRace(String raceName) {
-        if (raceName.equals("Black rat")) {
-            this.race = new BlackRat(this);
-        } else if (raceName.equals("Brown rat")) {
-            this.race = new BrownRat(this);
-        } else if (raceName.equals("White rat")) {
-            this.race = new WhiteRat(this);
+        switch (raceName.toUpperCase()) {
+            case "BLACK RAT" -> this.race = new BlackRat(this);
+            case "BROWN RAT" -> this.race = new BrownRat(this);
+            case "WHITE RAT" -> this.race = new WhiteRat(this);
         }
     }
 
