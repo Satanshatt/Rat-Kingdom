@@ -8,6 +8,13 @@ class NPCTest {
     int XPOSITION = 2;
     int YPOSITION = 4;
     int DAMAGE = 1;
+    String NPCNAME = "NPC Name";
+
+    @Test
+    void walkIntoWallTest(){
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+
+    }
 
     @Test
     void isDeadTest() {
@@ -36,12 +43,15 @@ class NPCTest {
     @Test
     void damagePlayerTest(){
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        npc.setDamage(DAMAGE);
+        //npc.setDamage(DAMAGE);
         //assertEquals(npc.damagePlayer(), DAMAGE);
     }
 
     @Test
-    void getName() {
+    void getNameAndSetNameTest() {
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        String expectedName = npc.setName(NPCNAME);
+        assertEquals(npc.getName(), expectedName);
     }
 
     @Test

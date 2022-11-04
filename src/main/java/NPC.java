@@ -21,7 +21,7 @@ abstract class NPC extends Entity{
 
     public abstract void battle ();
 
-    public abstract void moveForBattle ();
+    public abstract void moveForBattle();
 
     public void spawnNPC(int xCoordinate, int yCoordinate){
         this.setPosX(xCoordinate);
@@ -49,12 +49,20 @@ abstract class NPC extends Entity{
         this.setHealth(newHealth);
     }
 
-    public void moveToTheLeft(){
+    public void moveLeft(){
 
     }
 
-    public void moveToTheRight(){
+    public void moveRight(){
+        this.posX++;
+    }
 
+    public void moveUpwards(){
+        this.posY++;
+    }
+
+    public void moveDownwards(){
+        this.posY--;
     }
 
 
@@ -84,6 +92,10 @@ abstract class NPC extends Entity{
 
         public void setHealth(int newHealth){
             this.health = newHealth;
+        }
+
+        public void setName(String newName){
+            this.name = newName;
         }
 
 
