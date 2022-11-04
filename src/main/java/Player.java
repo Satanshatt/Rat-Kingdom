@@ -129,33 +129,6 @@ public class Player extends Entity {
             die();
     }
 
-    public void walkLeft(int steps) {
-        if (steps < 0)
-            throw new IllegalArgumentException("Negative steps not possible!");
-        else if (steps == 0)
-            throw new IllegalArgumentException("0 steps will not move the player");
-        else
-            this.posX = posX - steps;
-    }
-
-    public void walkRight(int steps) {
-        if (steps < 0)
-            throw new IllegalArgumentException("Negative steps not possible!");
-        else if (steps == 0)
-            throw new IllegalArgumentException("0 steps will not move the player");
-        else
-            this.posX = posX + steps;
-    }
-
-    public void walkForward(int steps) {
-        if (steps < 0)
-            throw new IllegalArgumentException("Negative steps not possible!");
-        else if (steps == 0)
-            throw new IllegalArgumentException("0 steps will not move the player");
-        else
-            this.posY = posY + steps;
-    }
-
     private boolean isNPCOutOfReach(NPC npc) {
         int npcPosX = npc.posX;
         int npcPosY = npc.posY;
@@ -179,6 +152,10 @@ public class Player extends Entity {
         npc.takeDamage(FRET_DAMAGE);
     }
 
+    public void kick (NPC npc) {
+
+    }
+
     public void useWeaponOnNPC(Weapon weapon, NPC npc) {
         //kolla så NPC står inom räckhåll
         int damage = weapon.attackDamage();
@@ -187,7 +164,7 @@ public class Player extends Entity {
 
     public void die() {
         this.isDead = true;
-        restartSameLevel();
+        restart();
     }
 
     public void pickUpWeapon(Weapon weapon) {
@@ -219,7 +196,7 @@ public class Player extends Entity {
         return isDead;
     }
 
-    public void restartSameLevel() {
+    public void restart() {
         health = 100;
         mana = 100;
         strength = 10;
@@ -228,6 +205,7 @@ public class Player extends Entity {
         xp = 0;
         this.posX = START_POS_X;
         this.posY = START_POS_Y;
+        level = 1;
     }
 
     public Trade getTrade() {
