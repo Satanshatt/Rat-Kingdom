@@ -35,8 +35,7 @@ abstract class NPC extends Entity{
         spawnNPC(xPosition, yPosition);
     }
 
-    //skapa randomizer för när NPCs dör, 1 av 10 att vapen ges
-    public boolean die() {
+    public boolean isDead() {
         if (this.health <= 0){
             return true;
         } else {
@@ -48,6 +47,14 @@ abstract class NPC extends Entity{
         int NPCOriginalHealth = this.getHealth();
         int newHealth = (NPCOriginalHealth - damageFromPlayer);
         this.setHealth(newHealth);
+    }
+
+    public void moveToTheLeft(){
+
+    }
+
+    public void moveToTheRight(){
+
     }
 
 

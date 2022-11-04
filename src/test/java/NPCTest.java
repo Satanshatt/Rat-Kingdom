@@ -1,6 +1,6 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.Random;
+
 import org.mockito.Mockito;
 
 class NPCTest {
@@ -13,7 +13,7 @@ class NPCTest {
     void isDeadTest() {
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
         boolean expected = true;
-        assertEquals(expected, npc.die());
+        assertEquals(expected, npc.isDead());
     }
 
     @Test
