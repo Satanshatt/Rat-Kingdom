@@ -5,7 +5,15 @@ public class Friend extends NPC{
         super(name, type, health, damage, size, level, posX, posY);
     }
 
-    public void battle() {
+    public void attackEnemy(){
+
+    };
+
+    public void attackFriend(){
+
+    };
+
+    public void attackPlayer(){
 
     }
 

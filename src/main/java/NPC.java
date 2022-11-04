@@ -19,9 +19,24 @@ abstract class NPC extends Entity{
         this.level = level;
     }
 
-    public abstract void battle ();
+    public abstract void attackEnemy();
+
+    public abstract void attackFriend();
+
+    public abstract void attackPlayer();
 
     public abstract void moveForBattle();
+
+    public boolean isEntityWithinReach(Player player) {
+        if ((this.posY == player.posY) &&
+                ((this.posX == (player.posX++)) || (this.posX == player.posX--))) {
+            return true;
+        } else if ((this.posX == player.posX) &&
+                ((this.posY == (player.posY++ )) || (this.posY == player.posY--))) {
+            return true;
+        }
+        return false;
+    }
 
     public void spawnNPC(int xCoordinate, int yCoordinate){
         this.setPosX(xCoordinate);
@@ -43,7 +58,7 @@ abstract class NPC extends Entity{
         }
     }
 
-    public void NPCDies(){
+    private void NPCDies(){
 
     }
 
