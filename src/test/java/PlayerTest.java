@@ -19,6 +19,8 @@ public class PlayerTest {
     private static final int XP_MAX_VALUE = 100;
     private static final int HEALTH_MAX_VALUE = 100;
     private static final int NEGATIVE_INPUT = -1;
+    private static final int MAP_WIDTH = 20;
+    private static final int MAP_HEIGHT = 20;
 
     @Test
     public void player_defaultValue_Is_Correct () {
@@ -34,6 +36,17 @@ public class PlayerTest {
         assertEquals(START_POS_Y, player.getPosY());
     }
 
+    @Test
+    public void player_Moves () {
+        Player player = new Player();
+        Room room = new RoomGenerator(MAP_WIDTH, MAP_HEIGHT).generate();
+
+        int xBefore = player.getPosX();
+        player.move(room, START_POS_X + 1, START_POS_Y);
+        int xAfter = player.getPosX();
+
+        assertTrue(xBefore != xAfter);
+    }
 
     //Snacka med Hannes
     @Test

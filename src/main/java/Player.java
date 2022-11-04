@@ -129,6 +129,10 @@ public class Player extends Entity {
             die();
     }
 
+    public void move(Room room, int x, int y) {
+
+    }
+
     private boolean isNPCOutOfReach(NPC npc) {
         int npcPosX = npc.posX;
         int npcPosY = npc.posY;
