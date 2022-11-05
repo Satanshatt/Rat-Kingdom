@@ -48,7 +48,7 @@ public class Room {
                 return type.cast(getEntityAt(Tile.class, x, y));
             }
         }
-        return null;
+        return null; //Kanske returnera ett fel istället? En fiende eller en tile kan ju inte vara utanför rummet
     }
 
     public boolean isBlocked(int x, int y) {

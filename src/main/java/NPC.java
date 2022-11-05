@@ -68,20 +68,46 @@ abstract class NPC extends Entity{
         this.setHealth(newHealth);
     }
 
-    public void moveLeft(){
-
+    public void moveDownwards(Tile newTile){
+        if(isLegalToMove(newTile)){
+            this.posY--;
+        }
     }
 
-    public void moveRight(){
-        this.posX++;
+    public void moveRight(Tile newTile){
+        if(isLegalToMove(newTile)){
+            this.posX++;
+        }
     }
 
-    public void moveUpwards(){
-        this.posY++;
+    public void moveLeft(Tile newTile){
+
+        if(isLegalToMove(newTile)){
+            this.posX--;
+        }
     }
 
-    public void moveDownwards(){
-        this.posY--;
+    public void moveUpwards(Tile newTile){
+        if (isLegalToMove(newTile)) {
+            this.posY++;
+        }
+    }
+
+    private boolean isLegalToMove(Tile newTile){
+        try {
+            if (newTile == null) {
+                throw new IllegalStateException("Can not move outside of the room, move elsewhere");
+            }
+
+            if (newTile.isBlocked()) {
+                throw new IllegalStateException("This path is blocked, move elsewhere");
+            }
+
+            return true;
+
+        } catch(IllegalStateException illegalStateException) {
+            return false;
+        }
     }
 
 

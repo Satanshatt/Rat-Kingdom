@@ -6,6 +6,21 @@ public class Enemy extends NPC
    super(name, type, health, damage, size, level, posX, posY);
   }
 
+  @Override
+  public void attackEnemy() {
+
+  }
+
+  @Override
+  public void attackFriend() {
+
+  }
+
+  @Override
+  public void attackPlayer() {
+
+  }
+
   public void battle() {
   }
 
