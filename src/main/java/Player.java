@@ -31,8 +31,6 @@ public class Player extends Entity {
         intelligence = 10;
         xp = 0;
         level = 1;
-        this.posX = START_POS_X;
-        this.posY = START_POS_Y;
     }
 
     public int getHealth() {
@@ -74,8 +72,6 @@ public class Player extends Entity {
     public void increaseHealth(int addedHealth) {
         if (addedHealth < 0)
             throw new IllegalArgumentException("Negative input not possible");
-        else if ((this.health = +addedHealth) >= 100)
-            this.health = 100;
         else
             this.health =+ addedHealth;
     }
@@ -181,13 +177,8 @@ public class Player extends Entity {
     }
 
     public void pickUpWeapon(Weapon weapon) {
-        // TODO: ni behöver en check om spelaren faktiskt har ett vapen, innan ni testar det.
-        if(this.activeWeapon == null) {
-            if(weapon.getWeaponLevel() <= this.level)
-        }
-        if (weapon.getWeaponLevel() <= this.level &&
-                weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel() ||
-                this.activeWeapon == null) {
+        if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() >
+                this.activeWeapon.getWeaponLevel() || this.activeWeapon == null) {
             this.setActiveWeapon(weapon);
             weapon.setPlayer(this);
         }
