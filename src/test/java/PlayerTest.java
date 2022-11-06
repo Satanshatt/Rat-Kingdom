@@ -51,18 +51,6 @@ public class PlayerTest {
     }
 
     @Test
-    public void plyer_move_room_is_null_error () {
-        assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                Player player = new Player();
-                Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).createWallsAndDoors().generate();
-                player.move(room, START_POS_X + 1, START_POS_Y);
-            }
-        });
-    }
-
-    @Test
     public void player_Try_Move_To_Occupied_coordinate_Error () {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
@@ -79,9 +67,17 @@ public class PlayerTest {
             }
         });
     }
-    //Snacka med Hannes
+
     @Test
     public void player_Try_Walk_Outside_Room_Error () {
+        assertThrows(ArrayIndexOutOfBoundsException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                Player player = new Player();
+                Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+                player.move(room, MAP_WIDTH + 1, START_POS_Y);
+            }
+        });
     }
 
     @Test
