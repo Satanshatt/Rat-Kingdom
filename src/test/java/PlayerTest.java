@@ -51,12 +51,12 @@ public class PlayerTest {
     }
 
     @Test
-    public void plyer_move_room_is_null_error () {
-        assertThrows(IllegalArgumentException.class, new Executable() {
+    public void plyer_Moves_room_is_null_error () {
+        assertThrows(NullPointerException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+                Room room = null;
                 player.move(room, START_POS_X + 1, START_POS_Y);
             }
         });
@@ -64,25 +64,18 @@ public class PlayerTest {
 
     @Test
     public void player_Try_Move_To_Occupied_coordinate_Error () {
-
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
                 NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-
                 Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
 
                 npc.setPosX(2);
                 npc.setPosY(2);
-                System.out.println(player.getPosX());
                 room.addEntity(npc);
 
                 player.move(room, 2, 2);
-
-                System.out.println(player.getPosX());
-                System.out.println(npc.getPosX());
-
             }
         });
     }
@@ -94,8 +87,10 @@ public class PlayerTest {
     @Test
     public void player_Dies () {
         Player player = new Player();
+        player.increaseLevel();
+        int higherLevel = player.getLevel();
         player.die();
-        assertTrue(player.isDead());
+        assertTrue(higherLevel > DEFAULT_VALUE_LEVEL);
     }
 
     @Test
@@ -104,7 +99,6 @@ public class PlayerTest {
     @Test
     public void player_Fret_NPC () {
         Player player = new Player();
-        //NPC npc = new Enemy("Namn", "Type", 10, 10, 10, 10, 0, 1);
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
         npc.setPosX(npc.getPosX()+1);
         int npcStartDamage = npc.getHealth();
@@ -158,11 +152,16 @@ public class PlayerTest {
         assertEquals(HEALTH_MAX_VALUE, player.getHealth());
     }
 
+    /*
+    När spelaren dör startar man om på ruta ett igen, dvs tillbaka till nivå 1.
+     */
     @Test
     public void health_Goes_Under_Zero_Player_Dies () {
         Player player = new Player();
+        player.increaseLevel();
+        int higherLevel = player.getLevel();
         player.damagePlayer(player.getHealth() + 1);
-        assertTrue(player.isDead());
+        assertTrue(higherLevel > DEFAULT_VALUE_LEVEL);
     }
 
     @Test
@@ -224,6 +223,14 @@ public class PlayerTest {
 
     }
 
+    @Test
+    public void player_Pick_Up_MagicRing () {}
+
+    @Test
+    public void player_Choose_Trade () {}
+
+    @Test
+    public void player_Choose_Race () {}
 
 
 

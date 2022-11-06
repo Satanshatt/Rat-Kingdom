@@ -17,7 +17,6 @@ public class Player extends Entity {
     private int level;
     private Weapon activeWeapon;
     private MagicRing magicRing;
-    private boolean isDead;
     private Trade trade;
     private Race race;
 
@@ -172,15 +171,15 @@ public class Player extends Entity {
     }
 
     public void die() {
-        this.isDead = true;
         restart();
     }
 
-    public void pickUpWeapon(Weapon weapon) {
-        if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() >
-                this.activeWeapon.getWeaponLevel() || this.activeWeapon == null) {
-            this.setActiveWeapon(weapon);
-            weapon.setPlayer(this);
+    public void pickUpWeapon(Weapon newWeapon) { //if-villkoret funkar inte. Blir nullpointerexception.
+        if ((newWeapon.getWeaponLevel() <= this.level) &&
+                ( (newWeapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel()) ||
+                        (this.activeWeapon == null))) {
+            this.setActiveWeapon(newWeapon);
+            newWeapon.setPlayer(this);
         }
     }
 
@@ -199,10 +198,6 @@ public class Player extends Entity {
     }
 
     public void useDoor() {
-    }
-
-    public boolean isDead() {
-        return isDead;
     }
 
     public void restart() {
