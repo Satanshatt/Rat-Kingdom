@@ -2,8 +2,8 @@ import java.awt.*;
 
 public class Player extends Entity {
 
-    private static final int START_POS_X = 1;
-    private static final int START_POS_Y = 1;
+    private static final int START_POS_X = 5;
+    private static final int START_POS_Y = 5;
     private static final int FRET_DAMAGE = 2;
     private static final int XP_KILLING_BONUS = 10;
     private static final int XP_MAX_VALUE = 100;
@@ -132,12 +132,10 @@ public class Player extends Entity {
         if(room.isBlocked(x, y)) {
             throw new IllegalArgumentException("Place is occupied");
         }
-        /*else {
+        else {
             this.setPosX(x);
             this.setPosY(y);
         }
-
-         */
     }
 
     private boolean isNPCOutOfReach(NPC npc) {
