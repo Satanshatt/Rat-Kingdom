@@ -25,7 +25,6 @@ public class RoomGenerator {
         } else{
             return null;
         }
-
     }
 
     public RoomGenerator fillRoom(String type){

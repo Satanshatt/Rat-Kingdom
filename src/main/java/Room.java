@@ -32,18 +32,18 @@ public class Room {
     }
 
     public <T extends Entity> T getEntityAt(Class<T> type, int x, int y) {
-        if (type == Enemy.class) { 
-            Enemy enemy = enemies.stream()
+        if (type == NPC.class) {
+            NPC npc = enemies.stream()
                     .filter(enemies -> enemies.getPosX() == x && enemies.getPosY() == y)
                     .findFirst()
                     .orElse(null);
-            return type.cast(enemy);
+            return type.cast(npc);
         } else if (type == Tile.class) {
             return type.cast(tiles[x][y]);
         } else if (type == Entity.class) {
-            Enemy creature = getEntityAt(Enemy.class, x, y);
-            if (creature != null) {
-                return type.cast(creature);
+            NPC npc = getEntityAt(Enemy.class, x, y);
+            if (npc != null) {
+                return type.cast(npc);
             } else {
                 return type.cast(getEntityAt(Tile.class, x, y));
             }
@@ -52,7 +52,7 @@ public class Room {
     }
 
     public boolean isBlocked(int x, int y) {
-        return (tiles[x][y].isBlocked());
+        return (tiles[x][y].isBlocked() || getEntityAt(NPC.class, x, y) != null);
     }
 
 }
