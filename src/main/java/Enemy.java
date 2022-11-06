@@ -30,29 +30,5 @@ public class Enemy extends NPC
   public void spawn() {
   }
 
-  public String getName() {
-   return name;
-  }
-
-  public String getType() {
-   return type;
-  }
-
-  public int getSize() {
-   return size;
-  }
-
-  public int getDamage() {
-   return damage;
-  }
-
-  public int getHealth() {
-   return health;
-  }
-
-  public int getLevel() {
-   return level;
-  }
-
  }
 

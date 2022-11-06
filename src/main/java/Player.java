@@ -194,7 +194,13 @@ public class Player extends Entity {
     }
 
     public void pickUpWeapon(Weapon weapon) {
-        if (weapon.getWeaponLevel() <= this.level && weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel() || this.activeWeapon == null) {
+        // TODO: ni behöver en check om spelaren faktiskt har ett vapen, innan ni testar det.
+        if(this.activeWeapon == null) {
+            if(weapon.getWeaponLevel() <= this.level)
+        }
+        if (weapon.getWeaponLevel() <= this.level &&
+                weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel() ||
+                this.activeWeapon == null) {
             this.setActiveWeapon(weapon);
             weapon.setPlayer(this);
         }

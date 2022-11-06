@@ -8,13 +8,6 @@ public class RoomGenerator {
     private Tile[][] tiles;
     private Set<Enemy> enemies;
 
-    public RoomGenerator(int width, int height){
-        this.width = width;
-        this.height = height;
-        this.tiles = new Tile[width][height];
-        this.enemies = new HashSet<Enemy>();
-    }
-
     public Tile generateTile(String type, int x, int y){
         if(type == "ground"){
             return new Tile("ground", x,y,false);
@@ -52,6 +45,19 @@ public class RoomGenerator {
         return this;
     }
 
+    public RoomGenerator(int width, int height){
+        this.width = width;
+        this.height = height;
+        this.tiles = new Tile[width][height];
+        this.enemies = new HashSet<Enemy>();
+    }
+
+    /* TODO: De här metoderna här under bör inte vara publika.
+             Det bör enbart finnas en enda metod som genererar ett rum (givet width, height och type of room)
+             För annars finns det chans att man generar rum som är helt tomma, utan mark eller något.
+
+
+     */
     public RoomGenerator generateObstacles(int numObstacles){
         return this;
     }
@@ -67,7 +73,8 @@ public class RoomGenerator {
     public RoomGenerator generateOwlEnemies(int numEnemies){
         return this;
     }
-
+    /* TODO: Den här metoden bör fungera som en "gör allt", och inte bara hämta ut ett rum..
+    * */
     public Room generate(){
         return new Room(tiles, enemies);
     }

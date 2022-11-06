@@ -51,6 +51,23 @@ public class Room {
         return null; //Kanske returnera ett fel istället? En fiende eller en tile kan ju inte vara utanför rummet
     }
 
+    public String generateRoomToShow(){
+        String representation = "";
+        for(int x = 0; x < this.getWidth(); x++) {
+            representation += "\n";
+            for (int y = 0; y < this.getHeight(); y++) {
+                try {
+                    Class<? extends Tile> type = this.tiles[x][y].getClass();
+                    representation +="[" + this.getEntityAt(type, x,y).getType() + "]";
+                } catch(Exception e) {
+                    representation +="[]";
+                }
+
+            }
+        }
+        return representation;
+    }
+
     public boolean isBlocked(int x, int y) {
         return (tiles[x][y].isBlocked());
     }

@@ -7,21 +7,6 @@ public class Tile extends Entity{
         this.blocked = blocked;
     }
 
-    @Override
-    public int getPosX() {
-        return super.getPosX();
-    }
-
-    @Override
-    public int getPosY() {
-        return super.getPosY();
-    }
-
-    @Override
-    public String getType() {
-        return super.getType();
-    }
-
     public boolean isBlocked(){
         return this.blocked;
     }
