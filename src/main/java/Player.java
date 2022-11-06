@@ -2,9 +2,11 @@ import java.awt.*;
 
 public class Player extends Entity {
 
-    private static final int START_POS_X = 0;
-    private static final int START_POS_Y = 0;
+    private static final int START_POS_X = 5;
+    private static final int START_POS_Y = 5;
     private static final int FRET_DAMAGE = 2;
+    private static final int XP_KILLING_BONUS = 10;
+    private static final int XP_MAX_VALUE = 100;
 
     private int health;
     private int mana;
@@ -75,7 +77,7 @@ public class Player extends Entity {
         else if ((this.health = +addedHealth) >= 100)
             this.health = 100;
         else
-            this.health = +addedHealth;
+            this.health =+ addedHealth;
     }
 
     public void setActiveWeapon(Weapon weapon) {
@@ -99,8 +101,8 @@ public class Player extends Entity {
     }
 
     public void increaseXp(int addXp) {
-        this.xp = +addXp;
-        if (this.xp >= 100) {
+        this.xp =+ addXp;
+        if (this.xp >= XP_MAX_VALUE) {
             increaseLevel();
         }
     }
@@ -113,14 +115,14 @@ public class Player extends Entity {
         while (npc.getHealth() > 0)
             useWeaponOnNPC(weapon, npc);
         if (npc.getHealth() <= 0)
-            increaseXp(10);
+            increaseXp(XP_KILLING_BONUS);
     }
 
     public void killNPCWithoutWeapon(NPC npc) {
         while (npc.getHealth() > 0)
             fret(npc);
         if (npc.getHealth() <= 0)
-            increaseXp(10);
+            increaseXp(XP_KILLING_BONUS);
     }
 
     public void damagePlayer(int damage) {
@@ -129,33 +131,15 @@ public class Player extends Entity {
             die();
     }
 
-    public void walkLeft(int steps) {
-        if (steps < 0)
-            throw new IllegalArgumentException("Negative steps not possible!");
-        else if (steps == 0)
-            throw new IllegalArgumentException("0 steps will not move the player");
-        else
-            this.posX = posX - steps;
-    }
+    public void move(Room room, int x, int y) {
 
-    public void walkRight(int steps) {
-        if (steps < 0)
-            throw new IllegalArgumentException("Negative steps not possible!");
-        else if (steps == 0)
-            throw new IllegalArgumentException("0 steps will not move the player");
-        else
-            this.posX = posX + steps;
-    }
-
-    public void walkForward(int steps) {
-        if (steps < 0)
-            throw new IllegalArgumentException("Negative steps not possible!");
-        else if (steps == 0)
-            throw new IllegalArgumentException("0 steps will not move the player");
-        else
-            this.posY = posY + steps;
-
-
+        if(room.isBlocked(x, y)) {
+            throw new IllegalArgumentException("Place is occupied");
+        }
+        else {
+            this.setPosX(x);
+            this.setPosY(y);
+        }
     }
 
     private boolean isNPCOutOfReach(NPC npc) {
@@ -179,6 +163,9 @@ public class Player extends Entity {
             throw new IllegalArgumentException("NPC out of reach");
         }
         npc.takeDamage(FRET_DAMAGE);
+    }
+
+    public void kick (NPC npc) {
 
     }
 
@@ -190,7 +177,7 @@ public class Player extends Entity {
 
     public void die() {
         this.isDead = true;
-        restartSameLevel();
+        restart();
     }
 
     public void pickUpWeapon(Weapon weapon) {
@@ -227,7 +214,7 @@ public class Player extends Entity {
         return isDead;
     }
 
-    public void restartSameLevel() {
+    public void restart() {
         health = 100;
         mana = 100;
         strength = 10;
@@ -236,6 +223,7 @@ public class Player extends Entity {
         xp = 0;
         this.posX = START_POS_X;
         this.posY = START_POS_Y;
+        level = 1;
     }
 
     public Trade getTrade() {
@@ -243,22 +231,18 @@ public class Player extends Entity {
     }
 
     public void chooseTrade(String tradeName) {
-        if (tradeName.equals("Builder")) {
-            this.trade = new Builder(this);
-        } else if (tradeName.equals("Circus artist")) {
-            this.trade = new CircusArtist(this);
-        } else if (tradeName.equals("Storyteller")) {
-            this.trade = new Storyteller(this);
+        switch (tradeName.toUpperCase()) {
+            case "BUILDER" -> this.trade = new Builder(this);
+            case "CIRCUS ARTIST" -> this.trade = new CircusArtist(this);
+            case "STORYTELLER" -> this.trade = new Storyteller(this);
         }
     }
 
     public void chooseRace(String raceName) {
-        if (raceName.equals("Black rat")) {
-            this.race = new BlackRat(this);
-        } else if (raceName.equals("Brown rat")) {
-            this.race = new BrownRat(this);
-        } else if (raceName.equals("White rat")) {
-            this.race = new WhiteRat(this);
+        switch (raceName.toUpperCase()) {
+            case "BLACK RAT" -> this.race = new BlackRat(this);
+            case "BROWN RAT" -> this.race = new BrownRat(this);
+            case "WHITE RAT" -> this.race = new WhiteRat(this);
         }
     }
 

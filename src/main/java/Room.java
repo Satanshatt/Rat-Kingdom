@@ -7,11 +7,11 @@ public class Room {
     private int height;
 
     public Player player;
-    public Set<Enemy> enemies;
+    public Set<NPC> npcs;
 
     public Room(Tile[][] tiles, Set<Enemy> enemies){
-        this.enemies = new HashSet<>();
-        this.enemies.addAll(enemies);
+        this.npcs = new HashSet<>();
+        this.npcs.addAll(enemies);
         this.tiles = tiles;
         this.width = tiles.length;
         this.height = tiles[0].length;
@@ -20,8 +20,8 @@ public class Room {
     public int getWidth() { return width; }
     public int getHeight() { return height; }
 
-    public void addEntity(Enemy enemy){
-        this.enemies.add(enemy);
+    public void addEntity(NPC npc){
+        this.npcs.add(npc);
     }
 
     public Tile getTile(int x, int y){
@@ -32,18 +32,18 @@ public class Room {
     }
 
     public <T extends Entity> T getEntityAt(Class<T> type, int x, int y) {
-        if (type == Enemy.class) {
-            Enemy enemy = enemies.stream()
+        if (type == NPC.class) {
+            NPC npc = npcs.stream()
                     .filter(enemies -> enemies.getPosX() == x && enemies.getPosY() == y)
                     .findFirst()
                     .orElse(null);
-            return type.cast(enemy);
+            return type.cast(npc);
         } else if (type == Tile.class) {
             return type.cast(tiles[x][y]);
         } else if (type == Entity.class) {
-            Enemy creature = getEntityAt(Enemy.class, x, y);
-            if (creature != null) {
-                return type.cast(creature);
+            NPC npc = getEntityAt(Enemy.class, x, y);
+            if (npc != null) {
+                return type.cast(npc);
             } else {
                 return type.cast(getEntityAt(Tile.class, x, y));
             }
@@ -69,7 +69,7 @@ public class Room {
     }
 
     public boolean isBlocked(int x, int y) {
-        return (tiles[x][y].isBlocked());
+        return (tiles[x][y].isBlocked() || getEntityAt(NPC.class, x, y) != null);
     }
 
 }

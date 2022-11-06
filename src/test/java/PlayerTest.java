@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
 
-    private static final int START_POS_X = 0;
-    private static final int START_POS_Y = 0;
+    private static final int START_POS_X = 1;
+    private static final int START_POS_Y = 1;
     private static final int DEFAULT_VALUE_HEALTH = 100;
     private static final int DEFAULT_VALUE_MANA = 100;
     private static final int DEFAULT_VALUE_STRENGTH = 10;
@@ -19,6 +19,8 @@ public class PlayerTest {
     private static final int XP_MAX_VALUE = 100;
     private static final int HEALTH_MAX_VALUE = 100;
     private static final int NEGATIVE_INPUT = -1;
+    private static final int MAP_WIDTH = 20;
+    private static final int MAP_HEIGHT = 20;
 
     @Test
     public void player_defaultValue_Is_Correct () {
@@ -35,123 +37,58 @@ public class PlayerTest {
     }
 
     @Test
-    public void player_Walk_One_Step_Left () {
+    public void player_Moves () {
         Player player = new Player();
-        int stepsInput = 1;
-        player.walkLeft(stepsInput);
-        int currentPosX = player.getPosX();
-        assertEquals(START_POS_X - stepsInput, currentPosX);
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+
+        int xBefore = player.getPosX();
+        player.move(room, START_POS_X + 1, START_POS_Y);
+        int xAfter = player.getPosX();
+
+        System.out.println("Before: " + xBefore + "after: " + xAfter);
+
+        assertTrue(xBefore != xAfter);
     }
 
     @Test
-    public void player_Walk_Negative_Step_Left_Error () {
+    public void plyer_move_room_is_null_error () {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                int stepsInput = -1;
-                player.walkLeft(stepsInput);
+                Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+                player.move(room, START_POS_X + 1, START_POS_Y);
             }
         });
     }
 
     @Test
-    public void player_Walk_Zero_Step_Left_Error () {
-        assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                Player player = new Player();
-                int stepsInput = 0;
-                player.walkLeft(stepsInput);
-            }
-        });
-    }
-
-    @Test
-    public void player_Walk_One_Step_Right () {
-        Player player = new Player();
-        int stepsInput = 1;
-        player.walkRight(stepsInput);
-        int currentPosX = player.getPosX();
-        assertEquals(START_POS_X + stepsInput, currentPosX);
-    }
-
-    @Test
-    public void player_Walk_Negative_Step_Right_Error () {
-        assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                Player player = new Player();
-                int stepsInput = -1;
-                player.walkRight(stepsInput);
-            }
-        });
-    }
-
-    @Test
-    public void player_Walk_Zero_Step_Right_Error () {
-        assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                Player player = new Player();
-                int stepsInput = 0;
-                player.walkRight(stepsInput);
-            }
-        });
-    }
-
-    @Test
-    public void player_Walk_One_Step_Forward () {
-        Player player = new Player();
-        int stepsInput = 1;
-        player.walkForward(stepsInput);
-        int currentPosY = player.getPosY();
-        assertEquals(START_POS_Y + stepsInput, currentPosY);
-    }
-
-    @Test
-    public void player_Walk_Negative_Step_Forward_Error () {
-        assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                Player player = new Player();
-                int stepsInput = -1;
-                player.walkForward(stepsInput);
-                int currentPosY = player.getPosY();
-                assertEquals(START_POS_Y + stepsInput, currentPosY);
-            }
-        });
-    }
-
-    @Test
-    public void player_Walk_Zero_Step_Forward_Error () {
-        assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                Player player = new Player();
-                int stepsInput = 0;
-                player.walkForward(stepsInput);
-            }
-        });
-    }
-
-    //Snacka med Hannes
-    @Test
-    public void player_Try_Walk_Outside_Room_Error () {
-    }
-
-    @Test
-    public void player_Try_Walk_One_Step_Forward_To_Occupied_Coordinate_Error () {
+    public void player_Try_Move_To_Occupied_coordinate_Error () {
 
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
                 NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-                player.walkForward(1);
+
+                Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+
+                npc.setPosX(2);
+                npc.setPosY(2);
+                System.out.println(player.getPosX());
+                room.addEntity(npc);
+
+                player.move(room, 2, 2);
+
+                System.out.println(player.getPosX());
+                System.out.println(npc.getPosX());
+
             }
         });
-
+    }
+    //Snacka med Hannes
+    @Test
+    public void player_Try_Walk_Outside_Room_Error () {
     }
 
     @Test
@@ -206,9 +143,11 @@ public class PlayerTest {
     public void player_Gets_Hurt_By_NPC () {
         Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+
         int playerStartHealth = player.getHealth();
-        // npc.hurtPlayer(Player player); Eller liknande
+        npc.damagePlayer(player);
         int playerHealthAfterAttack = player.getHealth();
+
         assertTrue(playerStartHealth > playerHealthAfterAttack);
     }
 
