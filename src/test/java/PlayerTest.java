@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
 
-    private static final int START_POS_X = 5;
-    private static final int START_POS_Y = 5;
+    private static final int START_POS_X = 1;
+    private static final int START_POS_Y = 1;
     private static final int DEFAULT_VALUE_HEALTH = 100;
     private static final int DEFAULT_VALUE_MANA = 100;
     private static final int DEFAULT_VALUE_STRENGTH = 10;
@@ -42,7 +42,7 @@ public class PlayerTest {
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
 
         int xBefore = player.getPosX();
-        player.move(room, START_POS_X + 2, START_POS_Y);
+        player.move(room, START_POS_X + 1, START_POS_Y);
         int xAfter = player.getPosX();
 
         System.out.println("Before: " + xBefore + "after: " + xAfter);
@@ -51,7 +51,20 @@ public class PlayerTest {
     }
 
     @Test
+    public void plyer_move_room_is_null_error () {
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                Player player = new Player();
+                Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+                player.move(room, START_POS_X + 1, START_POS_Y);
+            }
+        });
+    }
+
+    @Test
     public void player_Try_Move_To_Occupied_coordinate_Error () {
+
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
@@ -60,24 +73,22 @@ public class PlayerTest {
 
                 Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
 
-                npc.setPosX(6);
-                npc.setPosY(6);
+                npc.setPosX(2);
+                npc.setPosY(2);
+                System.out.println(player.getPosX());
+                room.addEntity(npc);
 
-                player.move(room, 6, 6);
+                player.move(room, 2, 2);
+
+                System.out.println(player.getPosX());
+                System.out.println(npc.getPosX());
+
             }
         });
     }
-
+    //Snacka med Hannes
     @Test
     public void player_Try_Walk_Outside_Room_Error () {
-        assertThrows(ArrayIndexOutOfBoundsException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                Player player = new Player();
-                Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
-                player.move(room, MAP_WIDTH + 1, START_POS_Y);
-            }
-        });
     }
 
     @Test

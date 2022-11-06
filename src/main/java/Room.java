@@ -7,11 +7,11 @@ public class Room {
     private int height;
 
     public Player player;
-    public Set<Enemy> enemies;
+    public Set<NPC> npcs;
 
     public Room(Tile[][] tiles, Set<Enemy> enemies){
-        this.enemies = new HashSet<>();
-        this.enemies.addAll(enemies);
+        this.npcs = new HashSet<>();
+        this.npcs.addAll(enemies);
         this.tiles = tiles;
         this.width = tiles.length;
         this.height = tiles[0].length;
@@ -20,8 +20,8 @@ public class Room {
     public int getWidth() { return width; }
     public int getHeight() { return height; }
 
-    public void addEntity(Enemy enemy){
-        this.enemies.add(enemy);
+    public void addEntity(NPC npc){
+        this.npcs.add(npc);
     }
 
     public Tile getTile(int x, int y){
@@ -33,7 +33,7 @@ public class Room {
 
     public <T extends Entity> T getEntityAt(Class<T> type, int x, int y) {
         if (type == NPC.class) {
-            NPC npc = enemies.stream()
+            NPC npc = npcs.stream()
                     .filter(enemies -> enemies.getPosX() == x && enemies.getPosY() == y)
                     .findFirst()
                     .orElse(null);
