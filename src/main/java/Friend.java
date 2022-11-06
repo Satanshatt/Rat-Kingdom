@@ -5,14 +5,8 @@ public class Friend extends NPC{
         super(name, type, health, damage, size, level, posX, posY);
     }
 
-    public void followPlayerForward(Player player, int steps){
+    public void followPlayer (Player player, int steps){
 
-      /*  while (player.walkForward(steps)){
-            int playerPositionY = player.getPosY();
-            this.posY = playerPositionY--;
-        }
-
-       */
     }
 
     public void attackEnemy(){

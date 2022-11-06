@@ -155,5 +155,6 @@ abstract class NPC extends Entity{
         }
 
 
-
+    public void damagePlayer(Player player) {
+    }
 }
