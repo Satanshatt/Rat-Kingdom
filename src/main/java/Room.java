@@ -7,7 +7,7 @@ public class Room {
     private int height;
 
     public Player player;
-    public Set<Enemy> enemies;
+    public Set<NPC> enemies;
 
     public Room(Tile[][] tiles, Set<Enemy> enemies){
         this.enemies = new HashSet<>();
@@ -20,8 +20,8 @@ public class Room {
     public int getWidth() { return width; }
     public int getHeight() { return height; }
 
-    public void addEntity(Enemy enemy){
-        this.enemies.add(enemy);
+    public void addEntity(NPC npc){
+        this.enemies.add(npc);
     }
 
     public Tile getTile(int x, int y){

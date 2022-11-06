@@ -76,6 +76,7 @@ public class PlayerTest {
                 npc.setPosX(2);
                 npc.setPosY(2);
                 System.out.println(player.getPosX());
+                room.addEntity(npc);
 
                 player.move(room, 2, 2);
 
