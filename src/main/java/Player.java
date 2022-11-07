@@ -129,7 +129,6 @@ public class Player extends Entity {
     }
 
     public void move(Room room, int x, int y) {
-
         if(room.isBlocked(x, y)) {
             throw new IllegalArgumentException("Place is occupied");
         }
@@ -160,10 +159,6 @@ public class Player extends Entity {
             throw new IllegalArgumentException("NPC out of reach");
         }
         npc.takeDamage(FRET_DAMAGE);
-    }
-
-    public void kick (NPC npc) {
-
     }
 
     public void useWeaponOnNPC(Weapon weapon, NPC npc) {
@@ -232,4 +227,7 @@ public class Player extends Entity {
         }
     }
 
+    public Race getRace() {
+        return this.race;
+    }
 }

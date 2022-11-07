@@ -15,9 +15,7 @@ public class PlayerTest {
     private static final int DEFAULT_VALUE_INTELLIGENCE = 10;
     private static final int DEFAULT_VALUE_XP = 0;
     private static final int DEFAULT_VALUE_LEVEL = 1;
-    private static final String SWORD_EQUIPMENT = "Sword";
     private static final int XP_MAX_VALUE = 100;
-    private static final int HEALTH_MAX_VALUE = 100;
     private static final int NEGATIVE_INPUT = -1;
     private static final int MAP_WIDTH = 20;
     private static final int MAP_HEIGHT = 20;
@@ -105,6 +103,19 @@ public class PlayerTest {
         player.fret(npc);
         int npcDamageAfterAttack = npc.getHealth();
         assertTrue(npcStartDamage > npcDamageAfterAttack);
+    }
+
+    @Test
+    public void player_Try_Use_Weapon_On_NPC_Out_Of_Range_Error () {
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                Player player = new Player();
+                Weapon weapon = Mockito.mock(Weapon.class, Mockito.CALLS_REAL_METHODS);
+                NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+                player.useWeaponOnNPC(weapon, npc);
+            }
+        });
     }
 
     @Test
@@ -208,7 +219,6 @@ public class PlayerTest {
         int levelUp = 1;
         player.increaseXp( XP_MAX_VALUE +1);
         assertEquals(DEFAULT_VALUE_LEVEL + levelUp, player.getLevel());
-
     }
 
     @Test
@@ -232,13 +242,28 @@ public class PlayerTest {
     }
 
     @Test
-    public void player_Pick_Up_MagicRing () {}
+    public void player_Pick_Up_MagicRing () {
+        Player player = new Player();
+        MagicRing magicRing = Mockito.mock(MagicRing.class, Mockito.CALLS_REAL_METHODS);
+        player.pickUpMagicRing(magicRing);
+        assertEquals(magicRing, player.getActiveMagicRing());
+    }
 
     @Test
-    public void player_Choose_Trade () {}
+    public void player_Choose_Trade () {
+        Player player = new Player();
+        Trade builder = new Builder(player);
+        player.chooseTrade("Builder");
+        assertEquals(builder, player.getTrade());
+    }
 
     @Test
-    public void player_Choose_Race () {}
+    public void player_Choose_Race () {
+        Player player = new Player();
+        Race brownRat = new BrownRat(player);
+        player.chooseRace("Brown rat");
+        assertEquals(brownRat, player.getRace());
+    }
 
 
 
