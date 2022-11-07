@@ -109,14 +109,10 @@ public class Player extends Entity {
     }
 
     public void killNPCWithWeapon(NPC npc, Weapon weapon) {
-        if (isNPCOutOfReach(npc)) {
-            throw new IllegalArgumentException("NPC is out of reach");
-        } else {
             while (npc.getHealth() > 0)
                 useWeaponOnNPC(weapon, npc);
             if (npc.getHealth() <= 0)
                 increaseXp(XP_KILLING_BONUS);
-        }
     }
 
     public void killNPCWithoutWeapon(NPC npc) {
@@ -166,9 +162,12 @@ public class Player extends Entity {
     }
 
     public void useWeaponOnNPC(Weapon weapon, NPC npc) {
-        //kolla så NPC står inom räckhåll
-        int damage = weapon.attackDamage();
-        npc.takeDamage(damage);
+        if (isNPCOutOfReach(npc)) {
+            throw new IllegalArgumentException("NPC is out of reach");
+        } else {
+            int damage = weapon.attackDamage();
+            npc.takeDamage(damage);
+        }
     }
 
     public void die() {

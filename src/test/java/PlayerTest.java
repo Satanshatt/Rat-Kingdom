@@ -114,7 +114,7 @@ public class PlayerTest {
                 Weapon weapon = Mockito.mock(Weapon.class, Mockito.CALLS_REAL_METHODS);
                 NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
                 npc.setPosX(START_POS_X + 3);
-                player.killNPCWithWeapon(npc, weapon);
+                player.useWeaponOnNPC(weapon, npc);
             }
         });
     }
@@ -141,6 +141,9 @@ public class PlayerTest {
                 Player player = new Player();
                 NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
                 player.increaseLevel();
+                npc.setPosX(START_POS_X+1);
+                npc.setPosY(START_POS_Y);
+                player.fret(npc);
             }
         });
     }
@@ -204,7 +207,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void kill_NPC_And_Increase_Xp () {
+    public void kill_NPC_Without_Weapon_And_Increase_Xp () {
         Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
 
