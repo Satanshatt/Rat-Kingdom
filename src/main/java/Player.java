@@ -174,12 +174,10 @@ public class Player extends Entity {
         restart();
     }
 
-    public void pickUpWeapon(Weapon newWeapon) { //if-villkoret funkar inte. Blir nullpointerexception.
-        if ((newWeapon.getWeaponLevel() <= this.level) &&
-                ( (newWeapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel()) ||
-                        (this.activeWeapon == null))) {
-            this.setActiveWeapon(newWeapon);
-            newWeapon.setPlayer(this);
+    public void pickUpWeapon(Weapon weapon) {
+        if (weapon.getWeaponLevel() <= this.level && this.activeWeapon == null || weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel()) {
+            this.setActiveWeapon(weapon);
+            weapon.setPlayer(this);
         }
     }
 
