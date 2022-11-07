@@ -10,7 +10,7 @@ class RoomTest {
 
     private static final int MAP_WIDTH = 20;
     private static final int MAP_HEIGHT = 20;
-    private  Set<Enemy> enemies = new HashSet<>();
+    private  Set<NPC> npcs = new HashSet<>();
 
     @BeforeEach
     void setup(){
@@ -72,11 +72,11 @@ class RoomTest {
     }
 
     @Test
-    public void enemiesExist(){
+    public void correctAmountOfEnemiesExist(){
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
-                fillRoom("ground").createWallsAndDoors().generateAntEnemies(4).generate();
-
-
+                fillRoom("ground").createWallsAndDoors().generateEnemies(4).generate();
+        int numEnemies = room.getSet().size();
+        assertEquals(4, numEnemies);
     }
 
 

@@ -1,4 +1,5 @@
 import java.util.HashSet;
+import java.util.Random;
 import java.util.Set;
 
 public class RoomGenerator {
@@ -6,13 +7,13 @@ public class RoomGenerator {
     private int width;
     private int height;
     private Tile[][] tiles;
-    private Set<Enemy> enemies;
+    private Set<NPC> npcs;
 
     public RoomGenerator(int width, int height){
         this.width = width;
         this.height = height;
         this.tiles = new Tile[width][height];
-        this.enemies = new HashSet<Enemy>();
+        this.npcs = new HashSet<NPC>();
     }
 
     public Tile generateTile(String type, int x, int y){
@@ -55,20 +56,25 @@ public class RoomGenerator {
         return this;
     }
 
-    public RoomGenerator generateAntEnemies(int numEnemies){
+    public RoomGenerator generateEnemies(int numEnemies){
+        Random random = new Random();
+        int randomX = 0;
+        int randomY = 0;
+
+        for(int i=0; i<numEnemies;i++){
+            while (tiles[randomX][randomY].isBlocked()){
+                randomX = random.nextInt(width);
+                randomY = random.nextInt(height);
+            }
+        }
+
         return this;
+
     }
 
-    public RoomGenerator generateRattlesnakeEnemies(int numEnemies){
-        return this;
-    }
-
-    public RoomGenerator generateOwlEnemies(int numEnemies){
-        return this;
-    }
 
     public Room generate(){
-        return new Room(tiles, enemies);
+        return new Room(tiles, npcs);
     }
 
 }

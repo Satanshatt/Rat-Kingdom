@@ -9,14 +9,17 @@ public class Room {
     public Player player;
     public Set<NPC> npcs;
 
-    public Room(Tile[][] tiles, Set<Enemy> enemies){
+    public Room(Tile[][] tiles, Set<NPC> npcs){
         this.npcs = new HashSet<>();
-        this.npcs.addAll(enemies);
+        this.npcs.addAll(npcs);
         this.tiles = tiles;
         this.width = tiles.length;
         this.height = tiles[0].length;
     }
 
+    public Set<NPC> getSet(){
+        return this.npcs;
+    }
     public int getWidth() { return width; }
     public int getHeight() { return height; }
 
