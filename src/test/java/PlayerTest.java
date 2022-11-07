@@ -169,6 +169,11 @@ public class PlayerTest {
 
     @Test
     public void mana_Increase_By_Level () {
+        Player player = new Player();
+        int manaBefore = player.getMana();
+        player.increaseLevel();
+        int manaAfter = player.getMana();
+        assertTrue(manaBefore < manaAfter);
 
     }
 
