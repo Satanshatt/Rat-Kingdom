@@ -10,7 +10,7 @@ class RoomTest {
 
     private static final int MAP_WIDTH = 20;
     private static final int MAP_HEIGHT = 20;
-    private  Set<NPC> npcs = new HashSet<>();
+
 
     @BeforeEach
     void setup(){
@@ -78,6 +78,43 @@ class RoomTest {
         int numEnemies = room.getSet().size();
         assertEquals(4, numEnemies);
     }
+
+    @Test
+    public void obstaclesAreGenerated(){
+        int counter = 0;
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
+                fillRoom("ground").createWallsAndDoors().generateObstacles(10).generate();
+
+        for(int x= 0;x<MAP_WIDTH-1; x++){
+            for(int y= 0;y<MAP_HEIGHT-1; y++){
+                if(room.getTile(x,y).getType().equals("obstacle")){
+                    counter++;
+                }
+            }
+        }
+
+        assertEquals(10, counter);
+
+    }
+
+    @Test
+    public void obstaclesCantBeCreatedInFrontOfDoors(){
+        int counter = 0;
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
+                fillRoom("ground").createWallsAndDoors().generateObstacles(100).generate();
+
+        for(int x= 0;x<MAP_WIDTH-1; x++){
+            for(int y= 0;y<MAP_HEIGHT-1; y++){
+                if(room.getTile(x,y).getType().equals("obstacle")){
+                    counter++;
+                }
+            }
+        }
+
+        assertEquals(100, counter);
+
+    }
+
 
 
 
