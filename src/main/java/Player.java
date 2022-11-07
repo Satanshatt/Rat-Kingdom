@@ -6,6 +6,7 @@ public class Player extends Entity {
     private static final int START_POS_Y = 1;
     private static final int FRET_DAMAGE = 2;
     private static final int XP_KILLING_BONUS = 10;
+    private static final int MANA_BONUS = 15;
     private static final int XP_MAX_VALUE = 100;
 
     private int health;
@@ -80,7 +81,7 @@ public class Player extends Entity {
     }
 
     public void increaseMana(int mana) {
-        this.mana = mana;
+        this.mana += mana;
     }
 
     public void increaseStrength(int strength) {
@@ -104,6 +105,7 @@ public class Player extends Entity {
 
     public void increaseLevel() {
         this.level = level + 1;
+        increaseMana(MANA_BONUS);
     }
 
     public void killNPCWithWeapon(NPC npc, Weapon weapon) {
