@@ -145,6 +145,7 @@ public class PlayerTest {
         assertTrue(playerStartHealth > playerHealthAfterAttack);
     }
 
+    /*
     @Test
     public void add_Over_Health_Maxvalue_Health_Value_Is_Maxvalue () {
         Player player = new Player();
@@ -152,6 +153,8 @@ public class PlayerTest {
         assertEquals(HEALTH_MAX_VALUE, player.getHealth());
     }
 
+
+     */
     /*
     När spelaren dör startar man om på ruta ett igen, dvs tillbaka till nivå 1.
      */
