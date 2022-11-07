@@ -5,7 +5,8 @@ public class Main {
 
         boolean running = true;
         while(running){
-            game.display();
+
+            game.startGame();
 //            String action = game.takeInput();
 //            game.act(action);
             running = false;

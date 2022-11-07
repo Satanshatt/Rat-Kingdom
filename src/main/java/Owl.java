@@ -3,11 +3,11 @@ public class Owl extends Fiend{
         super(name, type, health, damage, size, level, posX, posY);
     }
 
-    @Override
-    public void moveForBattle() {
+    public void moveForBattle(Room currentRoom) {
+        int widthOfRoom = currentRoom.getWidth();
 
         do{
-            moveLeft();
+
 
         } while(this.health >= 0);
     }

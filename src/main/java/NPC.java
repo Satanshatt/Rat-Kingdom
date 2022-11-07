@@ -38,18 +38,20 @@ abstract class NPC extends Entity{
         return false;
     }
 
-    public void spawnNPC(int xCoordinate, int yCoordinate){
-        this.setPosX(xCoordinate);
-        this.setPosY(yCoordinate);
+    public void spawnNPC(Tile newTile){
+        if(isLegalToMove(newTile)){
+            this.posY = newTile.getPosY();
+            this.posX = newTile.getPosX();
+        }
     }
-
+/* TODO: den här behöver finnas någon annanstans..
     public void spawnNPCRandomPosition(){
         Random randomNumber = new Random();
         int xPosition = randomNumber.nextInt(12);
         int yPosition = randomNumber.nextInt(12);
         spawnNPC(xPosition, yPosition);
     }
-
+*/
     public boolean isDead() {
         if (this.health <= 0){
             return true;

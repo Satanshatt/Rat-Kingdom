@@ -127,14 +127,30 @@ public class Player extends Entity {
             die();
     }
 
-    public void move(Room room, int x, int y) {
+    public void move(Room room, Direction direction) {
+        int newXPos = this.getPosX();
+        int newYPos = this.getPosY();
+        switch(direction) {
+            case LEFT -> {
+                newYPos -= 1;
+            }
+            case RIGHT -> {
+                newYPos += 1;
+            }
+            case UPWARDS -> {
+                newXPos -= 1;
+            }
+            case DOWNWARDS -> {
+                newXPos += 1;
+            }
+        }
 
-        if(room.isBlocked(x, y)) {
+        if(room.isBlocked(newXPos, newYPos)) {
             throw new IllegalArgumentException("Place is occupied");
         }
         else {
-            this.setPosX(x);
-            this.setPosY(y);
+            this.setPosX(newXPos);
+            this.setPosY(newYPos);
         }
     }
 

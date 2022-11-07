@@ -51,20 +51,26 @@ public class Room {
         return null; //Kanske returnera ett fel istället? En fiende eller en tile kan ju inte vara utanför rummet
     }
 
-    public String generateRoomToShow(){
+    public String generateRoomToShow(Player player){
         String representation = "";
         for(int x = 0; x < this.getWidth(); x++) {
             representation += "\n";
             for (int y = 0; y < this.getHeight(); y++) {
                 try {
-                    Class<? extends Tile> type = this.tiles[x][y].getClass();
-                    representation +="[" + this.getEntityAt(type, x,y).getType() + "]";
+                    if(player.getPosX() == x && player.getPosY() == y) {
+                        representation +="[P]";
+                    }
+                    else {
+                        Class<? extends Tile> type = this.tiles[x][y].getClass();
+                        representation +="[" + this.getEntityAt(type, x,y).getType().substring(0, 1).toUpperCase(Locale.ROOT) + "]";
+                    }
                 } catch(Exception e) {
                     representation +="[]";
                 }
 
             }
         }
+        representation += "\n";
         return representation;
     }
 
