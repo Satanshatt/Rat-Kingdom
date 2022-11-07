@@ -8,8 +8,9 @@ abstract class NPC extends Entity{
     int damage = 2;
     int health = 2;
     int level = 2;
+    boolean direction = false;
 
-    NPC(String name, String type, int health, int damage, int size, int level, int posX, int posY) {
+    NPC(String name, String type, int health, int damage, int size, int level, int posX, int posY, boolean direction) {
         super(type, posX, posY);
         this.name = name;
         this.type = type;
@@ -17,6 +18,7 @@ abstract class NPC extends Entity{
         this.damage = damage;
         this.size = size;
         this.level = level;
+        this.direction = direction;
     }
 
     public abstract void attackEnemy();
@@ -38,20 +40,6 @@ abstract class NPC extends Entity{
         return false;
     }
 
-    public void spawnNPC(Tile newTile){
-        if(isLegalToMove(newTile)){
-            this.posY = newTile.getPosY();
-            this.posX = newTile.getPosX();
-        }
-    }
-/* TODO: den här behöver finnas någon annanstans..
-    public void spawnNPCRandomPosition(){
-        Random randomNumber = new Random();
-        int xPosition = randomNumber.nextInt(12);
-        int yPosition = randomNumber.nextInt(12);
-        spawnNPC(xPosition, yPosition);
-    }
-*/
     public boolean isDead() {
         if (this.health <= 0){
             return true;
@@ -102,7 +90,7 @@ abstract class NPC extends Entity{
             }
 
             if (newTile.isBlocked()) {
-                throw new IllegalStateException("This path is blocked, move elsewhere");
+                direction = true;
             }
 
             return true;
