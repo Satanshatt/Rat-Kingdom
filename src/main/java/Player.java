@@ -109,10 +109,14 @@ public class Player extends Entity {
     }
 
     public void killNPCWithWeapon(NPC npc, Weapon weapon) {
-        while (npc.getHealth() > 0)
-            useWeaponOnNPC(weapon, npc);
-        if (npc.getHealth() <= 0)
-            increaseXp(XP_KILLING_BONUS);
+        if (isNPCOutOfReach(npc)) {
+            throw new IllegalArgumentException("NPC is out of reach");
+        } else {
+            while (npc.getHealth() > 0)
+                useWeaponOnNPC(weapon, npc);
+            if (npc.getHealth() <= 0)
+                increaseXp(XP_KILLING_BONUS);
+        }
     }
 
     public void killNPCWithoutWeapon(NPC npc) {

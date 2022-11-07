@@ -113,7 +113,8 @@ public class PlayerTest {
                 Player player = new Player();
                 Weapon weapon = Mockito.mock(Weapon.class, Mockito.CALLS_REAL_METHODS);
                 NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-                player.useWeaponOnNPC(weapon, npc);
+                npc.setPosX(START_POS_X + 3);
+                player.killNPCWithWeapon(npc, weapon);
             }
         });
     }
@@ -125,6 +126,7 @@ public class PlayerTest {
             public void execute() throws Throwable {
                 Player player = new Player();
                 NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+                npc.setPosX(START_POS_X + 3);
                 player.fret(npc);
             }
         });
