@@ -1,4 +1,5 @@
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Random;
 import java.util.Set;
 
@@ -13,17 +14,17 @@ public class RoomGenerator {
         this.width = width;
         this.height = height;
         this.tiles = new Tile[width][height];
-        this.npcs = new HashSet<NPC>();
+        this.npcs = new HashSet<>();
     }
 
     public Tile generateTile(String type, int x, int y){
-        if(type == "ground"){
+        if(Objects.equals(type, "ground")){
             return new Tile("ground", x,y,false);
-        } else if (type == "wall") {
+        } else if (Objects.equals(type, "wall")) {
             return new Tile("wall",x,y,true);
-        } else if (type == "door") {
+        } else if (Objects.equals(type, "door")) {
             return new Tile("door",x,y,true);
-        } else if (type == "obstacle") {
+        } else if (Objects.equals(type, "obstacle")) {
             return new Tile("obstacle",x,y,true);
         } else{
             return null;
