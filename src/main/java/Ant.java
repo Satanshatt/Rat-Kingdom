@@ -3,28 +3,57 @@ public class Ant extends Fiend{
         super(name, type, health, damage, size, level, posX, posY, direction);
     }
 
+    boolean justWentRight = false;
+    boolean justWentLeft = false;
+    boolean justWentUp = false;
+    boolean justWentDown = false;
+
     @Override
     public void attackPlayer(Player player) {
         if(this.isPlayerWithinReach(player)){
             player.damagePlayer(this.damage);
+            System.out.println("An ant bit you!");
         } else {
             return; //Kanske göra annorlunda?
         }
     }
 
     public void moveForBattle(Room currentRoom){
-        boolean justTurnedRight = true;
-        int widthOfRoom = currentRoom.getWidth();
-        if(justTurnedRight){
-        }
+
         do{
 
+            int xPosition = this.getPosX();
+            int yPosition = this.getPosY();
+            Tile currentTile = currentRoom.getTile(xPosition, yPosition);
 
+            if(justWentRight){
+                this.moveDownwards(currentTile);
+                justWentDown = true;
+                justWentRight = false;
+            }
+
+            if(justWentDown){
+                this.moveLeft(currentTile);
+                justWentLeft = true;
+                justWentDown = false;
+            }
+
+            if(justWentLeft) {
+                this.moveUpwards(currentTile);
+                justWentUp = true;
+                justWentLeft = false;
+            }
+
+            if(justWentUp){
+                this.moveRight(currentTile);
+                justWentRight = true;
+                justWentUp = false;
+
+            } else {
+                this.moveRight(currentTile);
+                justWentRight = true;
+            }
 
         } while(this.health >= 0);
-
-
-
-
     }
 }

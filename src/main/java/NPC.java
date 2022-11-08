@@ -145,6 +145,11 @@ abstract class NPC extends Entity{
         }
 
 
-    public void damagePlayer(Player player) {
+    public int damagePlayer(Player player) {
+        int playerHealth = player.getHealth();
+        int NPCDamage = this.getDamage();
+        playerHealth = playerHealth - NPCDamage;
+        return playerHealth;
+
     }
 }

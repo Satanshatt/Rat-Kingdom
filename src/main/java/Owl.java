@@ -23,9 +23,7 @@ public class Owl extends Fiend{
                     direction = false;
                 }
             }
-
         } while(this.health >= 0);
-
     }
 
     @Override
@@ -41,6 +39,6 @@ public class Owl extends Fiend{
     @Override
     public void attackPlayer(Player player) {
         player.damagePlayer(this.getDamage());
-        System.out.println("Owl attacked you!");
+        System.out.println("An owl attacked you!");
     }
 }
