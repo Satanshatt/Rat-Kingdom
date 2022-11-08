@@ -49,7 +49,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void plyer_Moves_room_is_null_error () {
+    public void player_Moves_room_is_null_error () {
         assertThrows(NullPointerException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
@@ -155,8 +155,10 @@ public class PlayerTest {
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
 
         int playerStartHealth = player.getHealth();
+        System.out.println("start: " + playerStartHealth);
         npc.damagePlayer(player);
         int playerHealthAfterAttack = player.getHealth();
+        System.out.println("After: " + playerHealthAfterAttack);
 
         assertTrue(playerStartHealth > playerHealthAfterAttack);
     }
@@ -255,19 +257,51 @@ public class PlayerTest {
     }
 
     @Test
-    public void player_Choose_Trade () {
+    public void player_Choose_Trade_Builder () {
         Player player = new Player();
         Trade builder = new Builder(player);
         player.chooseTrade("Builder");
-        assertEquals(builder, player.getTrade());
+        assertEquals(builder.getName(), player.getTrade().getName());
     }
 
     @Test
-    public void player_Choose_Race () {
+    public void player_Choose_Trade_CircusArtist () {
+        Player player = new Player();
+        Trade circusArtist = new CircusArtist(player);
+        player.chooseTrade("Circus artist");
+        assertEquals(circusArtist.getName(), player.getTrade().getName());
+    }
+
+    @Test
+    public void player_Choose_Trade_Storyteller () {
+        Player player = new Player();
+        Trade storyteller = new Storyteller(player);
+        player.chooseTrade("Storyteller");
+        assertEquals(storyteller.getName(), player.getTrade().getName());
+    }
+
+    @Test
+    public void player_Choose_Race_BrownRat () {
         Player player = new Player();
         Race brownRat = new BrownRat(player);
-        player.chooseRace("Brown rat");
-        assertEquals(brownRat, player.getRace());
+        player.chooseRace("brown rat");
+        assertEquals(brownRat.getName(), player.getRace().getName());
+    }
+
+    @Test
+    public void player_Choose_Race_WhiteRat () {
+        Player player = new Player();
+        Race whiteRat = new WhiteRat(player);
+        player.chooseRace("white rat");
+        assertEquals(whiteRat.getName(), player.getRace().getName());
+    }
+
+    @Test
+    public void player_Choose_Race_BlackRat () {
+        Player player = new Player();
+        Race blackRat = new BlackRat(player);
+        player.chooseRace("black rat");
+        assertEquals(blackRat.getName(), player.getRace().getName());
     }
 
 

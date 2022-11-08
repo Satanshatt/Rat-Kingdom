@@ -155,10 +155,12 @@ public class Player extends Entity {
     }
 
     public void fret(NPC npc) {
-        if (isNPCOutOfReach(npc)) {
+        if (isNPCOutOfReach(npc))
             throw new IllegalArgumentException("NPC out of reach");
-        }
-        npc.takeDamage(FRET_DAMAGE);
+        if(this.level != npc.getLevel())
+            throw new IllegalArgumentException("NPC and Player are not the same level");
+        else
+            npc.takeDamage(FRET_DAMAGE);
     }
 
     public void useWeaponOnNPC(Weapon weapon, NPC npc) {
