@@ -2,8 +2,8 @@
 public class Enemy extends NPC
  {
 
-  Enemy(String name, String type, int health, int damage, int size, int level, int posX, int posY) {
-   super(name, type, health, damage, size, level, posX, posY);
+  Enemy(String name, String type, int health, int damage, int size, int level, int posX, int posY, boolean direction) {
+   super(name, type, health, damage, size, level, posX, posY, direction);
   }
 
   @Override

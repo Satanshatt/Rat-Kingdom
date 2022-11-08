@@ -8,7 +8,7 @@ abstract class NPC extends Entity{
     int damage = 2;
     int health = 2;
     int level = 2;
-    boolean direction = false;
+    static boolean direction = false;
 
     NPC(String name, String type, int health, int damage, int size, int level, int posX, int posY, boolean direction) {
         super(type, posX, posY);
@@ -29,7 +29,7 @@ abstract class NPC extends Entity{
 
     public abstract void moveForBattle();
 
-    public boolean isEntityWithinReach(Player player) {
+    public boolean isPlayerWithinReach(Player player) {
         if ((this.posY == player.posY) &&
                 ((this.posX == (player.posX++)) || (this.posX == player.posX--))) {
             return true;
