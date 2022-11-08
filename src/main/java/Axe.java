@@ -42,4 +42,8 @@ public class Axe extends Weapon {
     public void setWeaponLevel(int weaponLevel){
         this.weaponLevel = weaponLevel;
     }
+
+    public String toString() {
+        return NAME;
+    }
 }

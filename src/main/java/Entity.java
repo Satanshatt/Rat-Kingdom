@@ -25,8 +25,9 @@ public class Entity {
         posY = newYPosition;
     }
 
-    public String getType() {
+    public String getType() { // TODO: Den här ärvs till alla klasser, men ni deklarerar fortfarande många getType metoder i klasserna under.
         return type;
     }
+    //TODO: ni bör ha ett sätt att generera en representation av type, som exempelvis ett G för ground eller P för player.
 
 }

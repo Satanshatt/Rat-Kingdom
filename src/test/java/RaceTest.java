@@ -34,5 +34,4 @@ public class RaceTest {
         player.chooseRace("White rat");
         assertEquals(120, player.getMana());
     }
-
 }

@@ -8,8 +8,9 @@ abstract class NPC extends Entity{
     int damage = 2;
     int health = 2;
     int level = 2;
+    static boolean direction = false;
 
-    NPC(String name, String type, int health, int damage, int size, int level, int posX, int posY) {
+    NPC(String name, String type, int health, int damage, int size, int level, int posX, int posY, boolean direction) {
         super(type, posX, posY);
         this.name = name;
         this.type = type;
@@ -17,31 +18,38 @@ abstract class NPC extends Entity{
         this.damage = damage;
         this.size = size;
         this.level = level;
+        this.direction = direction;
     }
 
-    public abstract void battle ();
+    public abstract void attackEnemy();
 
-    public abstract void moveForBattle ();
+    public abstract void attackFriend();
 
-    public void spawnNPC(int xCoordinate, int yCoordinate){
-        this.setPosX(xCoordinate);
-        this.setPosY(yCoordinate);
+    public abstract void attackPlayer();
+
+    public abstract void moveForBattle();
+
+    public boolean isPlayerWithinReach(Player player) {
+        if ((this.posY == player.posY) &&
+                ((this.posX == (player.posX++)) || (this.posX == player.posX--))) {
+            return true;
+        } else if ((this.posX == player.posX) &&
+                ((this.posY == (player.posY++ )) || (this.posY == player.posY--))) {
+            return true;
+        }
+        return false;
     }
 
-    public void spawnNPCRandomPosition(){
-        Random randomNumber = new Random();
-        int xPosition = randomNumber.nextInt(12);
-        int yPosition = randomNumber.nextInt(12);
-        spawnNPC(xPosition, yPosition);
-    }
-
-    //skapa randomizer för när NPCs dör, 1 av 10 att vapen ges
-    public boolean die() {
+    public boolean isDead() {
         if (this.health <= 0){
             return true;
         } else {
             return false;
         }
+    }
+
+    private void NPCDies(){
+
     }
 
     public void takeDamage(int damageFromPlayer){
@@ -50,17 +58,50 @@ abstract class NPC extends Entity{
         this.setHealth(newHealth);
     }
 
-    public void damagePlayer(Player player){
-        player.damagePlayer(this.getDamage());
+    public void moveDownwards(Tile newTile){
+        if(isLegalToMove(newTile)){
+            this.posY--;
+        }
     }
 
+    public void moveRight(Tile newTile){
+        if(isLegalToMove(newTile)){
+            this.posX++;
+        }
+    }
+
+    public void moveLeft(Tile newTile){
+
+        if(isLegalToMove(newTile)){
+            this.posX--;
+        }
+    }
+
+    public void moveUpwards(Tile newTile){
+        if (isLegalToMove(newTile)) {
+            this.posY++;
+        }
+    }
+
+    private boolean isLegalToMove(Tile newTile){
+        try {
+            if (newTile == null) {
+                throw new IllegalStateException("Can not move outside of the room, move elsewhere");
+            }
+
+            if (newTile.isBlocked()) {
+                direction = true;
+            }
+
+            return true;
+
+        } catch(IllegalStateException illegalStateException) {
+            return false;
+        }
+    }
 
         public String getName () {
             return name;
-        }
-
-        public String getType () {
-            return type;
         }
 
         public int getSize () {
@@ -83,8 +124,32 @@ abstract class NPC extends Entity{
             this.health = newHealth;
         }
 
-        public void setDamage(int newDamage){ this.damage = newDamage; }
+        public void setName(String newName){
+            this.name = newName;
+        }
+
+        public void setLevel(int newLevel){
+            this.level = newLevel;
+        }
+
+        public void setType(String newType){
+            this.type = newType;
+        }
+
+        public void setSize(int newSize){
+            this.size = newSize;
+        }
+
+        public void setDamage(int newDamage){
+            this.damage = newDamage;
+        }
 
 
+    public int damagePlayer(Player player) {
+        int playerHealth = player.getHealth();
+        int NPCDamage = this.getDamage();
+        playerHealth = playerHealth - NPCDamage;
+        return playerHealth;
 
+    }
 }

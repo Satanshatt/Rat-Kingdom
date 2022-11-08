@@ -1,5 +1,4 @@
 import java.util.HashSet;
-import java.util.Random;
 import java.util.Set;
 
 public class RoomGenerator {
@@ -7,13 +6,13 @@ public class RoomGenerator {
     private int width;
     private int height;
     private Tile[][] tiles;
-    private Set<NPC> npcs;
+    private Set<Enemy> enemies;
 
     public RoomGenerator(int width, int height){
         this.width = width;
         this.height = height;
         this.tiles = new Tile[width][height];
-        this.npcs = new HashSet<NPC>();
+        this.enemies = new HashSet<Enemy>();
     }
 
     public Tile generateTile(String type, int x, int y){
@@ -23,8 +22,6 @@ public class RoomGenerator {
             return new Tile("wall",x,y,true);
         } else if (type == "door") {
             return new Tile("door",x,y,true);
-        } else if (type == "obstacle") {
-            return new Tile("obstacle",x,y,true);
         } else{
             return null;
         }
@@ -55,45 +52,23 @@ public class RoomGenerator {
     }
 
     public RoomGenerator generateObstacles(int numObstacles){
-        Random random = new Random();
-        int randomX = 0;
-        int randomY = 0;
-
-        for(int i=0; i<numObstacles;i++){
-            while (tiles[randomX][randomY].isBlocked()){
-                randomX = random.nextInt(width);
-                randomY = random.nextInt(height);
-            }
-            tiles[randomX][randomY] = generateTile("obstacle", randomX,randomY);
-        }
-
         return this;
     }
 
-    public RoomGenerator generateEnemies(int numEnemies){
-        Random random = new Random();
-        int randomX = 0;
-        int randomY = 0;
-        NPC npc;
-
-        for(int i=0; i<numEnemies;i++){
-            while (tiles[randomX][randomY].isBlocked()){
-                randomX = random.nextInt(width);
-                randomY = random.nextInt(height);
-            }
-
-            npc = new Enemy("Ant", "Ant", 10,10,10,1, randomX, randomY);
-            npcs.add(npc);
-
-        }
-
+    public RoomGenerator generateAntEnemies(int numEnemies){
         return this;
-
     }
 
+    public RoomGenerator generateRattlesnakeEnemies(int numEnemies){
+        return this;
+    }
+
+    public RoomGenerator generateOwlEnemies(int numEnemies){
+        return this;
+    }
 
     public Room generate(){
-        return new Room(tiles, npcs);
+        return new Room(tiles, enemies);
     }
 
 }
