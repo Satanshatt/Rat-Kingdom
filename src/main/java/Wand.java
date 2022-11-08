@@ -42,4 +42,8 @@ public class Wand extends Weapon {
     public void setPlayer(Player player){
         this.player = player;
     }
+
+    public String toString() {
+        return NAME;
+    }
 }

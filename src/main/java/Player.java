@@ -209,6 +209,7 @@ public class Player extends Entity {
     }
 
     public void pickUpWeapon(Weapon weapon) {
+        //Kolla om en npc har dött (då finns vapen att hämta)
         if (weapon.getWeaponLevel() <= this.level && this.activeWeapon == null || weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel()) {
             this.setActiveWeapon(weapon);
             weapon.setPlayer(this);

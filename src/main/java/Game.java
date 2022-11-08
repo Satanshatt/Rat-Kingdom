@@ -12,10 +12,7 @@ public class Game {
     }
 
     public void startGame(){
-
         player = userInput.createPlayer(); //skapa spelare mha metod från input
-
-
         currentRoom = roomGenerator.fillRoom("ground").createWallsAndDoors().generate();
         display();
 
@@ -31,6 +28,9 @@ public class Game {
                         //player.attack(NPC npc, userInput.)
                     case TRADE:
                     case PICK_UP_ITEM:
+                        PickUpChoice choice = userInput.getPickUpChoice();
+                        if(choice.equals(PickUpChoice.YES))
+                            //player.pickUpWeapon();
                         break;
                     case ENTER_NEXT_ROOM:
                     default:

@@ -32,6 +32,11 @@ enum TradeChoice{
     STORYTELLER
 }
 
+enum PickUpChoice {
+    YES,
+    NO
+}
+
 public class UserInput {
 
     public final String  WALK_UPWARDS = "U";
@@ -51,6 +56,8 @@ public class UserInput {
     public final String BROWN_RAT = "BROWN";
     public final String WITH_WEAPON = "W";
     public final String FRET = "F";
+    public final String YES = "Y";
+    public final String NO = "N";
 
 
     Scanner sc = new Scanner(System.in);
@@ -164,6 +171,37 @@ public class UserInput {
                    break;
            }
        }
+   }
+
+   public PickUpChoice getPickUpChoice () {
+        Weapon weapon = randomizeWeapon();
+       System.out.println("Pick up " + weapon + "?");
+       String userInput = sc.nextLine().trim();
+       while (true) {
+           switch (userInput.toUpperCase(Locale.ROOT)){
+               case YES:
+                   return PickUpChoice.YES;
+               case NO:
+                   return PickUpChoice.NO;
+               default:
+                   System.out.println("Please only type one letter, Y or N.");
+                   break;
+           }
+       }
+   }
+
+   public Weapon randomizeWeapon () {
+        int weaponNumber = (int)(Math.random()*((3-1)+1))+1;
+        while (true) {
+            switch (weaponNumber) {
+                case 1:
+                    return new Wand();
+                case 2:
+                    return new Sword();
+                case 3:
+                    return new Axe();
+            }
+        }
    }
 }
 
