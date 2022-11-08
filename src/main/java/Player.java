@@ -2,11 +2,10 @@ import java.awt.*;
 
 public class Player extends Entity {
 
-    private static final int START_POS_X = 1;
-    private static final int START_POS_Y = 1;
+    private static final int START_POS_X = 5;
+    private static final int START_POS_Y = 5;
     private static final int FRET_DAMAGE = 2;
     private static final int XP_KILLING_BONUS = 10;
-    private static final int MANA_BONUS = 15;
     private static final int XP_MAX_VALUE = 100;
 
     private int health;
@@ -81,7 +80,7 @@ public class Player extends Entity {
     }
 
     public void increaseMana(int mana) {
-        this.mana += mana;
+        this.mana = mana;
     }
 
     public void increaseStrength(int strength) {
@@ -105,14 +104,13 @@ public class Player extends Entity {
 
     public void increaseLevel() {
         this.level = level + 1;
-        increaseMana(MANA_BONUS);
     }
 
     public void killNPCWithWeapon(NPC npc, Weapon weapon) {
-            while (npc.getHealth() > 0)
-                useWeaponOnNPC(weapon, npc);
-            if (npc.getHealth() <= 0)
-                increaseXp(XP_KILLING_BONUS);
+        while (npc.getHealth() > 0)
+            useWeaponOnNPC(weapon, npc);
+        if (npc.getHealth() <= 0)
+            increaseXp(XP_KILLING_BONUS);
     }
 
     public void killNPCWithoutWeapon(NPC npc) {
@@ -128,13 +126,30 @@ public class Player extends Entity {
             die();
     }
 
-    public void move(Room room, int x, int y) {
-        if(room.isBlocked(x, y)) {
+    public void move(Room room, Direction direction) {
+        int newXPos = this.getPosX();
+        int newYPos = this.getPosY();
+        switch(direction) {
+            case LEFT -> {
+                newYPos -= 1;
+            }
+            case RIGHT -> {
+                newYPos += 1;
+            }
+            case UPWARDS -> {
+                newXPos -= 1;
+            }
+            case DOWNWARDS -> {
+                newXPos += 1;
+            }
+        }
+
+        if(room.isBlocked(newXPos, newYPos)) {
             throw new IllegalArgumentException("Place is occupied");
         }
         else {
-            this.setPosX(x);
-            this.setPosY(y);
+            this.setPosX(newXPos);
+            this.setPosY(newYPos);
         }
     }
 
@@ -155,21 +170,20 @@ public class Player extends Entity {
     }
 
     public void fret(NPC npc) {
-        if (isNPCOutOfReach(npc))
+        if (isNPCOutOfReach(npc)) {
             throw new IllegalArgumentException("NPC out of reach");
-        if(this.level != npc.getLevel())
-            throw new IllegalArgumentException("NPC and Player are not the same level");
-        else
-            npc.takeDamage(FRET_DAMAGE);
+        }
+        npc.takeDamage(FRET_DAMAGE);
+    }
+
+    public void kick (NPC npc) {
+
     }
 
     public void useWeaponOnNPC(Weapon weapon, NPC npc) {
-        if (isNPCOutOfReach(npc)) {
-            throw new IllegalArgumentException("NPC is out of reach");
-        } else {
-            int damage = weapon.attackDamage();
-            npc.takeDamage(damage);
-        }
+        //kolla så NPC står inom räckhåll
+        int damage = weapon.attackDamage();
+        npc.takeDamage(damage);
     }
 
     public void die() {
@@ -232,7 +246,4 @@ public class Player extends Entity {
         }
     }
 
-    public Race getRace() {
-        return this.race;
-    }
 }
