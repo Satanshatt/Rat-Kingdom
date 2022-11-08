@@ -2,13 +2,14 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 
+import static org.hamcrest.Matchers.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 public class WeaponTest {
@@ -36,6 +37,17 @@ public class WeaponTest {
     }
 
     @Test
+    public void testLevelRandomizerWithMatchers(){
+        ArrayList<Weapon> weapons = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            weapons.add(new Axe());
+        }
+        for (int i = 0; i < 100; i++) {
+            assertThat(weapons.get(i).getWeaponLevel(), both(greaterThan(0)).and(lessThanOrEqualTo(10)));
+        }
+    }
+
+    @Test
     public void testAxe() {
         Weapon axe = new Axe();
         axe.setPlayer(player);
@@ -44,6 +56,17 @@ public class WeaponTest {
         assertEquals(weaponLevel + 2, axe.getSpeed());
         assertEquals(10 + axe.getDamage(), axe.attackDamage());
         assertEquals(10 + axe.getSpeed(), axe.attackSpeed());
+    }
+
+    @Test
+    public void testAxeWithMatchers(){
+        Weapon axe = new Axe();
+        axe.setPlayer(player);
+        int weaponLevel = axe.getWeaponLevel();
+        assertThat(axe.getDamage(), is(equalTo(weaponLevel + 4)));
+        assertThat(axe.getSpeed(), is(equalTo(weaponLevel + 2)));
+        assertThat(axe.attackDamage(), is(equalTo(10 + axe.getDamage())));
+        assertThat(axe.attackSpeed(), is(equalTo(10 + axe.getSpeed())));
     }
 
     @Test
@@ -89,6 +112,17 @@ public class WeaponTest {
     }
 
     @Test
+    public void testPickUpWeaponSuccessWithMatchers(){
+        Weapon sword = new Sword();
+        Weapon axe = new Axe();
+        sword.setWeaponLevel(0);
+        axe.setWeaponLevel(1);
+        player.setActiveWeapon(sword);
+        player.pickUpWeapon(axe);
+        assertThat(axe, sameInstance(player.getActiveWeapon()));
+    }
+
+    @Test
     public void testPickUpWeaponFailWithMock() {
         when(sword.getWeaponLevel()).thenReturn(1);
         when(axe.getWeaponLevel()).thenReturn(0);
@@ -107,8 +141,4 @@ public class WeaponTest {
         player.pickUpWeapon(axe);
         assertSame(sword, player.getActiveWeapon());
     }
-
-    /*@Test void testWeaponDrop(){
-        NPC owl = new Owl();
-    }*/
 }
