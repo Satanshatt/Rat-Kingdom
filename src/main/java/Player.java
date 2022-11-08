@@ -15,6 +15,7 @@ public class Player extends Entity {
     private int intelligence;
     private int xp;
     private int level;
+    private boolean isDead;
     private Weapon activeWeapon;
     private MagicRing magicRing;
     private Trade trade;
@@ -58,6 +59,10 @@ public class Player extends Entity {
 
     public int getLevel() {
         return this.level;
+    }
+
+    public boolean isDead () {
+        return isDead;
     }
 
     public Weapon getActiveWeapon() {
@@ -105,7 +110,7 @@ public class Player extends Entity {
     public void increaseLevel() {
         this.level = level + 1;
     }
-
+/*
     public void killNPCWithWeapon(NPC npc, Weapon weapon) {
         while (npc.getHealth() > 0)
             useWeaponOnNPC(weapon, npc);
@@ -120,10 +125,23 @@ public class Player extends Entity {
             increaseXp(XP_KILLING_BONUS);
     }
 
+ */
+
     public void damagePlayer(int damage) {
         this.health = health - damage;
         if (this.health <= 0)
             die();
+    }
+
+    public void attack (NPC npc, AttackChoice attackChoice) {
+        switch (attackChoice) {
+            case WITH_WEAPON -> {
+                useWeaponOnNPC(npc);
+            }
+            case FRET -> {
+                fret(npc);
+            }
+        }
     }
 
     public void move(Room room, Direction direction) {
@@ -150,6 +168,7 @@ public class Player extends Entity {
         else {
             this.setPosX(newXPos);
             this.setPosY(newYPos);
+
         }
     }
 
@@ -176,17 +195,16 @@ public class Player extends Entity {
         npc.takeDamage(FRET_DAMAGE);
     }
 
-    public void kick (NPC npc) {
-
-    }
-
-    public void useWeaponOnNPC(Weapon weapon, NPC npc) {
-        //kolla så NPC står inom räckhåll
-        int damage = weapon.attackDamage();
+    public void useWeaponOnNPC(NPC npc) {
+        if (isNPCOutOfReach(npc)) {
+            throw new IllegalArgumentException("NPC out of reach");
+        }
+        int damage = activeWeapon.attackDamage();
         npc.takeDamage(damage);
     }
 
     public void die() {
+        isDead = true;
         restart();
     }
 
@@ -211,9 +229,6 @@ public class Player extends Entity {
         return magicRing;
     }
 
-    public void useDoor() {
-    }
-
     public void restart() {
         health = 100;
         mana = 100;
@@ -230,6 +245,22 @@ public class Player extends Entity {
         return this.trade;
     }
 
+    public void chooseTrade(TradeChoice tradeChoice) {
+        switch (tradeChoice) {
+            case BUILDER -> this.trade = new Builder(this);
+            case STORYTELLER -> this.trade = new Storyteller(this);
+            case CIRCUS_ARTIST -> this.trade = new CircusArtist(this);
+        }
+    }
+
+    public void chooseRace(RaceChoice raceChoice) {
+        switch (raceChoice) {
+            case BLACK_RAT -> this.race = new BlackRat(this);
+            case BROWN_RAT -> this.race = new BrownRat(this);
+            case WHITE_RAT -> this.race = new WhiteRat(this);
+        }
+    }
+/*
     public void chooseTrade(String tradeName) {
         switch (tradeName.toUpperCase()) {
             case "BUILDER" -> this.trade = new Builder(this);
@@ -245,5 +276,7 @@ public class Player extends Entity {
             case "WHITE RAT" -> this.race = new WhiteRat(this);
         }
     }
+
+ */
 
 }
