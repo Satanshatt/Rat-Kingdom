@@ -2,11 +2,12 @@ import java.awt.*;
 
 public class Player extends Entity {
 
-    private static final int START_POS_X = 5;
-    private static final int START_POS_Y = 5;
+    private static final int START_POS_X = 1;
+    private static final int START_POS_Y = 1;
     private static final int FRET_DAMAGE = 2;
     private static final int XP_KILLING_BONUS = 10;
     private static final int XP_MAX_VALUE = 100;
+    private static final int MANA_BONUS = 15;
 
     private int health;
     private int mana;
@@ -53,6 +54,7 @@ public class Player extends Entity {
         return this.intelligence;
     }
 
+    //Testad
     public int getXp() {
         return this.xp;
     }
@@ -73,6 +75,10 @@ public class Player extends Entity {
         return this.magicRing;
     }
 
+    public Race getRace () {
+        return this.race;
+    }
+
     public void increaseHealth(int addedHealth) {
         if (addedHealth < 0)
             throw new IllegalArgumentException("Negative input not possible");
@@ -82,10 +88,6 @@ public class Player extends Entity {
 
     public void setActiveWeapon(Weapon weapon) {
         this.activeWeapon = weapon;
-    }
-
-    public void increaseMana(int mana) {
-        this.mana = mana;
     }
 
     public void increaseStrength(int strength) {
@@ -107,25 +109,15 @@ public class Player extends Entity {
         }
     }
 
+    public void increaseMana(int mana) {
+        this.mana = mana;
+    }
+
     public void increaseLevel() {
         this.level = level + 1;
-    }
-/*
-    public void killNPCWithWeapon(NPC npc, Weapon weapon) {
-        while (npc.getHealth() > 0)
-            useWeaponOnNPC(weapon, npc);
-        if (npc.getHealth() <= 0)
-            increaseXp(XP_KILLING_BONUS);
-    }
+        this.mana = mana + MANA_BONUS;
 
-    public void killNPCWithoutWeapon(NPC npc) {
-        while (npc.getHealth() > 0)
-            fret(npc);
-        if (npc.getHealth() <= 0)
-            increaseXp(XP_KILLING_BONUS);
     }
-
- */
 
     public void damagePlayer(int damage) {
         this.health = health - damage;
@@ -142,6 +134,10 @@ public class Player extends Entity {
                 fret(npc);
             }
         }
+        if(npc.getHealth() < 0) {
+            this.increaseXp(XP_KILLING_BONUS);
+            //npc.die();
+        }
     }
 
     public void move(Room room, Direction direction) {
@@ -149,16 +145,16 @@ public class Player extends Entity {
         int newYPos = this.getPosY();
         switch(direction) {
             case LEFT -> {
-                newYPos -= 1;
-            }
-            case RIGHT -> {
-                newYPos += 1;
-            }
-            case UPWARDS -> {
                 newXPos -= 1;
             }
-            case DOWNWARDS -> {
+            case RIGHT -> {
                 newXPos += 1;
+            }
+            case UPWARDS -> {
+                newYPos += 1;
+            }
+            case DOWNWARDS -> {
+                newYPos -= 1;
             }
         }
 

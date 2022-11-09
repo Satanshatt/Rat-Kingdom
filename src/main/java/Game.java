@@ -22,14 +22,19 @@ public class Game {
                 Command userCommand = userInput.getPlayerAction();
                 switch (userCommand) {
                     case MOVE:
-                        player.move(currentRoom, userInput.getDirection());
+                        try {
+                            player.move(currentRoom, userInput.getDirection());
+                        } catch (Exception e) {
+                            System.out.println("You cannot go there!");
+                        }
+
                         //npc.move();
                     case ATTACK:
                         //player.attack(NPC npc, userInput.)
                     case TRADE:
                     case PICK_UP_ITEM:
-                        PickUpChoice choice = userInput.getPickUpChoice();
-                        if(choice.equals(PickUpChoice.YES))
+                        //PickUpChoice choice = userInput.getPickUpChoice();
+                        //if(choice.equals(PickUpChoice.YES))
                             //player.pickUpWeapon();
                         break;
                     case ENTER_NEXT_ROOM:

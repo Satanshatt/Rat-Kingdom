@@ -17,7 +17,7 @@ class TradeTest {
         assertEquals("Storyteller", tradeStoryteller.getName());
 
     }
-
+/*
     @Test
     public void choosingTradeBuilder(){
         Player player = new Player();
@@ -45,4 +45,6 @@ class TradeTest {
         player.chooseTrade("Builder");
         assertThat(12, is(equalTo(player.getStrength())));
     }
+
+ */
 }
