@@ -21,6 +21,16 @@ public class PlayerTest {
     private static final int MAP_HEIGHT = 20;
 
     @Test
+    public void increase_Xp_Success () {
+        Player player = new Player();
+        int xpBefore = player.getXp();
+        player.increaseXp(10);
+        int xpAfter = player.getXp();
+       // assertTrue(b);
+
+    }
+
+    @Test
     public void player_defaultValue_Is_Correct () {
         Player player = new Player();
         assertEquals(DEFAULT_VALUE_HEALTH, player.getHealth());
@@ -35,15 +45,13 @@ public class PlayerTest {
     }
 
     @Test
-    public void player_Moves () {
+    public void player_Moves_One_Step_To_Right () {
         Player player = new Player();
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
 
         int xBefore = player.getPosX();
-      //  player.move(room, START_POS_X + 1, START_POS_Y);
+        player.move(room, Direction.RIGHT);
         int xAfter = player.getPosX();
-
-        System.out.println("Before: " + xBefore + "after: " + xAfter);
 
         assertTrue(xBefore != xAfter);
     }
@@ -55,7 +63,7 @@ public class PlayerTest {
             public void execute() throws Throwable {
                 Player player = new Player();
                 Room room = null;
-                //player.move(room, START_POS_X + 1, START_POS_Y);
+                player.move(room, Direction.UPWARDS);
             }
         });
     }
@@ -69,11 +77,11 @@ public class PlayerTest {
                 NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
                 Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
 
-                npc.setPosX(2);
-                npc.setPosY(2);
+                npc.setPosX(START_POS_X);
+                npc.setPosY(START_POS_Y+1);
                 room.addEntity(npc);
 
-                //player.move(room, 2, 2);
+                player.move(room, Direction.UPWARDS);
             }
         });
     }
@@ -94,11 +102,11 @@ public class PlayerTest {
     @Test
     public void player_Use_Door () {}
 
+    //funkar ej ännu pga av npc-kordinater
     @Test
     public void player_Fret_NPC () {
         Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        npc.setPosX(npc.getPosX()+1);
         int npcStartDamage = npc.getHealth();
         player.fret(npc);
         int npcDamageAfterAttack = npc.getHealth();
@@ -111,10 +119,9 @@ public class PlayerTest {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                Weapon weapon = Mockito.mock(Weapon.class, Mockito.CALLS_REAL_METHODS);
                 NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
                 npc.setPosX(START_POS_X + 3);
-                player.useWeaponOnNPC(weapon, npc);
+                player.useWeaponOnNPC(npc);
             }
         });
     }
@@ -195,26 +202,16 @@ public class PlayerTest {
 
     }
 
+    //Går ej igenom pga NPC kordinater är 0,0
     @Test
-    public void kill_NPC_With_Weapon_Increase_Xp () {
-        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        Player player = new Player();
-        Weapon sword = new Sword();
-
-        int xPBefore = player.getXp();
-        player.killNPCWithWeapon(npc, sword);
-        int xPAfter = player.getXp();
-
-        assertTrue(xPBefore < xPAfter);
-    }
-
-    @Test
-    public void kill_NPC_Without_Weapon_And_Increase_Xp () {
+    public void kill_NPC_With_fret_And_Increase_Xp () {
         Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
 
         int xPBefore = player.getXp();
-        player.killNPCWithoutWeapon(npc);
+        while(!npc.isDead()) {
+            player.attack(npc, AttackChoice.FRET);
+        }
         int xPAfter = player.getXp();
 
         assertTrue(xPBefore < xPAfter);
@@ -260,7 +257,7 @@ public class PlayerTest {
     public void player_Choose_Trade_Builder () {
         Player player = new Player();
         Trade builder = new Builder(player);
-        player.chooseTrade("Builder");
+        player.chooseTrade(TradeChoice.BUILDER);
         assertEquals(builder.getName(), player.getTrade().getName());
     }
 
@@ -268,7 +265,7 @@ public class PlayerTest {
     public void player_Choose_Trade_CircusArtist () {
         Player player = new Player();
         Trade circusArtist = new CircusArtist(player);
-        player.chooseTrade("Circus artist");
+        player.chooseTrade(TradeChoice.CIRCUS_ARTIST);
         assertEquals(circusArtist.getName(), player.getTrade().getName());
     }
 
@@ -276,7 +273,7 @@ public class PlayerTest {
     public void player_Choose_Trade_Storyteller () {
         Player player = new Player();
         Trade storyteller = new Storyteller(player);
-        player.chooseTrade("Storyteller");
+        player.chooseTrade(TradeChoice.STORYTELLER);
         assertEquals(storyteller.getName(), player.getTrade().getName());
     }
 
@@ -284,7 +281,7 @@ public class PlayerTest {
     public void player_Choose_Race_BrownRat () {
         Player player = new Player();
         Race brownRat = new BrownRat(player);
-        player.chooseRace("brown rat");
+        player.chooseRace(RaceChoice.BROWN_RAT);
         assertEquals(brownRat.getName(), player.getRace().getName());
     }
 
@@ -292,7 +289,7 @@ public class PlayerTest {
     public void player_Choose_Race_WhiteRat () {
         Player player = new Player();
         Race whiteRat = new WhiteRat(player);
-        player.chooseRace("white rat");
+        player.chooseRace(RaceChoice.WHITE_RAT);
         assertEquals(whiteRat.getName(), player.getRace().getName());
     }
 
@@ -300,7 +297,7 @@ public class PlayerTest {
     public void player_Choose_Race_BlackRat () {
         Player player = new Player();
         Race blackRat = new BlackRat(player);
-        player.chooseRace("black rat");
+        player.chooseRace(RaceChoice.BLACK_RAT);
         assertEquals(blackRat.getName(), player.getRace().getName());
     }
 

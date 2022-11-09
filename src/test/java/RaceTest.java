@@ -12,8 +12,7 @@ public class RaceTest {
         assertEquals("Brown rat", raceBrownRat.getName());
         assertEquals("White rat", raceWhiteRat.getName());
     }
-
-
+/*
     @Test
     public void choosingBlackRat(){
         Player player = new Player();
@@ -35,4 +34,6 @@ public class RaceTest {
         player.chooseRace("White rat");
         assertEquals(120, player.getMana());
     }
+
+ */
 }
