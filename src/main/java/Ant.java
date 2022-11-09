@@ -1,6 +1,6 @@
-public class Ant extends Fiend{
-    Ant(String name, String type, int health, int damage, int size, int level, int posX, int posY) {
-        super(name, type, health, damage, size, level, posX, posY, direction);
+public class Ant extends Enemy{
+    Ant(String name, int health, int damage, boolean direction, String type, int posX, int posY) {
+        super(name, health, damage, direction, type, posX, posY);
     }
 
     boolean justWentRight = false;
@@ -11,10 +11,10 @@ public class Ant extends Fiend{
     @Override
     public void attackPlayer(Player player) {
         if(this.isPlayerWithinReach(player)){
-            player.playerTakesDamage(this.damage);
+            player.damagePlayer(this.getDamage());
             System.out.println("An ant bit you!");
         } else {
-            return; //Kanske göra annorlunda?
+            System.out.println("The ant missed when attacking!");
         }
     }
 
@@ -54,6 +54,6 @@ public class Ant extends Fiend{
                 justWentRight = true;
             }
 
-        } while(this.health >= 0);
+        } while(this.getHealth() >= 0);
     }
 }

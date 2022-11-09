@@ -2,23 +2,19 @@ import java.util.Random;
 
 abstract class NPC extends Entity{
 
-    String name = "";
-    String type = "";
-    int size = 2;
-    int damage = 2;
-    int health = 2;
-    int level = 2;
-    static boolean direction = false;
+    private String name;
+    private int damage;
+    private int health;
+    private static boolean direction = false;
 
-    NPC(String name, String type, int health, int damage, int size, int level, int posX, int posY, boolean direction) {
+    NPC(String name, int damage, int health, boolean direction, String type, int posX, int posY) {
         super(type, posX, posY);
+
         this.name = name;
-        this.type = type;
-        this.health = health;
         this.damage = damage;
-        this.size = size;
-        this.level = level;
-        this.direction = direction;
+        this.health = health;
+        this.direction = false;
+
     }
 
     public abstract void attackEnemy();
@@ -100,12 +96,12 @@ abstract class NPC extends Entity{
         }
     }
 
+    public void damagePlayer(Player player) {
+        player.damagePlayer(this.damage);
+    }
+
         public String getName () {
             return name;
-        }
-
-        public int getSize () {
-            return size;
         }
 
         public int getDamage () {
@@ -116,8 +112,8 @@ abstract class NPC extends Entity{
             return health;
         }
 
-        public int getLevel () {
-            return level;
+        public boolean getDirection () {
+        return direction;
         }
 
         public void setHealth(int newHealth){
@@ -128,28 +124,12 @@ abstract class NPC extends Entity{
             this.name = newName;
         }
 
-        public void setLevel(int newLevel){
-            this.level = newLevel;
-        }
-
-        public void setType(String newType){
-            this.type = newType;
-        }
-
-        public void setSize(int newSize){
-            this.size = newSize;
-        }
-
         public void setDamage(int newDamage){
             this.damage = newDamage;
         }
 
+        public void setDirection(boolean newDirection) {
+        this.direction = newDirection;
+        }
 
-    public int damagePlayer(Player player) {
-        int playerHealth = player.getHealth();
-        int NPCDamage = this.getDamage();
-        playerHealth = playerHealth - NPCDamage;
-        return playerHealth;
-
-    }
 }

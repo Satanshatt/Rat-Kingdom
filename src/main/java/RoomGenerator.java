@@ -82,17 +82,22 @@ public class RoomGenerator {
                 randomX = random.nextInt(width);
                 randomY = random.nextInt(height);
             }
-            npc = new Ant("Ant", "Ant", 10,10,10,1, randomX, randomY);
+
+            npc = new Ant("Ant", 100, 5, false, "Ant", 1, 1);
             npcs.add(npc);
+
         }
+
         return this;
+
     }
 
-    public RoomGenerator createBoss() {
-        Boss boss = new Boss("Boss", "boss", 50, 6, 1, 1, width/2, height-2);
+    public RoomGenerator createBoss(){
+        Boss boss = new Boss("Big Cat", 200, 10, false, "Boss", 1, 1);
         npcs.add(boss);
         return this;
     }
+
 
     public Room generate(){
         return new Room(tiles, npcs);

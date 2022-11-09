@@ -46,9 +46,7 @@ class NPCTest {
 
     @Test
     void damagePlayerTest(){
-        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        //npc.setDamage(DAMAGE);
-        //assertEquals(npc.damagePlayer(), DAMAGE);
+
     }
 
     @Test

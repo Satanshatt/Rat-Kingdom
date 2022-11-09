@@ -1,13 +1,13 @@
-public abstract class Rattlesnake extends Fiend{
-    Rattlesnake(String name, String type, int health, int damage, int size, int level, int posX, int posY) {
-        super(name, type, health, damage, size, level, posX, posY, direction);
+public class Rattlesnake extends Enemy{
+    Rattlesnake(String name, int health, int damage, boolean direction, String type, int posX, int posY) {
+        super(name, health, damage, direction, type, posX, posY);
     }
 
     @Override
     public void attackPlayer(Player player) {
         if(this.isPlayerWithinReach(player)){
-            player.playerTakesDamage(this.damage);
-            System.out.println("Rattlesnake bit you!");
+            player.damagePlayer(this.getDamage());
+            System.out.println("A rattlesnake bit you!");
         } else {
             return; //Kanske göra annorlunda?
         }
@@ -22,7 +22,7 @@ public abstract class Rattlesnake extends Fiend{
         boolean justWentDown = false;
 
         do{
-            if(direction == false) {
+            if(this.getDirection()) {
                 int xPosition = this.getPosX();
                 int yPosition = this.getPosY();
                 Tile currentTile = currentRoom.getTile(xPosition, yPosition);
@@ -40,10 +40,10 @@ public abstract class Rattlesnake extends Fiend{
                 }
 
                 if(yPosition == 0){
-                    direction = true;
+                    this.setDirection(true);
                 }
 
-            } else if (direction == true) {
+            } else if (!this.getDirection()) {
                 int xPosition = this.getPosX();
                 int yPosition = this.getPosY();
                 Tile currentTile = currentRoom.getTile(xPosition, yPosition);
@@ -62,11 +62,11 @@ public abstract class Rattlesnake extends Fiend{
 
                 this.moveRight(currentTile);
                 if(yPosition == heightOfRoom){
-                    direction = false;
+                    this.setDirection(false);
                 }
             }
 
-        } while(this.health >= 0);
+        } while(this.getHealth() >= 0);
 
     }
 }
