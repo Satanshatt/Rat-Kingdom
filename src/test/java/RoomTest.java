@@ -119,7 +119,7 @@ class RoomTest {
     public void newMap(){
         Map map = new Map();
         int counter = 0;
-        for(int i = 0;i<map.getRooms().size;i++){
+        for(int i = 0;i<map.getRooms().size();i++){
             counter++;
         }
 
