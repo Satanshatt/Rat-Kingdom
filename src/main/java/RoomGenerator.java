@@ -83,7 +83,7 @@ public class RoomGenerator {
                 randomY = random.nextInt(height);
             }
 
-            npc = new Enemy("Ant", "Ant", 10,10,10,1, randomX, randomY, true);
+            npc = new Ant("Ant", "Ant", 10,10,10,1, randomX, randomY);
             npcs.add(npc);
 
         }

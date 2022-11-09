@@ -7,40 +7,39 @@ public class Game {
     RoomGenerator roomGenerator = new RoomGenerator(10, 10);
     UserInput userInput = new UserInput();
 
+    Map map = new Map();
+
     Game() {
 
     }
 
     public void startGame(){
         player = userInput.createPlayer(); //skapa spelare mha metod från input
-        currentRoom = roomGenerator.fillRoom("ground").createWallsAndDoors().generate();
-        display();
+        for(int i = 0; i<map.getRooms().size();i++){
 
-        while(!player.isDead()){
-            while(true) {
-                display();
-                Command userCommand = userInput.getPlayerAction();
-                switch (userCommand) {
-                    case MOVE:
-                        try {
+            currentRoom = map.getRooms().get(i);
+
+            while(!player.isDead()){
+                while(true) {
+                    display();
+                    Command userCommand = userInput.getPlayerAction();
+                    switch (userCommand) {
+                        case MOVE:
                             player.move(currentRoom, userInput.getDirection());
-                        } catch (Exception e) {
-                            System.out.println("You cannot go there!");
-                        }
-
-                        //npc.move();
-                    case ATTACK:
-                        //player.attack(NPC npc, userInput.)
-                    case TRADE:
-                    case PICK_UP_ITEM:
-                        //PickUpChoice choice = userInput.getPickUpChoice();
-                        //if(choice.equals(PickUpChoice.YES))
-                            //player.pickUpWeapon();
-                        break;
-                    case ENTER_NEXT_ROOM:
-                    default:
-                        System.out.println("Please only type one letter! M, A, T or P.");
-                        break;
+                            //npc.move();
+                        case ATTACK:
+                            //player.attack(NPC npc, userInput.)
+                        case TRADE:
+                        case PICK_UP_ITEM:
+                            PickUpChoice choice = userInput.getPickUpChoice();
+                            if(choice.equals(PickUpChoice.YES))
+                                //player.pickUpWeapon();
+                                break;
+                        case ENTER_NEXT_ROOM:
+                        default:
+                            System.out.println("Please only type one letter! M, A, T or P.");
+                            break;
+                    }
                 }
             }
         }
@@ -48,7 +47,7 @@ public class Game {
     }
 
     public void display(){
-       System.out.print(this.currentRoom.generateRoomToShow(player));
+        System.out.print(this.currentRoom.generateRoomToShow(player));
     }
 
 }

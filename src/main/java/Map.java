@@ -4,7 +4,7 @@ public class Map {
 
     private static final int MAP_WIDTH = 20;
     private static final int MAP_HEIGHT = 20;
-    private ArrayList<Room> rooms = new ArrayList<>();
+    private ArrayList<Room> rooms;
     public Map(){
         this.rooms = this.generateMap();
     }
@@ -31,6 +31,10 @@ public class Map {
 
         return roomsToAdd;
 
+    }
+
+    public ArrayList<Room> getRooms(){
+        return rooms;
     }
 
 
