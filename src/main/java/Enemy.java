@@ -1,9 +1,9 @@
 
-public class Enemy extends NPC
+public abstract class Enemy extends NPC
  {
 
-  Enemy(String name, String type, int health, int damage, int size, int level, int posX, int posY, boolean direction) {
-   super(name, type, health, damage, size, level, posX, posY, direction);
+  Enemy(String name, int health, int damage, boolean direction, String type, int posX, int posY) {
+   super(name, health, damage, direction, type, posX, posY);
   }
 
   @Override
@@ -30,5 +30,6 @@ public class Enemy extends NPC
   public void spawn() {
   }
 
+  public abstract void attackPlayer(Player player);
  }
 

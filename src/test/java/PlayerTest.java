@@ -19,6 +19,7 @@ public class PlayerTest {
     private static final int NEGATIVE_INPUT = -1;
     private static final int MAP_WIDTH = 20;
     private static final int MAP_HEIGHT = 20;
+    private static final int HEALTH_MAX_VALUE = 100;
 
     @Test
     public void increase_Xp_Success () {

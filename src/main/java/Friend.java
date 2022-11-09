@@ -1,8 +1,8 @@
 public class Friend extends NPC{
 
 
-    Friend(String name, String type, int health, int damage, int size, int level, int posX, int posY) {
-        super(name, type, health, damage, size, level, posX, posY, direction);
+    Friend(String name, int health, int damage, boolean direction, String type, int posX, int posY) {
+        super(name, health, damage, direction, type, posX, posY);
     }
 
     public void followPlayer (Player player, int steps){

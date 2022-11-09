@@ -118,7 +118,7 @@ public class Player extends Entity {
 
     }
 
-    public void damagePlayer(int damage) {
+    public void damagePlayer(int damage) { // playerTakesDamage istället kanske
         this.health = health - damage;
         if (this.health <= 0)
             die();
