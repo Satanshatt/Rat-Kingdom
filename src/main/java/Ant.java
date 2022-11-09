@@ -14,7 +14,7 @@ public class Ant extends Fiend{
             player.damagePlayer(this.damage);
             System.out.println("An ant bit you!");
         } else {
-            return; //Kanske göra annorlunda?
+            System.out.println("The ant missed when attacking!");
         }
     }
 

@@ -13,6 +13,7 @@ public class RaceTest {
         assertEquals("White rat", raceWhiteRat.getName());
     }
 
+
     @Test
     public void choosingBlackRat(){
         Player player = new Player();

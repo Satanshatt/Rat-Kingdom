@@ -1,5 +1,3 @@
-import java.awt.*;
-
 public class Player extends Entity {
 
     private static final int START_POS_X = 5;
@@ -20,6 +18,7 @@ public class Player extends Entity {
     private MagicRing magicRing;
     private Trade trade;
     private Race race;
+    //private boolean isDead;
 
 
     public Player() {
@@ -61,7 +60,7 @@ public class Player extends Entity {
         return this.level;
     }
 
-    public boolean isDead () {
+    public boolean isDead(Player player) {
         return isDead;
     }
 
@@ -279,5 +278,10 @@ public class Player extends Entity {
     }
 
  */
+
+    public boolean isDead(){
+        die();
+        return true;
+    }
 
 }

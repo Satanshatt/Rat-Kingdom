@@ -163,7 +163,6 @@ public class PlayerTest {
         assertTrue(playerStartHealth > playerHealthAfterAttack);
     }
 
-    /*
     @Test
     public void add_Over_Health_Maxvalue_Health_Value_Is_Maxvalue () {
         Player player = new Player();
@@ -172,10 +171,11 @@ public class PlayerTest {
     }
 
 
-     */
+
     /*
     När spelaren dör startar man om på ruta ett igen, dvs tillbaka till nivå 1.
      */
+
     @Test
     public void health_Goes_Under_Zero_Player_Dies () {
         Player player = new Player();

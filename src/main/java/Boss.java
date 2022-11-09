@@ -4,4 +4,6 @@ public class Boss extends Enemy{
         super(name, type, health, damage, size, level, posX, posY, direction);
     }
 
+
+
 }

@@ -1,4 +1,4 @@
-public abstract class Rattlesnake extends Fiend{
+public class Rattlesnake extends Fiend{
     Rattlesnake(String name, String type, int health, int damage, int size, int level, int posX, int posY) {
         super(name, type, health, damage, size, level, posX, posY, direction);
     }
@@ -7,7 +7,7 @@ public abstract class Rattlesnake extends Fiend{
     public void attackPlayer(Player player) {
         if(this.isPlayerWithinReach(player)){
             player.damagePlayer(this.damage);
-            System.out.println("Rattlesnake bit you!");
+            System.out.println("A rattlesnake bit you!");
         } else {
             return; //Kanske göra annorlunda?
         }
