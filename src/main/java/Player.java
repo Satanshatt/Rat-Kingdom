@@ -2,11 +2,12 @@ import java.awt.*;
 
 public class Player extends Entity {
 
-    private static final int START_POS_X = 1;
-    private static final int START_POS_Y = 1;
+    private static final int START_POS_X = 5; //Ställ fraaför dörren
+    private static final int START_POS_Y = 5;
     private static final int FRET_DAMAGE = 2;
     private static final int XP_KILLING_BONUS = 10;
     private static final int XP_MAX_VALUE = 100;
+    private static final int HEALTH_MAX_VALUE = 100;
     private static final int MANA_BONUS = 15;
 
     private int health;
@@ -84,6 +85,8 @@ public class Player extends Entity {
             throw new IllegalArgumentException("Negative input not possible");
         else
             this.health =+ addedHealth;
+        if(this.health > HEALTH_MAX_VALUE)
+            this.health = HEALTH_MAX_VALUE;
     }
 
     public void setActiveWeapon(Weapon weapon) {
@@ -105,7 +108,7 @@ public class Player extends Entity {
     public void increaseXp(int addXp) {
         this.xp =+ addXp;
         if (this.xp >= XP_MAX_VALUE) {
-            increaseLevel();
+            increaseLevel(); //Sätt tillbaka xp på 0
         }
     }
 
@@ -119,10 +122,10 @@ public class Player extends Entity {
 
     }
 
-    public void damagePlayer(int damage) {
+    public void playerTakesDamage(int damage) {
         this.health = health - damage;
         if (this.health <= 0)
-            die();
+            this.die();
     }
 
     public void attack (NPC npc, AttackChoice attackChoice) {
@@ -151,10 +154,10 @@ public class Player extends Entity {
                 newXPos += 1;
             }
             case UPWARDS -> {
-                newYPos += 1;
+                newYPos -= 1;
             }
             case DOWNWARDS -> {
-                newYPos -= 1;
+                newYPos += 1;
             }
         }
 
@@ -168,7 +171,7 @@ public class Player extends Entity {
         }
     }
 
-    private boolean isNPCOutOfReach(NPC npc) {
+    private boolean isNPCOutOfReach(NPC npc) { //within reach
         int npcPosX = npc.posX;
         int npcPosY = npc.posY;
         int playerPosX = this.posX;
@@ -186,7 +189,7 @@ public class Player extends Entity {
 
     public void fret(NPC npc) {
         if (isNPCOutOfReach(npc)) {
-            throw new IllegalArgumentException("NPC out of reach");
+            throw new IllegalArgumentException("Enemy out of reach");
         }
         npc.takeDamage(FRET_DAMAGE);
     }
@@ -205,11 +208,8 @@ public class Player extends Entity {
     }
 
     public void pickUpWeapon(Weapon weapon) {
-        //Kolla om en npc har dött (då finns vapen att hämta)
-        if (weapon.getWeaponLevel() <= this.level && this.activeWeapon == null || weapon.getWeaponLevel() > this.activeWeapon.getWeaponLevel()) {
             this.setActiveWeapon(weapon);
             weapon.setPlayer(this);
-        }
     }
 
     public void pickUpMagicRing(MagicRing magicRing) {
@@ -236,6 +236,7 @@ public class Player extends Entity {
         this.posX = START_POS_X;
         this.posY = START_POS_Y;
         level = 1;
+        isDead = false;
     }
 
     public Trade getTrade() {
@@ -257,23 +258,4 @@ public class Player extends Entity {
             case WHITE_RAT -> this.race = new WhiteRat(this);
         }
     }
-/*
-    public void chooseTrade(String tradeName) {
-        switch (tradeName.toUpperCase()) {
-            case "BUILDER" -> this.trade = new Builder(this);
-            case "CIRCUS ARTIST" -> this.trade = new CircusArtist(this);
-            case "STORYTELLER" -> this.trade = new Storyteller(this);
-        }
-    }
-
-    public void chooseRace(String raceName) {
-        switch (raceName.toUpperCase()) {
-            case "BLACK RAT" -> this.race = new BlackRat(this);
-            case "BROWN RAT" -> this.race = new BrownRat(this);
-            case "WHITE RAT" -> this.race = new WhiteRat(this);
-        }
-    }
-
- */
-
 }

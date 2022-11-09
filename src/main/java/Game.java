@@ -31,8 +31,7 @@ public class Game {
                             //player.attack(NPC npc, userInput.)
                         case TRADE:
                         case PICK_UP_ITEM:
-                            PickUpChoice choice = userInput.getPickUpChoice();
-                            if(choice.equals(PickUpChoice.YES))
+                            if(userInput.getPickUpChoice().equals(PickUpChoice.YES))
                                 //player.pickUpWeapon();
                                 break;
                         case ENTER_NEXT_ROOM:

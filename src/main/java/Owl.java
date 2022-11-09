@@ -38,7 +38,7 @@ public class Owl extends Fiend{
 
     @Override
     public void attackPlayer(Player player) {
-        player.damagePlayer(this.getDamage());
+        player.playerTakesDamage(this.getDamage());
         System.out.println("An owl attacked you!");
     }
 }

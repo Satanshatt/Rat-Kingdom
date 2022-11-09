@@ -16,6 +16,7 @@ class RoomTest {
     void setup(){
 
     }
+
     @Test
     public void correctSizeOfRoom(){
         RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
@@ -35,6 +36,7 @@ class RoomTest {
             }
         }
     }
+
     @Test
     public void testGetTileCorrectPosition(){
         RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
@@ -122,7 +124,6 @@ class RoomTest {
         for(int i = 0;i<map.getRooms().size();i++){
             counter++;
         }
-
         assertEquals(5,counter);
 
     }

@@ -1,3 +1,4 @@
+
 public class CircusArtist extends Trade{
     public static final String NAME = "Circus artist";
     CircusArtist(Player player) {

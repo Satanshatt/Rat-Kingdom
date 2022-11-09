@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class PlayerTest {
 
-    private static final int START_POS_X = 1;
-    private static final int START_POS_Y = 1;
+    private static final int START_POS_X = 5;
+    private static final int START_POS_Y = 5;
     private static final int DEFAULT_VALUE_HEALTH = 100;
     private static final int DEFAULT_VALUE_MANA = 100;
     private static final int DEFAULT_VALUE_STRENGTH = 10;
@@ -19,6 +19,7 @@ public class PlayerTest {
     private static final int NEGATIVE_INPUT = -1;
     private static final int MAP_WIDTH = 20;
     private static final int MAP_HEIGHT = 20;
+    private static final int HEALTH_MAX_VALUE = 100;
 
     @Test
     public void increase_Xp_Success () {
@@ -54,6 +55,18 @@ public class PlayerTest {
         int xAfter = player.getPosX();
 
         assertTrue(xBefore != xAfter);
+    }
+
+    @Test
+    public void player_Moves_One_Step_Upwards () {
+        Player player = new Player();
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+
+        int yBefore = player.getPosY();
+        player.move(room, Direction.UPWARDS);
+        int yAfter = player.getPosY();
+
+        assertTrue(yBefore != yAfter);
     }
 
     @Test
@@ -108,6 +121,8 @@ public class PlayerTest {
         Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
         int npcStartDamage = npc.getHealth();
+        npc.setPosY(START_POS_Y);
+        npc.setPosX(START_POS_X+1);
         player.fret(npc);
         int npcDamageAfterAttack = npc.getHealth();
         assertTrue(npcStartDamage > npcDamageAfterAttack);
@@ -139,22 +154,6 @@ public class PlayerTest {
         });
     }
 
-    //Kommer en npc kunna möta en npc som inte är samma level? Testa i npc-klassen?
-    @Test
-    public void player_Level_And_NPC_Level_Not_The_Same_Error () {
-        assertThrows(IllegalArgumentException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                Player player = new Player();
-                NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-                player.increaseLevel();
-                npc.setPosX(START_POS_X+1);
-                npc.setPosY(START_POS_Y);
-                player.fret(npc);
-            }
-        });
-    }
-
     //Ej klar, behöver metod i NPC som skadar en player
     @Test
     public void player_Gets_Hurt_By_NPC () {
@@ -170,16 +169,13 @@ public class PlayerTest {
         assertTrue(playerStartHealth > playerHealthAfterAttack);
     }
 
-    /*
     @Test
-    public void add_Over_Health_Maxvalue_Health_Value_Is_Maxvalue () {
+    public void add_Over_Health_Maxvalue () {
         Player player = new Player();
         player.increaseHealth(HEALTH_MAX_VALUE + 1);
         assertEquals(HEALTH_MAX_VALUE, player.getHealth());
     }
 
-
-     */
     /*
     När spelaren dör startar man om på ruta ett igen, dvs tillbaka till nivå 1.
      */
@@ -188,7 +184,7 @@ public class PlayerTest {
         Player player = new Player();
         player.increaseLevel();
         int higherLevel = player.getLevel();
-        player.damagePlayer(player.getHealth() + 1);
+        player.playerTakesDamage(player.getHealth() + 1);
         assertTrue(higherLevel > DEFAULT_VALUE_LEVEL);
     }
 
