@@ -5,4 +5,13 @@ public class Companion extends Friend{
         super(name, health, damage, direction, type, posX, posY);
     }
 
+    @Override
+    public void attack(Player player) {
+
+    }
+
+    @Override
+    public void moveForBattle(Room currentRoom) {
+
+    }
 }

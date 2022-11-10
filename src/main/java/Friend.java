@@ -1,4 +1,4 @@
-public class Friend extends NPC{
+public abstract class Friend extends NPC{
 
 
     Friend(String name, int health, int damage, boolean direction, String type, int posX, int posY) {
@@ -9,25 +9,10 @@ public class Friend extends NPC{
 
     }
 
-    public void attackEnemy(){
+    public abstract void attack(Player player);
 
-    };
+    public abstract void moveForBattle(Room currentRoom);
 
-    public void attackFriend(){
-
-    };
-
-    public void attackPlayer(){
-
-    }
-
-    public void moveForBattle() {
-
-    }
-
-    public void spawn() {
-
-    }
 
     public void moveNoThreat(){
 

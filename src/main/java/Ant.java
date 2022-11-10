@@ -1,6 +1,6 @@
 public class Ant extends Enemy{
-    Ant(String name, int health, int damage, boolean direction, String type, int posX, int posY) {
-        super(name, health, damage, direction, type, posX, posY);
+    Ant(int posX, int posY) {
+        super("Ant", 50, 5, false, "Enemy", posX, posY);
     }
 
     boolean justWentRight = false;
@@ -9,7 +9,7 @@ public class Ant extends Enemy{
     boolean justWentDown = false;
 
     @Override
-    public void attackPlayer(Player player) {
+    public void attack(Player player) {
         if(this.isPlayerWithinReach(player)){
             player.playerTakesDamage(this.getDamage());
             System.out.println("An ant bit you!");
