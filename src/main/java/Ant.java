@@ -1,6 +1,6 @@
 public class Ant extends Enemy{
     Ant(String name, int health, int damage, boolean direction, String type, int posX, int posY) {
-        super(name, health, damage, direction, type, posX, posY);
+        super("Ant", 50, 5, false, "Enemy", posX, posY);
     }
 
     boolean justWentRight = false;
