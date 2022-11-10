@@ -17,7 +17,7 @@ abstract class NPC extends Entity{
 
     }
 
-    public abstract void attackEnemy();
+    public abstract void attackEnemy(); //fixa alla attack-metoder
 
     public abstract void attackFriend();
 
@@ -26,14 +26,20 @@ abstract class NPC extends Entity{
     public abstract void moveForBattle();
 
     public boolean isPlayerWithinReach(Player player) {
-        if ((this.posY == player.posY) &&
-                ((this.posX == (player.posX++)) || (this.posX == player.posX--))) {
-            return true;
-        } else if ((this.posX == player.posX) &&
-                ((this.posY == (player.posY++ )) || (this.posY == player.posY--))) {
-            return true;
+
+        int npcPosX = this.posX;
+        int npcPosY = this.posY;
+        int playerPosX = player.posX;
+        int playerPosY = player.posY;
+
+        if ((npcPosY == playerPosY) &&
+                ((npcPosX == (playerPosX + 1)) || (npcPosX == playerPosX - 1))) {
+            return false;
+        } else if ((npcPosX == playerPosX) &&
+                ((npcPosY == (playerPosY + 1)) || (npcPosY == playerPosY - 1))) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     public boolean isDead() {
@@ -44,11 +50,11 @@ abstract class NPC extends Entity{
         }
     }
 
-    private void NPCDies(){
+    private void NPC_Dies_Test(){ // heta die istället?
 
     }
 
-    public void takeDamage(int damageFromPlayer){
+    public void takeDamage(int damageFromPlayer){ //NPC takes Damage
         int NPCOriginalHealth = this.getHealth();
         int newHealth = (NPCOriginalHealth - damageFromPlayer);
         this.setHealth(newHealth);
@@ -79,10 +85,10 @@ abstract class NPC extends Entity{
         }
     }
 
-    private boolean isLegalToMove(Tile newTile){
+    private boolean isLegalToMove(Tile newTile){ //Logiska fel, gör om! Fixa strukturen
         try {
             if (newTile == null) {
-                throw new IllegalStateException("Can not move outside of the room, move elsewhere");
+                throw new IllegalStateException("Can not move outside of the room, move elsewhere"); // ta bort SOP
             }
 
             if (newTile.isBlocked()) {
@@ -97,7 +103,7 @@ abstract class NPC extends Entity{
     }
 
     public void damagePlayer(Player player) {
-        player.damagePlayer(this.damage);
+        player.playerTakesDamage(this.damage);
     }
 
         public String getName () {

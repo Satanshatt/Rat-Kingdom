@@ -11,7 +11,7 @@ public class Ant extends Enemy{
     @Override
     public void attackPlayer(Player player) {
         if(this.isPlayerWithinReach(player)){
-            player.damagePlayer(this.getDamage());
+            player.playerTakesDamage(this.getDamage());
             System.out.println("An ant bit you!");
         } else {
             System.out.println("The ant missed when attacking!");

@@ -5,8 +5,14 @@ import org.mockito.Mockito;
 
 class NPCTest {
 
-    int XPOSITION = 2;
-    int YPOSITION = 4;
+    int Y_POSITION_SET_TO_FOUR = 4;
+    int Y_POSITION_NEGATIVE_OFF_ONE = 3;
+    int Y_POSITION_POSTIVE_OFF_ONE = 5;
+    int X_POSITION_SET_TO_FOUR = 4;
+    int X_POSITION_POSITIVE_OFF_ONE = 3;
+    int X_POSITION_NEGATIVE_OFF_ONE = 1;
+    int X_POSITION_SET_TO_TWO = 2;
+    int Y_POSITION_SET_TO_TWO = 2;
     int DAMAGE = 1;
     int NPC_HEALTH = 10;
     int NPC_LEVEL = 10;
@@ -15,24 +21,113 @@ class NPCTest {
     String NPC_TYPE = "NPC Type";
 
     @Test
-    void walkIntoWallTest(){
+    void walkIntoWallTest() {
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-
     }
 
     @Test
-    void isDeadTest() {
+    void player_Is_Within_Reach_On_X_Axis_NPC_One_Y_Coordinate_Positive_Off_One_Test(){
+        Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        boolean expected = true;
-        assertEquals(expected, npc.isDead());
+        player.setPosX(X_POSITION_SET_TO_FOUR);
+        player.setPosY(Y_POSITION_SET_TO_FOUR);
+        npc.setPosX(X_POSITION_SET_TO_FOUR);
+        npc.setPosY(Y_POSITION_POSTIVE_OFF_ONE);
+        assertTrue(npc.isPlayerWithinReach(player));
     }
 
     @Test
-    void spawnNPCControlledPositionTest() {
+    void player_Is_Within_Reach_On_X_Axis_One_Y_Coordinate_Negative_Off_Test(){
+        Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        /*npc.spawnNPC(XPOSITION, YPOSITION);
-        assertEquals(XPOSITION, npc.getPosX());
-        assertEquals(YPOSITION, npc.getPosY());*/
+        player.setPosX(4);
+        player.setPosY(2);
+        npc.setPosX(4);
+        npc.setPosY(1);
+        assertTrue(npc.isPlayerWithinReach(player));
+    }
+
+
+    @Test
+    void player_Is_Within_Reach_On_Y_Axis_One_X_Coordinate_Negative_Off_Test(){
+        Player player = new Player();
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        player.setPosX(X_POSITION_SET_TO_FOUR);
+        player.setPosY(Y_POSITION_SET_TO_FOUR);
+        npc.setPosX(X_POSITION_NEGATIVE_OFF_ONE);
+        npc.setPosY(Y_POSITION_SET_TO_FOUR);
+        assertTrue(npc.isPlayerWithinReach(player) == true);
+    }
+
+
+
+    @Test
+    void player_Is_Within_Reach_On_Y_Axis_One_X_Coordinate_Negative_OffTest(){
+        Player player = new Player();
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        player.setPosX(X_POSITION_SET_TO_FOUR);
+        player.setPosY(Y_POSITION_SET_TO_FOUR);
+        npc.setPosX(X_POSITION_NEGATIVE_OFF_ONE);
+        npc.setPosY(Y_POSITION_SET_TO_FOUR);
+        assertTrue(npc.isPlayerWithinReach(player) == true);
+    }
+
+    /*
+    @Test
+    void is_Dead_Should_Be_True_Test() {
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        npc.setHealth(-2);
+        assertTrue(true == npc.isDead());
+    }
+    */
+
+    /*
+    @Test
+    void is_Dead_Should_Be_False_Test(){
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        npc.setHealth(NPC_HEALTH);
+        assertFalse(npc.isDead() == false);
+    }
+    */
+
+    @Test
+    void npcShould_Move_Left_Test(){
+            NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+            Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, false);
+            npc.setPosX(X_POSITION_SET_TO_FOUR);
+            npc.moveLeft(tile);
+            int expectedXPosition = (X_POSITION_SET_TO_FOUR -1);
+            assertEquals(npc.getPosX(), expectedXPosition);
+    }
+
+    @Test
+    void npcShould_Move_Right_Test(){
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, false);
+        npc.setPosX(X_POSITION_SET_TO_FOUR);
+        npc.moveRight(tile);
+        int expectedXPosition = (X_POSITION_SET_TO_FOUR +1);
+        assertEquals(npc.getPosX(), expectedXPosition);
+    }
+
+    @Test
+    void npcShould_Move_Up_Test(){
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, false);
+        npc.setPosY(Y_POSITION_SET_TO_FOUR); //satt till 4
+        npc.moveUpwards(tile);
+        int expectedYPosition = (Y_POSITION_SET_TO_FOUR +1);
+        assertEquals(npc.getPosY(), expectedYPosition);
+    }
+
+    @Test
+    void npcShould_Move_Down_Tile_Not_Blocked_Test(){
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, false);
+        npc.setPosY(Y_POSITION_SET_TO_FOUR);
+        npc.moveDownwards(tile);
+        int expectedYPosition = (Y_POSITION_SET_TO_FOUR -1);
+        assertEquals(npc.getPosY(), expectedYPosition);
     }
 
     @Test
@@ -45,29 +140,22 @@ class NPCTest {
     }
 
     @Test
-    void damagePlayerTest(){
+    void damagePlayerTest() {
+        Player player = new Player();
+        int playerHealth = player.getHealth();
+        int playerExpectedHealth = playerHealth - DAMAGE;
+        player.playerTakesDamage(this.DAMAGE);
+        int playerNewHealth = player.getHealth();
+        assertTrue(playerNewHealth == playerExpectedHealth);
 
     }
+
 
     @Test
     void getNameAndSetNameTest() {
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
         npc.setName(NPC_NAME);
         assertEquals(npc.getName(), NPC_NAME);
-    }
-
-    @Test
-    void getTypeAndSetTypeTest() {
-        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        npc.setType(NPC_TYPE);
-        assertEquals(npc.getType(), NPC_TYPE);
-    }
-
-    @Test
-    void getSizeAndSetSizeTest() {
-        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        npc.setSize(NPC_SIZE);
-        assertEquals(npc.getSize(), NPC_SIZE);
     }
 
     @Test
@@ -84,10 +172,4 @@ class NPCTest {
         assertEquals(npc.getHealth(), NPC_HEALTH);
     }
 
-    @Test
-    void getLevelAndSetLevelTest() {
-        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);npc.setType(NPC_TYPE);
-        npc.setLevel(NPC_LEVEL);
-        assertEquals(npc.getLevel(), NPC_LEVEL);
-    }
 }
