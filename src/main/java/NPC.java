@@ -14,7 +14,6 @@ abstract class NPC extends Entity{
         this.damage = damage;
         this.health = health;
         this.direction = false;
-
     }
 
     public abstract void attack(Player player); //fixa alla attack-metoder
@@ -30,12 +29,14 @@ abstract class NPC extends Entity{
 
         if ((npcPosY == playerPosY) &&
                 ((npcPosX == (playerPosX + 1)) || (npcPosX == playerPosX - 1))) {
-            return false;
-        } else if ((npcPosX == playerPosX) &&
-                ((npcPosY == (playerPosY + 1)) || (npcPosY == playerPosY - 1))) {
-            return false;
+            return true;
         }
-        return true;
+        System.out.println((npcPosY == playerPosY) + " " + ((npcPosX == (playerPosX + 1)) || (npcPosX == playerPosX - 1)));
+        if ((npcPosX == playerPosX) &&
+                ((npcPosY == (playerPosY + 1)) || (npcPosY == playerPosY - 1))) {
+            return true;
+        }
+        return false;
     }
 
     public boolean isDead() {

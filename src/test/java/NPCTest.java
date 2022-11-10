@@ -5,20 +5,14 @@ import org.mockito.Mockito;
 
 class NPCTest {
 
-    int Y_POSITION_SET_TO_FOUR = 4;
-    int Y_POSITION_NEGATIVE_OFF_ONE = 3;
-    int Y_POSITION_POSTIVE_OFF_ONE = 5;
-    int X_POSITION_SET_TO_FOUR = 4;
-    int X_POSITION_POSITIVE_OFF_ONE = 3;
-    int X_POSITION_NEGATIVE_OFF_ONE = 1;
-    int X_POSITION_SET_TO_TWO = 2;
-    int Y_POSITION_SET_TO_TWO = 2;
+    int FOUR = 4;
+    int THREE = 3;
+    int FIVE = 5;
+    int ONE = 1;
+    int TWO = 2;
     int DAMAGE = 1;
     int NPC_HEALTH = 10;
-    int NPC_LEVEL = 10;
-    int NPC_SIZE = 10;
     String NPC_NAME = "NPC Name";
-    String NPC_TYPE = "NPC Type";
 
     @Test
     void walkIntoWallTest() {
@@ -26,13 +20,37 @@ class NPCTest {
     }
 
     @Test
+    void player_Is_Not_Within_Reach_But_On_Same_Y_Axis_Test(){
+
+        Player player = new Player();
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        player.setPosX(TWO);
+        player.setPosY(FOUR);
+        npc.setPosX(FOUR);
+        npc.setPosY(FOUR);
+        assertFalse(npc.isPlayerWithinReach(player));
+    }
+
+    @Test
+    void player_Is_Not_Within_Reach_But_On_Same_X_Axis_Test(){
+
+        Player player = new Player();
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        player.setPosX(FOUR);
+        player.setPosY(TWO);
+        npc.setPosX(FOUR);
+        npc.setPosY(FOUR);
+        assertFalse(npc.isPlayerWithinReach(player));
+    }
+
+    @Test
     void player_Is_Within_Reach_On_X_Axis_NPC_One_Y_Coordinate_Positive_Off_One_Test(){
         Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        player.setPosX(X_POSITION_SET_TO_FOUR);
-        player.setPosY(Y_POSITION_SET_TO_FOUR);
-        npc.setPosX(X_POSITION_SET_TO_FOUR);
-        npc.setPosY(Y_POSITION_POSTIVE_OFF_ONE);
+        player.setPosX(FOUR);
+        player.setPosY(FOUR);
+        npc.setPosX(FOUR);
+        npc.setPosY(THREE);
         assertTrue(npc.isPlayerWithinReach(player));
     }
 
@@ -52,10 +70,10 @@ class NPCTest {
     void player_Is_Within_Reach_On_Y_Axis_One_X_Coordinate_Negative_Off_Test(){
         Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        player.setPosX(X_POSITION_SET_TO_FOUR);
-        player.setPosY(Y_POSITION_SET_TO_FOUR);
-        npc.setPosX(X_POSITION_NEGATIVE_OFF_ONE);
-        npc.setPosY(Y_POSITION_SET_TO_FOUR);
+        player.setPosX(FOUR);
+        player.setPosY(FOUR);
+        npc.setPosX(THREE);
+        npc.setPosY(FOUR);
         assertTrue(npc.isPlayerWithinReach(player) == true);
     }
 
@@ -65,10 +83,10 @@ class NPCTest {
     void player_Is_Within_Reach_On_Y_Axis_One_X_Coordinate_Negative_OffTest(){
         Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        player.setPosX(X_POSITION_SET_TO_FOUR);
-        player.setPosY(Y_POSITION_SET_TO_FOUR);
-        npc.setPosX(X_POSITION_NEGATIVE_OFF_ONE);
-        npc.setPosY(Y_POSITION_SET_TO_FOUR);
+        player.setPosX(FOUR);
+        player.setPosY(FOUR);
+        npc.setPosX(FIVE);
+        npc.setPosY(FOUR);
         assertTrue(npc.isPlayerWithinReach(player) == true);
     }
 
@@ -93,47 +111,47 @@ class NPCTest {
     @Test
     void npc_Should_Move_Left_Tile_Not_Blocked_Test(){
             NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-            Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, false);
-            npc.setPosX(X_POSITION_SET_TO_FOUR);
+            Tile tile = new Tile("Ground", TWO, TWO, false);
+            npc.setPosX(FOUR);
             npc.moveLeft(tile);
-            int expectedXPosition = (X_POSITION_SET_TO_FOUR -1);
+            int expectedXPosition = (FOUR -1);
             assertEquals(npc.getPosX(), expectedXPosition);
     }
 
     @Test
     void npc_Should_Move_Right_Tile_Not_Blocked_Test(){
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, false);
-        npc.setPosX(X_POSITION_SET_TO_FOUR);
+        Tile tile = new Tile("Ground", TWO, TWO, false);
+        npc.setPosX(FOUR);
         npc.moveRight(tile);
-        int expectedXPosition = (X_POSITION_SET_TO_FOUR +1);
+        int expectedXPosition = (FOUR +1);
         assertEquals(npc.getPosX(), expectedXPosition);
     }
 
     @Test
     void npc_Should_Move_Up_Tile_Not_Blocked_Test(){
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, false);
-        npc.setPosY(Y_POSITION_SET_TO_FOUR); //satt till 4
+        Tile tile = new Tile("Ground", TWO, TWO, false);
+        npc.setPosY(FOUR); //satt till 4
         npc.moveUpwards(tile);
-        int expectedYPosition = (Y_POSITION_SET_TO_FOUR +1);
+        int expectedYPosition = (FOUR +1);
         assertEquals(npc.getPosY(), expectedYPosition);
     }
 
     @Test
     void npc_Should_Move_Down_Tile_Not_Blocked_Test(){
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, false);
-        npc.setPosY(Y_POSITION_SET_TO_FOUR);
+        Tile tile = new Tile("Ground", TWO, TWO, false);
+        npc.setPosY(FOUR);
         npc.moveDownwards(tile);
-        int expectedYPosition = (Y_POSITION_SET_TO_FOUR -1);
+        int expectedYPosition = (FOUR -1);
         assertEquals(npc.getPosY(), expectedYPosition);
     }
 
     @Test
     void npc_Try_To_Move_Tile_Is_Blocked_Test(){
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, true);
+        Tile tile = new Tile("Ground", TWO, TWO, true);
         assertFalse(npc.checkIfLegalToMove(tile));
     }
 
