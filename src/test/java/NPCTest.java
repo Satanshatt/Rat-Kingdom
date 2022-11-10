@@ -56,19 +56,6 @@ class NPCTest {
         assertEquals(npc.getName(), NPC_NAME);
     }
 
-    @Test
-    void getTypeAndSetTypeTest() {
-        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        npc.setType(NPC_TYPE);
-        assertEquals(npc.getType(), NPC_TYPE);
-    }
-
-    @Test
-    void getSizeAndSetSizeTest() {
-        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        npc.setSize(NPC_SIZE);
-        assertEquals(npc.getSize(), NPC_SIZE);
-    }
 
     @Test
     void getDamageAndSetDamageTest() {
@@ -84,10 +71,4 @@ class NPCTest {
         assertEquals(npc.getHealth(), NPC_HEALTH);
     }
 
-    @Test
-    void getLevelAndSetLevelTest() {
-        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);npc.setType(NPC_TYPE);
-        npc.setLevel(NPC_LEVEL);
-        assertEquals(npc.getLevel(), NPC_LEVEL);
-    }
 }

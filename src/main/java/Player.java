@@ -81,8 +81,8 @@ public class Player extends Entity {
     }
 
     public void increaseHealth(int addedHealth) {
-        if (addedHealth < 0)
-            throw new IllegalArgumentException("Negative input not possible");
+        if (addedHealth <= 0)
+            throw new IllegalArgumentException("Input less or equal to 0 not possible");
         else
             this.health =+ addedHealth;
         if(this.health > HEALTH_MAX_VALUE)
@@ -90,30 +90,48 @@ public class Player extends Entity {
     }
 
     public void setActiveWeapon(Weapon weapon) {
+        if (weapon == null) {
+            throw new IllegalArgumentException("Weapon cannot be null");
+        }
         this.activeWeapon = weapon;
     }
 
     public void increaseStrength(int strength) {
-        this.strength = strength;
+        if (strength <= 0)
+            throw new IllegalArgumentException("Input less or equal to 0 not possible");
+        else
+            this.strength = strength;
     }
 
     public void increaseDexterity(int dexterity) {
-        this.dexterity = dexterity;
+        if (dexterity <= 0)
+            throw new IllegalArgumentException("Input less or equal to 0 not possible");
+        else
+            this.dexterity = dexterity;
     }
 
     public void increaseIntelligence(int intelligence) {
-        this.intelligence = intelligence;
+        if (intelligence <= 0)
+            throw new IllegalArgumentException("Input less or equal to 0 not possible");
+        else
+            this.intelligence = intelligence;
     }
 
     public void increaseXp(int addXp) {
-        this.xp =+ addXp;
+        if (strength <= 0)
+            throw new IllegalArgumentException("Input less or equal to 0 not possible");
+        else
+            this.xp =+ addXp;
         if (this.xp >= XP_MAX_VALUE) {
             increaseLevel(); //Sätt tillbaka xp på 0
         }
     }
 
     public void increaseMana(int mana) {
-        this.mana = mana;
+        if (strength <= 0)
+            throw new IllegalArgumentException("Input less or equal to 0 not possible");
+        else
+            this.mana = mana;
     }
 
     public void increaseLevel() {
@@ -123,6 +141,9 @@ public class Player extends Entity {
     }
 
     public void playerTakesDamage(int damage) {
+        if (damage < 0) {
+            throw new IllegalArgumentException("Negative damage not possible");
+        }
         this.health = health - damage;
         if (this.health <= 0)
             this.die();
@@ -139,7 +160,7 @@ public class Player extends Entity {
         }
         if(npc.getHealth() < 0) {
             this.increaseXp(XP_KILLING_BONUS);
-            //npc.die();
+            //npc.die()
         }
     }
 
@@ -171,7 +192,7 @@ public class Player extends Entity {
         }
     }
 
-    private boolean isNPCOutOfReach(NPC npc) { //within reach
+    public boolean isNPCWithinReach(NPC npc) { //within reach
         int npcPosX = npc.posX;
         int npcPosY = npc.posY;
         int playerPosX = this.posX;
@@ -179,23 +200,23 @@ public class Player extends Entity {
 
         if ((playerPosY == npcPosY) &&
                 ((playerPosX == (npcPosX + 1)) || (playerPosX == npcPosX - 1))) {
-            return false;
+            return true;
         } else if ((playerPosX == npcPosX) &&
                 ((playerPosY == (npcPosY + 1)) || (playerPosY == npcPosY - 1))) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     public void fret(NPC npc) {
-        if (isNPCOutOfReach(npc)) {
+        if (!isNPCWithinReach(npc)) {
             throw new IllegalArgumentException("Enemy out of reach");
         }
         npc.takeDamage(FRET_DAMAGE);
     }
 
     public void useWeaponOnNPC(NPC npc) {
-        if (isNPCOutOfReach(npc)) {
+        if (!isNPCWithinReach(npc)) {
             throw new IllegalArgumentException("NPC out of reach");
         }
         int damage = activeWeapon.attackDamage();

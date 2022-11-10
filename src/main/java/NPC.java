@@ -97,7 +97,7 @@ abstract class NPC extends Entity{
     }
 
     public void damagePlayer(Player player) {
-        player.damagePlayer(this.damage);
+        player.playerTakesDamage(this.damage);
     }
 
         public String getName () {
