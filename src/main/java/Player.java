@@ -80,6 +80,10 @@ public class Player extends Entity {
         return this.race;
     }
 
+    public Trade getTrade() {
+        return this.trade;
+    }
+
     public void increaseHealth(int addedHealth) {
         if (addedHealth <= 0)
             throw new IllegalArgumentException("Input less or equal to 0 not possible");
@@ -118,7 +122,7 @@ public class Player extends Entity {
     }
 
     public void increaseXp(int addXp) {
-        if (strength <= 0)
+        if (addXp <= 0)
             throw new IllegalArgumentException("Input less or equal to 0 not possible");
         else
             this.xp =+ addXp;
@@ -128,7 +132,7 @@ public class Player extends Entity {
     }
 
     public void increaseMana(int mana) {
-        if (strength <= 0)
+        if (mana <= 0)
             throw new IllegalArgumentException("Input less or equal to 0 not possible");
         else
             this.mana = mana;
@@ -234,17 +238,8 @@ public class Player extends Entity {
     }
 
     public void pickUpMagicRing(MagicRing magicRing) {
-        if (this.magicRing == null){
-            this.magicRing = magicRing;
-            magicRing.setPlayer(this);
-        } else {
-            this.magicRing = chooseRing(magicRing);
-            magicRing.setPlayer(this);
-        }
-    }
-
-    public MagicRing chooseRing(MagicRing magicRing){
-        return magicRing;
+        this.magicRing = magicRing;
+        magicRing.setPlayer(this);
     }
 
     public void restart() {
@@ -258,10 +253,6 @@ public class Player extends Entity {
         this.posY = START_POS_Y;
         level = 1;
         isDead = false;
-    }
-
-    public Trade getTrade() {
-        return this.trade;
     }
 
     public void chooseTrade(TradeChoice tradeChoice) {

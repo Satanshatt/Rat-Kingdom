@@ -31,7 +31,6 @@ public class PlayerTest {
         player.increaseXp(10);
         int xpAfter = player.getXp();
         assertTrue(xpBefore < xpAfter);
-
     }
 
     @Test
@@ -49,7 +48,6 @@ public class PlayerTest {
     }
 
     @Test
-
     public void Should_BeTrue_When_NPCIsWithinReach_OneXCoordinateAway (){
         Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
@@ -63,7 +61,6 @@ public class PlayerTest {
     }
 
     @Test
-
     public void Should_BeTrue_When_NPCIsWithinReach_OneYCoordinateAway (){
         Player player = new Player();
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
@@ -122,21 +119,6 @@ public class PlayerTest {
         assertThat(yAfter, is(equalTo(yBefore + 1)));
     }
 
-    /*
-    @Test
-    public void player_Moves_room_is_null_error () {
-        assertThrows(NullPointerException.class, new Executable() {
-            @Override
-            public void execute() throws Throwable {
-                Player player = new Player();
-                Room room = null;
-                player.move(room, Direction.UPWARDS);
-            }
-        });
-    }
-
-     */
-
     @Test
     public void Should_ThrowException_When_PlayerMovesToOccupiedCordinate () {
         assertThrows(IllegalArgumentException.class, new Executable() {
@@ -178,20 +160,20 @@ public class PlayerTest {
         assertTrue(higherLevel > DEFAULT_VALUE_LEVEL);
     }
 
-    //funkar ej ännu pga av npc-kordinater
     @Test
-    public void Should_GiveNPCDamage_When_PlayerFret () {
+    public void Should_DamageNPC_When_PlayerAttacksWithFret () {
         Player player = new Player();
-        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        npc.setHealth(10);
+        //NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        Enemy ant = new Ant(START_POS_X, START_POS_Y);
 
-        int npcStartDamage = npc.getHealth();
-        npc.setPosY(START_POS_Y);
-        npc.setPosX(START_POS_X+1);
-        player.fret(npc);
-        int npcDamageAfterAttack = npc.getHealth();
+        ant.setPosY(START_POS_Y);
+        ant.setPosX(START_POS_X + 1);
 
-        assertTrue(npcStartDamage > npcDamageAfterAttack);
+        int beforeAttack = ant.getHealth();
+        player.attack(ant, AttackChoice.FRET);
+        int afterAttack = ant.getHealth();
+
+        assertTrue(beforeAttack > afterAttack);
     }
 
     @Test
@@ -200,13 +182,13 @@ public class PlayerTest {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                player.playerTakesDamage(-10);
+                player.playerTakesDamage(NEGATIVE_INPUT);
             }
         });
     }
 
-    @Test //NPC out of range
-    public void Should_ThrowException_When_PlayerUseWeaponAndNPCIsOutOfRange () {
+    @Test
+    public void Should_ThrowException_When_PlayerUseWeapon_AndNPCIsOutOfRange () {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
@@ -219,7 +201,7 @@ public class PlayerTest {
     }
 
     @Test
-    public void Should_ThrowException_When_PlayerFretAndNPCIsOutOfRange () {
+    public void Should_ThrowException_When_PlayerFret_AndNPCIsOutOfRange () {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
@@ -234,11 +216,10 @@ public class PlayerTest {
     @Test
     public void Should_DamagePlayer_When_NPCAttacksPlayer () {
         Player player = new Player();
-        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        npc.setDamage(2);
+        Enemy ant = new Ant(START_POS_X, START_POS_Y);
 
         int playerStartHealth = player.getHealth();
-        npc.damagePlayer(player);
+        ant.damagePlayer(player);
         int playerHealthAfterAttack = player.getHealth();
 
         assertTrue(playerStartHealth > playerHealthAfterAttack);
@@ -251,10 +232,6 @@ public class PlayerTest {
         assertThat(player.getHealth(), is(equalTo(HEALTH_MAX_VALUE)));
     }
 
-    /*
-    När spelaren dör startar man om på ruta ett igen, dvs tillbaka till nivå 1.
-    Överflöd?
-     */
     @Test
     public void Should_KillPlayer_When_PlayersHealthGoesUnderZero () {
         Player player = new Player();
@@ -278,31 +255,26 @@ public class PlayerTest {
     @Test
     public void Should_DamageNPC_When_PlayerAttacksWithWeapon () {
         Player player = new Player();
-        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-        Weapon weapon = new Axe();
+        Enemy ant = new Ant(START_POS_X + 1, START_POS_Y);
+        Weapon axe = new Axe();
 
-        player.setActiveWeapon(weapon);
-        weapon.setPlayer(player);
+        player.setActiveWeapon(axe);
+        axe.setPlayer(player);
 
-        npc.setPosY(START_POS_Y);
-        npc.setPosX(START_POS_X + 1);
-        npc.setHealth(10);
-
-        int beforeAttack = npc.getHealth();
-        player.attack(npc, AttackChoice.WITH_WEAPON);
-        int afterAttack = npc.getHealth();
+        int beforeAttack = ant.getHealth();
+        player.attack(ant, AttackChoice.WITH_WEAPON);
+        int afterAttack = ant.getHealth();
 
         assertTrue(beforeAttack > afterAttack);
     }
 
     @Test
-
     public void Should_ThrowException_When_IntelligenceInputIsNegative () {
         assertThrows(IllegalArgumentException.class, new Executable() {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                player.increaseIntelligence(-10);
+                player.increaseIntelligence(NEGATIVE_INPUT);
             }
         });
     }
@@ -313,7 +285,7 @@ public class PlayerTest {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                player.increaseStrength(-10);
+                player.increaseStrength(NEGATIVE_INPUT);
             }
         });
     }
@@ -324,7 +296,7 @@ public class PlayerTest {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                player.increaseMana(-10);
+                player.increaseMana(NEGATIVE_INPUT);
             }
         });
     }
@@ -338,23 +310,24 @@ public class PlayerTest {
         assertThat(manaAfter, is(equalTo(manaBefore+MANA_BONUS)));
     }
 
-    //går aldrig in i while-loopen. Pga av isDead()?
     @Test
     public void Should_GivePlayerXP_When_PlayerKillsNPCWithFret () {
         Player player = new Player();
-        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        Enemy ant = new Ant(START_POS_X, START_POS_X);
 
-        npc.setPosX(START_POS_X);
-        npc.setPosY(START_POS_Y + 1);
+        ant.setPosX(START_POS_X);
+        ant.setPosY(START_POS_Y + 1);
 
+        int A = ant.getHealth();
         int xPBefore = player.getXp();
-        while(!npc.isDead()) {
-            player.attack(npc, AttackChoice.FRET);
+        while(!ant.isDead()) {
+            player.attack(ant, AttackChoice.FRET);
         }
         int xPAfter = player.getXp();
+
         assertThat(xPAfter, is(equalTo(xPBefore + XP_BONUS)));
 
-    } //Eller annat än xp
+    }
 
     @Test
     public void Should_UpgradeLevel_When_XPGoesOverMaxValue(){
@@ -368,10 +341,10 @@ public class PlayerTest {
     public void Should_ActivateWeapon_When_PickUpWeapon () {
         Player player = new Player();
         //Weapon weapon = Mockito.mock(Weapon.class, Mockito.CALLS_REAL_METHODS);
-        Weapon weapon = new Axe();
-        weapon.setPlayer(player);
-        player.pickUpWeapon(weapon);
-        assertEquals(weapon, player.getActiveWeapon());
+        Weapon axe = new Axe();
+        axe.setPlayer(player);
+        player.pickUpWeapon(axe);
+        assertEquals(axe, player.getActiveWeapon());
     }
 
     @Test
@@ -392,6 +365,17 @@ public class PlayerTest {
             public void execute() throws Throwable {
                 Player player = new Player();
                 player.increaseHealth(NEGATIVE_INPUT);
+            }
+        });
+    }
+
+    @Test
+    public void Should_ThrowException_When_XPInputIsNegative () {
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                Player player = new Player();
+                player.increaseXp(NEGATIVE_INPUT);
             }
         });
     }
@@ -462,6 +446,12 @@ public class PlayerTest {
         Race blackRat = new BlackRat(player);
         player.chooseRace(RaceChoice.BLACK_RAT);
         assertEquals(blackRat.getName(), player.getRace().getName());
+    }
+
+    @Test
+    public void Should_BeFalse_When_PlayerNotDead () {
+        Player player = new Player();
+        assertFalse(player.isDead());
     }
 
 
