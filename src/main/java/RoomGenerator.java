@@ -31,10 +31,10 @@ public class RoomGenerator {
         }
     }
 
-    public RoomGenerator fillRoom(String type){
+    public RoomGenerator fillRoom(){
         for(int x= 0;x<width; x++){
             for(int y= 0;y<height; y++){
-                tiles[x][y] = generateTile(type, x,y);
+                tiles[x][y] = generateTile("ground", x,y);
             }
         } return this;
     }

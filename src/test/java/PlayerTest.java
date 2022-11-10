@@ -79,7 +79,7 @@ public class PlayerTest {
     @Test
     public void Should_BeTrue_When_PlayerMoveOneStepRight () {
         Player player = new Player();
-        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
 
         int xBefore = player.getPosX();
         player.move(room, Direction.RIGHT);
@@ -90,7 +90,7 @@ public class PlayerTest {
     @Test
     public void Should_BeTrue_When_PlayerMoveOneStepLeft () {
         Player player = new Player();
-        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
 
         int xBefore = player.getPosX();
         player.move(room, Direction.LEFT);
@@ -101,7 +101,7 @@ public class PlayerTest {
     @Test
     public void Should_BeTrue_When_PlayerMoveOneStepUpwards () {
         Player player = new Player();
-        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
 
         int yBefore = player.getPosY();
         player.move(room, Direction.UPWARDS);
@@ -113,7 +113,7 @@ public class PlayerTest {
     @Test
     public void Should_BeTrue_When_PlayerMoveOneStepDownwards () {
         Player player = new Player();
-        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
 
         int yBefore = player.getPosY();
         player.move(room, Direction.DOWNWARDS);
@@ -144,7 +144,7 @@ public class PlayerTest {
             public void execute() throws Throwable {
                 Player player = new Player();
                 NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
-                Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+                Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
 
                 npc.setPosX(START_POS_X);
                 npc.setPosY(START_POS_Y-1);
@@ -161,7 +161,7 @@ public class PlayerTest {
             @Override
             public void execute() throws Throwable {
                 Player player = new Player();
-                Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+                Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
 
                 player.setPosY(1);
                 player.move(room, Direction.UPWARDS);
