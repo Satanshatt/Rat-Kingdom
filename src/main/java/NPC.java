@@ -31,7 +31,6 @@ abstract class NPC extends Entity{
                 ((npcPosX == (playerPosX + 1)) || (npcPosX == playerPosX - 1))) {
             return true;
         }
-        System.out.println((npcPosY == playerPosY) + " " + ((npcPosX == (playerPosX + 1)) || (npcPosX == playerPosX - 1)));
         if ((npcPosX == playerPosX) &&
                 ((npcPosY == (playerPosY + 1)) || (npcPosY == playerPosY - 1))) {
             return true;
