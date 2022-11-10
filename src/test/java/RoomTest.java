@@ -12,24 +12,41 @@ class RoomTest {
     private static final int MAP_HEIGHT = 20;
 
 
-    @BeforeEach
-    void setup(){
-
+    @Test
+    public void testCorrectSizeOfRoomX(){
+        RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
+        Room room = roomGen.fillRoom().generate();
+        int width = room.getWidth();
+        assertEquals(20, width);
     }
 
     @Test
-    public void correctSizeOfRoom(){
+    public void testCorrectSizeOfRoomY(){
         RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
-        Room room = roomGen.fillRoom("ground").generate();
-        int width = room.getWidth();
+        Room room = roomGen.fillRoom().generate();
         int height = room.getHeight();
-        assertEquals(20, width);
         assertEquals(20, height);
     }
 
     @Test
+    public void testFalseSizeOfRoomX(){
+        RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
+        Room room = roomGen.fillRoom().generate();
+        int width = room.getWidth();
+        assertFalse(width!=MAP_WIDTH);
+    }
+
+    @Test
+    public void testFalseSizeOfRoomY(){
+        RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
+        Room room = roomGen.fillRoom().generate();
+        int height = room.getWidth();
+        assertFalse(height!=MAP_HEIGHT);
+    }
+
+    @Test
     public void roomContainsTiles(){
-        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").generate();
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().generate();
         for(int x= 0;x<MAP_WIDTH-1; x++){
             for(int y= 0;y<MAP_HEIGHT-1; y++){
                 assertEquals("ground",room.getTile(x,y).getType());
@@ -40,7 +57,7 @@ class RoomTest {
     @Test
     public void testGetTileCorrectPositionX(){
         RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
-        Room room = roomGen.fillRoom("ground").generate();
+        Room room = roomGen.fillRoom().generate();
         Tile expectedTile = room.getTile(0,0);
         assertEquals(expectedTile.getPosX(), 0);
         assertEquals(expectedTile.getPosY(), 0);
@@ -49,7 +66,7 @@ class RoomTest {
     @Test
     public void testGetTileCorrectPositionY(){
         RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
-        Room room = roomGen.fillRoom("ground").generate();
+        Room room = roomGen.fillRoom().generate();
         Tile expectedTile = room.getTile(0,0);
         assertEquals(expectedTile.getPosY(), 0);
     }
@@ -57,7 +74,7 @@ class RoomTest {
     @Test
     public void testGetEntityAt(){
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
-                fillRoom("ground").createWallsAndDoors().generate();
+                fillRoom().createWallsAndDoors().generate();
         NPC npc = new Ant(1,1);
         room.addEntity(npc);
         NPC npcInRoom = room.getEntityAt(NPC.class, 1 ,1 );
@@ -66,9 +83,27 @@ class RoomTest {
     }
 
     @Test
+    public void testEntityPositionX(){
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
+                fillRoom().createWallsAndDoors().generate();
+        Entity entity = room.getEntityAt(Entity.class, 1 ,1 );
+        int posX = entity.getPosX();
+        assertEquals(1, posX);
+    }
+
+    @Test
+    public void testEntityPositionY(){
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
+                fillRoom().createWallsAndDoors().generate();
+        Entity entity = room.getEntityAt(Entity.class, 1 ,1 );
+        int posY = entity.getPosY();
+        assertEquals(1, posY);
+    }
+
+    @Test
     public void testGetTileCorrectType(){
         RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
-        Room room = roomGen.fillRoom("ground").generate();
+        Room room = roomGen.fillRoom().generate();
         String type = room.getTile(1,1).getType();
         assertEquals(type, "ground");
     }
@@ -76,7 +111,7 @@ class RoomTest {
 
     @Test
     public void createWallAroundEdges(){
-        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
         String wallTile = room.getTile(0,0).getType();
         String groundTile = room.getTile(1,1).getType();
         assertEquals("wall", wallTile);
@@ -85,7 +120,7 @@ class RoomTest {
 
     @Test
     public void createDoorsAtCorrectPosition(){
-        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom("ground").createWallsAndDoors().generate();
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
         String doorTile1 = room.getTile(0,(MAP_HEIGHT-1)/2).getType();
         String doorTile2 = room.getTile(MAP_WIDTH-1,(MAP_HEIGHT-1)/2).getType();
         assertEquals("door", doorTile1);
@@ -95,7 +130,7 @@ class RoomTest {
     @Test
     public void correctAmountOfEnemiesExist(){
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
-                fillRoom("ground").createWallsAndDoors().generateEnemies(4).generate();
+                fillRoom().createWallsAndDoors().generateEnemies(4).generate();
         int numEnemies = room.getSet().size();
         assertEquals(4, numEnemies);
     }
@@ -104,7 +139,7 @@ class RoomTest {
     public void obstaclesAreGenerated(){
         int counter = 0;
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
-                fillRoom("ground").createWallsAndDoors().generateObstacles(10).generate();
+                fillRoom().createWallsAndDoors().generateObstacles(10).generate();
 
         for(int x= 0;x<MAP_WIDTH-1; x++){
             for(int y= 0;y<MAP_HEIGHT-1; y++){
@@ -121,7 +156,7 @@ class RoomTest {
     @Test
     public void testObstacleCantBeCreatedInFrontOfDoor(){
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
-                fillRoom("ground").createWallsAndDoors().generateObstacles(322).generate();
+                fillRoom().createWallsAndDoors().generateObstacles(322).generate();
         String tileInFrontOfDoor1 = room.getTile(9,1).getType();
         assertEquals("ground", tileInFrontOfDoor1);
     }
@@ -135,6 +170,20 @@ class RoomTest {
         assertEquals(5,counter);
 
     }
+
+    @Test
+    public void testIfEnemyAreGenerated(){
+
+        Room room = new RoomGenerator(3,3).
+                fillRoom().createWallsAndDoors().generateEnemies(1).generate();
+        NPC npc = room.getEntityAt(NPC.class,1,1);
+        assertTrue(npc.getName().equals("Owl") ||
+                npc.getName().equals("Rattlesnake") ||
+                npc.getName().equals("Ant"));
+
+    }
+
+
 
 
 
