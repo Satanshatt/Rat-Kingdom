@@ -61,44 +61,36 @@ abstract class NPC extends Entity{
     }
 
     public void moveDownwards(Tile newTile){
-        if(isLegalToMove(newTile)){
+        if(checkIfLegalToMove(newTile)){
             this.posY--;
         }
     }
 
     public void moveRight(Tile newTile){
-        if(isLegalToMove(newTile)){
+        if(checkIfLegalToMove(newTile)){
             this.posX++;
         }
     }
 
     public void moveLeft(Tile newTile){
 
-        if(isLegalToMove(newTile)){
+        if(checkIfLegalToMove(newTile)){
             this.posX--;
         }
     }
 
     public void moveUpwards(Tile newTile){
-        if (isLegalToMove(newTile)) {
+        if (checkIfLegalToMove(newTile)) {
             this.posY++;
         }
     }
 
-    private boolean isLegalToMove(Tile newTile){ //Logiska fel, gör om! Fixa strukturen
-        try {
-            if (newTile == null) {
-                throw new IllegalStateException("Can not move outside of the room, move elsewhere"); // ta bort SOP
-            }
-
-            if (newTile.isBlocked()) {
-                direction = true;
-            }
-
-            return true;
-
-        } catch(IllegalStateException illegalStateException) {
+    boolean checkIfLegalToMove(Tile newTile){ //Logiska fel, gör om! Fixa strukturen
+        if (newTile.isBlocked()) {
+            direction = true;
             return false;
+        } else {
+            return true;
         }
     }
 

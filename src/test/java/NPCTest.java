@@ -91,7 +91,7 @@ class NPCTest {
     */
 
     @Test
-    void npcShould_Move_Left_Test(){
+    void npc_Should_Move_Left_Tile_Not_Blocked_Test(){
             NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
             Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, false);
             npc.setPosX(X_POSITION_SET_TO_FOUR);
@@ -101,7 +101,7 @@ class NPCTest {
     }
 
     @Test
-    void npcShould_Move_Right_Test(){
+    void npc_Should_Move_Right_Tile_Not_Blocked_Test(){
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
         Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, false);
         npc.setPosX(X_POSITION_SET_TO_FOUR);
@@ -111,7 +111,7 @@ class NPCTest {
     }
 
     @Test
-    void npcShould_Move_Up_Test(){
+    void npc_Should_Move_Up_Tile_Not_Blocked_Test(){
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
         Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, false);
         npc.setPosY(Y_POSITION_SET_TO_FOUR); //satt till 4
@@ -121,13 +121,20 @@ class NPCTest {
     }
 
     @Test
-    void npcShould_Move_Down_Tile_Not_Blocked_Test(){
+    void npc_Should_Move_Down_Tile_Not_Blocked_Test(){
         NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
         Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, false);
         npc.setPosY(Y_POSITION_SET_TO_FOUR);
         npc.moveDownwards(tile);
         int expectedYPosition = (Y_POSITION_SET_TO_FOUR -1);
         assertEquals(npc.getPosY(), expectedYPosition);
+    }
+
+    @Test
+    void npc_Try_To_Move_Tile_Is_Blocked_Test(){
+        NPC npc = Mockito.mock(NPC.class, Mockito.CALLS_REAL_METHODS);
+        Tile tile = new Tile("Ground", X_POSITION_SET_TO_TWO, Y_POSITION_SET_TO_TWO, true);
+        assertFalse(npc.checkIfLegalToMove(tile));
     }
 
     @Test
@@ -147,9 +154,7 @@ class NPCTest {
         player.playerTakesDamage(this.DAMAGE);
         int playerNewHealth = player.getHealth();
         assertTrue(playerNewHealth == playerExpectedHealth);
-
     }
-
 
     @Test
     void getNameAndSetNameTest() {
