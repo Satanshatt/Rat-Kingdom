@@ -1,5 +1,5 @@
 public class Ant extends Enemy{
-    Ant(String name, int health, int damage, boolean direction, String type, int posX, int posY) {
+    Ant(int posX, int posY) {
         super("Ant", 50, 5, false, "Enemy", posX, posY);
     }
 

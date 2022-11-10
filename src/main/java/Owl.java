@@ -1,6 +1,6 @@
 public class Owl extends Enemy{
-    Owl(String name, int health, int damage, boolean direction, String type, int posX, int posY) {
-        super(name, health, damage, direction, type, posX, posY);
+    Owl(int posX, int posY) {
+        super("Owl", 35, 15, false, "Enemy", posX, posY);
     }
 
 

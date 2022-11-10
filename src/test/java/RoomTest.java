@@ -38,12 +38,31 @@ class RoomTest {
     }
 
     @Test
-    public void testGetTileCorrectPosition(){
+    public void testGetTileCorrectPositionX(){
         RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
         Room room = roomGen.fillRoom("ground").generate();
         Tile expectedTile = room.getTile(0,0);
         assertEquals(expectedTile.getPosX(), 0);
         assertEquals(expectedTile.getPosY(), 0);
+    }
+
+    @Test
+    public void testGetTileCorrectPositionY(){
+        RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
+        Room room = roomGen.fillRoom("ground").generate();
+        Tile expectedTile = room.getTile(0,0);
+        assertEquals(expectedTile.getPosY(), 0);
+    }
+
+    @Test
+    public void testGetEntityAt(){
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
+                fillRoom("ground").createWallsAndDoors().generate();
+        NPC npc = new Ant(1,1);
+        room.addEntity(npc);
+        NPC npcInRoom = room.getEntityAt(NPC.class, 1 ,1 );
+        String type = npcInRoom.getName();
+        assertEquals("Ant", type);
     }
 
     @Test
@@ -100,25 +119,14 @@ class RoomTest {
     }
 
     @Test
-    public void obstaclesCantBeCreatedInFrontOfDoors(){
-        int counter = 0;
+    public void testObstacleCantBeCreatedInFrontOfDoor(){
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
-                fillRoom("ground").createWallsAndDoors().generateObstacles(100).generate();
-
-        for(int x= 0;x<MAP_WIDTH-1; x++){
-            for(int y= 0;y<MAP_HEIGHT-1; y++){
-                if(room.getTile(x,y).getType().equals("obstacle")){
-                    counter++;
-                }
-            }
-        }
-
-        assertEquals(100, counter);
-
+                fillRoom("ground").createWallsAndDoors().generateObstacles(322).generate();
+        String tileInFrontOfDoor1 = room.getTile(9,1).getType();
+        assertEquals("ground", tileInFrontOfDoor1);
     }
-
     @Test
-    public void newMap(){
+    public void testIfMapContainsFiveRooms(){
         Map map = new Map();
         int counter = 0;
         for(int i = 0;i<map.getRooms().size();i++){

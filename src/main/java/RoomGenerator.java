@@ -44,7 +44,7 @@ public class RoomGenerator {
             tiles[x][0] = generateTile("wall", x,0);
             tiles[x][height-1] = generateTile("wall", x,height-1);
         }
-        for(int y= 0;y<width; y++){
+        for(int y= 0;y<height; y++){
             tiles[0][y] = generateTile("wall", y,0);
             tiles[width-1][y] = generateTile("wall", y,width-1);
             if( y == (width-1)/2){
@@ -60,11 +60,14 @@ public class RoomGenerator {
         int randomX;
         int randomY;
 
+
         for(int i=0; i<numObstacles;i++){
             do {
                 randomX = random.nextInt(width);
                 randomY = random.nextInt(height);
-            } while (tiles[randomX][randomY].isBlocked());
+            } while (tiles[randomX][randomY].isBlocked()
+                    || (tiles[randomX][randomY].getPosY() == 18 && tiles[randomX][randomY].getPosX() == 9)
+                    || (tiles[randomX][randomY].getPosY() == 1 && tiles[randomX][randomY].getPosX() == 9));
             tiles[randomX][randomY] = generateTile("obstacle", randomX,randomY);
         }
 
@@ -78,13 +81,24 @@ public class RoomGenerator {
         NPC npc;
 
         for(int i=0; i<numEnemies;i++){
+
             while (tiles[randomX][randomY].isBlocked()){
                 randomX = random.nextInt(width);
                 randomY = random.nextInt(height);
             }
 
-            npc = new Ant("Ant", 100, 5, false, "Ant", 1, 1);
-            npcs.add(npc);
+            int rnd = random.nextInt(3);
+
+            if (rnd == 0){
+                npc = new Ant(randomX, randomY);
+                npcs.add(npc);
+            } else if (rnd == 1) {
+                npc = new Owl(randomX, randomY);
+                npcs.add(npc);
+            } else {
+                npc = new Rattlesnake(randomX, randomY);
+                npcs.add(npc);
+            }
 
         }
 
