@@ -3,6 +3,14 @@ public class Owl extends Enemy{
         super(name, health, damage, direction, type, posX, posY);
     }
 
+
+    @Override
+    public void attack(Player player) {
+        player.playerTakesDamage(this.getDamage());
+        System.out.println("An owl attacked you!");
+    }
+
+    @Override
     public void moveForBattle(Room currentRoom) {
         int widthOfRoom = currentRoom.getWidth();
         do{
@@ -26,19 +34,4 @@ public class Owl extends Enemy{
         } while(this.getHealth() >= 0);
     }
 
-    @Override
-    public void attackEnemy() {
-
-    }
-
-    @Override
-    public void attackFriend() {
-
-    }
-
-    @Override
-    public void attackPlayer(Player player) {
-        player.playerTakesDamage(this.getDamage());
-        System.out.println("An owl attacked you!");
-    }
 }

@@ -5,7 +5,12 @@ public class Boss extends Enemy{
     }
 
     @Override
-    public void attackPlayer(Player player) {
+    public void attack(Player player) {
+
+    }
+
+    @Override
+    public void moveForBattle(Room currentRoom) {
 
     }
 

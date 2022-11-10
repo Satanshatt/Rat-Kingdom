@@ -9,7 +9,7 @@ public class Ant extends Enemy{
     boolean justWentDown = false;
 
     @Override
-    public void attackPlayer(Player player) {
+    public void attack(Player player) {
         if(this.isPlayerWithinReach(player)){
             player.playerTakesDamage(this.getDamage());
             System.out.println("An ant bit you!");

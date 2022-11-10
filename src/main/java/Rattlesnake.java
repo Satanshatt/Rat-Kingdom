@@ -4,7 +4,7 @@ public class Rattlesnake extends Enemy{
     }
 
     @Override
-    public void attackPlayer(Player player) {
+    public void attack(Player player) {
         if(this.isPlayerWithinReach(player)){
             player.playerTakesDamage(this.getDamage());
             System.out.println("A rattlesnake bit you!");

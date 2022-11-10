@@ -17,13 +17,9 @@ abstract class NPC extends Entity{
 
     }
 
-    public abstract void attackEnemy(); //fixa alla attack-metoder
+    public abstract void attack(Player player); //fixa alla attack-metoder
 
-    public abstract void attackFriend();
-
-    public abstract void attackPlayer();
-
-    public abstract void moveForBattle();
+    public abstract void moveForBattle(Room currentRoom);
 
     public boolean isPlayerWithinReach(Player player) {
 
