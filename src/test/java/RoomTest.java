@@ -12,19 +12,36 @@ class RoomTest {
     private static final int MAP_HEIGHT = 20;
 
 
-    @BeforeEach
-    void setup(){
-
-    }
-
     @Test
-    public void correctSizeOfRoom(){
+    public void testCorrectSizeOfRoomX(){
         RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
         Room room = roomGen.fillRoom().generate();
         int width = room.getWidth();
-        int height = room.getHeight();
         assertEquals(20, width);
+    }
+
+    @Test
+    public void testCorrectSizeOfRoomY(){
+        RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
+        Room room = roomGen.fillRoom().generate();
+        int height = room.getHeight();
         assertEquals(20, height);
+    }
+
+    @Test
+    public void testFalseSizeOfRoomX(){
+        RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
+        Room room = roomGen.fillRoom().generate();
+        int width = room.getWidth();
+        assertFalse(width!=MAP_WIDTH);
+    }
+
+    @Test
+    public void testFalseSizeOfRoomY(){
+        RoomGenerator roomGen = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT);
+        Room room = roomGen.fillRoom().generate();
+        int height = room.getWidth();
+        assertFalse(height!=MAP_HEIGHT);
     }
 
     @Test
@@ -153,6 +170,20 @@ class RoomTest {
         assertEquals(5,counter);
 
     }
+
+    @Test
+    public void testIfEnemyAreGenerated(){
+
+        Room room = new RoomGenerator(3,3).
+                fillRoom().createWallsAndDoors().generateEnemies(1).generate();
+        NPC npc = room.getEntityAt(NPC.class,1,1);
+        assertTrue(npc.getName().equals("Owl") ||
+                npc.getName().equals("Rattlesnake") ||
+                npc.getName().equals("Ant"));
+
+    }
+
+
 
 
 
