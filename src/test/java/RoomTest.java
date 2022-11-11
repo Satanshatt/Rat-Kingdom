@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -60,7 +62,7 @@ class RoomTest {
         Room room = roomGen.fillRoom().generate();
         Tile expectedTile = room.getTile(0,0);
         assertEquals(expectedTile.getPosX(), 0);
-        assertEquals(expectedTile.getPosY(), 0);
+
     }
 
     @Test
@@ -113,17 +115,27 @@ class RoomTest {
     public void createWallAroundEdges(){
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
         String wallTile = room.getTile(0,0).getType();
-        String groundTile = room.getTile(1,1).getType();
         assertEquals("wall", wallTile);
+    }
+
+    @Test
+    public void testGroundInsideWalls(){
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
+        String groundTile = room.getTile(1,1).getType();
         assertEquals("ground", groundTile);
     }
 
     @Test
-    public void createDoorsAtCorrectPosition(){
+    public void testDoorAtCorrectPostion1(){
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
         String doorTile1 = room.getTile(0,(MAP_HEIGHT-1)/2).getType();
-        String doorTile2 = room.getTile(MAP_WIDTH-1,(MAP_HEIGHT-1)/2).getType();
         assertEquals("door", doorTile1);
+    }
+
+    @Test
+    public void testDoorAtCorrectPostion2(){
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
+        String doorTile2 = room.getTile(MAP_WIDTH-1,(MAP_HEIGHT-1)/2).getType();
         assertEquals("door", doorTile2);
     }
 
@@ -171,6 +183,7 @@ class RoomTest {
 
     }
 
+
     @Test
     public void testIfEnemyAreGenerated(){
 
@@ -182,6 +195,36 @@ class RoomTest {
                 npc.getName().equals("Ant"));
 
     }
+
+    @Test
+    public void testIfTooManyEnemiesAreGenerated(){
+
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                Room room = new RoomGenerator(3,3).
+                        fillRoom().createWallsAndDoors().generateEnemies(2).generate();
+            }
+        });
+
+    }
+
+    @Test
+    public void testIfTooManyObstaclesAreGenerated(){
+
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                Room room = new RoomGenerator(4,4).
+                        fillRoom().createWallsAndDoors().generateObstacles(3).generate();
+            }
+        });
+
+    }
+
+
+
+
 
 
 
