@@ -85,6 +85,28 @@ class RoomTest {
     }
 
     @Test
+    public void testOneEntityPerTileCorrect(){
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
+                fillRoom().createWallsAndDoors().generate();
+        NPC npc = new Ant(1,1);
+        NPC npc1 = new Rattlesnake(1,1);
+        room.getSet().add(npc);
+        room.getSet().add(npc1);
+        assertTrue(room.getEntityAt(NPC.class,1,1).getName().equals("Rattlesnake"));
+    }
+
+    @Test
+    public void testOneEntityPerTileFalse(){
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
+                fillRoom().createWallsAndDoors().generate();
+        NPC npc = new Ant(1,1);
+        NPC npc1 = new Rattlesnake(1,1);
+        room.getSet().add(npc);
+        room.getSet().add(npc1);
+        assertFalse(room.getEntityAt(NPC.class,1,1).getName().equals("Ant"));
+    }
+
+    @Test
     public void testEntityPositionX(){
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
                 fillRoom().createWallsAndDoors().generate();
@@ -140,12 +162,13 @@ class RoomTest {
     }
 
     @Test
-    public void correctAmountOfEnemiesExist(){
+    public void testCorrectAmountOfEnemiesExist(){
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
                 fillRoom().createWallsAndDoors().generateEnemies(4).generate();
         int numEnemies = room.getSet().size();
         assertEquals(4, numEnemies);
     }
+
 
     @Test
     public void obstaclesAreGenerated(){
@@ -172,16 +195,6 @@ class RoomTest {
         String tileInFrontOfDoor1 = room.getTile(9,1).getType();
         assertEquals("ground", tileInFrontOfDoor1);
     }
-    @Test
-    public void testIfMapContainsFiveRooms(){
-        Map map = new Map();
-        int counter = 0;
-        for(int i = 0;i<map.getRooms().size();i++){
-            counter++;
-        }
-        assertEquals(5,counter);
-
-    }
 
 
     @Test
@@ -193,6 +206,17 @@ class RoomTest {
         assertTrue(npc.getName().equals("Owl") ||
                 npc.getName().equals("Rattlesnake") ||
                 npc.getName().equals("Ant"));
+
+    }
+
+    @Test
+    public void testIfMapContainsFiveRooms(){
+        Map map = new Map();
+        int counter = 0;
+        for(int i = 0;i<map.getRooms().size();i++){
+            counter++;
+        }
+        assertEquals(5,counter);
 
     }
 
