@@ -29,7 +29,7 @@ public class Room {
 
     public Tile getTile(int x, int y){
         if (x < 0 || x >= width || y < 0 || y >= height)
-            return null;
+            throw new IllegalArgumentException("Outside map");
         else
             return tiles[x][y];
     }

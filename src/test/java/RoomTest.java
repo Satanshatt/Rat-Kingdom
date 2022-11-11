@@ -96,23 +96,32 @@ class RoomTest {
     }
 
     @Test
-    public void testOneEntityPerTileFalse(){
-        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
-                fillRoom().createWallsAndDoors().generate();
-        NPC npc = new Ant(1,1);
-        NPC npc1 = new Rattlesnake(1,1);
-        room.getSet().add(npc);
-        room.getSet().add(npc1);
-        assertFalse(room.getEntityAt(NPC.class,1,1).getName().equals("Ant"));
-    }
-
-    @Test
     public void testEntityPositionX(){
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
                 fillRoom().createWallsAndDoors().generate();
         Entity entity = room.getEntityAt(Entity.class, 1 ,1 );
         int posX = entity.getPosX();
         assertEquals(1, posX);
+    }
+
+    @Test
+    public void testEntitySetPositionX(){
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
+                fillRoom().createWallsAndDoors().generate();
+        Entity entity = room.getEntityAt(Entity.class, 1 ,1 );
+        entity.setPosX(2);
+        int posX = entity.getPosX();
+        assertEquals(2, posX);
+    }
+
+    @Test
+    public void testEntitySetPositionY(){
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).
+                fillRoom().createWallsAndDoors().generate();
+        Entity entity = room.getEntityAt(Entity.class, 1 ,1 );
+        entity.setPosY(2);
+        int posY = entity.getPosY();
+        assertEquals(2, posY);
     }
 
     @Test
@@ -132,12 +141,24 @@ class RoomTest {
         assertEquals(type, "ground");
     }
 
+    @Test
+    public void testGetWallTileBlocked(){
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
+        assertTrue(room.isBlocked(0,0));
+    }
 
     @Test
     public void createWallAroundEdges(){
         Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
         String wallTile = room.getTile(0,0).getType();
         assertEquals("wall", wallTile);
+    }
+
+    @Test
+    public void testWallAroundEdgesAreBlocked(){
+        Room room = new RoomGenerator(MAP_WIDTH,MAP_HEIGHT).fillRoom().createWallsAndDoors().generate();
+        Tile wallTile = room.getTile(0,0);
+        assertTrue(wallTile.isBlocked());
     }
 
     @Test
@@ -210,6 +231,13 @@ class RoomTest {
     }
 
     @Test
+    public void testEntityTileBlocked(){
+        Room room = new RoomGenerator(3,3).
+                fillRoom().createWallsAndDoors().generateEnemies(1).generate();
+        assertTrue(room.isBlocked(1,1));
+    }
+
+    @Test
     public void testIfMapContainsFiveRooms(){
         Map map = new Map();
         int counter = 0;
@@ -241,6 +269,20 @@ class RoomTest {
             public void execute() throws Throwable {
                 Room room = new RoomGenerator(4,4).
                         fillRoom().createWallsAndDoors().generateObstacles(3).generate();
+            }
+        });
+
+    }
+
+    @Test
+    public void testTileOutsideMap(){
+
+        assertThrows(IllegalArgumentException.class, new Executable() {
+            @Override
+            public void execute() throws Throwable {
+                Room room = new RoomGenerator(4,4).
+                        fillRoom().createWallsAndDoors().generateObstacles(3).generate();
+                room.getTile(10,10);
             }
         });
 
