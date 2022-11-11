@@ -83,7 +83,6 @@ abstract class NPC extends Entity{
 
     boolean checkIfLegalToMove(Tile newTile){ //Logiska fel, gör om! Fixa strukturen
         if (newTile.isBlocked()) {
-            direction = true;
             return false;
         } else {
             return true;

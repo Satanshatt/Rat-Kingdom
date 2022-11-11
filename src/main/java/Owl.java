@@ -12,26 +12,27 @@ public class Owl extends Enemy{
 
     @Override
     public void moveForBattle(Room currentRoom) {
-        int widthOfRoom = currentRoom.getWidth();
-        do{
-            if(this.getDirection()){
-                int xPosition = this.getPosX();
-                int yPosition = this.getPosY();
-                Tile currentTile = currentRoom.getTile(xPosition, yPosition);
-                this.moveLeft(currentTile); //kolla vad som händer om vägen är blockad
-                if(xPosition == 0){ // ska denna if-sats ligga efter att vi flyttat redan?
-                    this.setDirection(true);
-                }
-            } else if (!this.getDirection()){
-                int xPosition = this.getPosX();
-                int yPosition = this.getPosY();
-                Tile currentTile = currentRoom.getTile(xPosition, yPosition);
-                this.moveRight(currentTile);
-                if(xPosition == widthOfRoom){
-                    this.setDirection(true);
-                }
-            }
-        } while(this.getHealth() >= 0);
+        int xPosition = this.getPosX();
+        int yPosition = this.getPosY();
+
+        if(this.getDirection()) {
+            xPosition += 1;
+        }
+        else {
+            xPosition -= 1;
+        }
+
+        Tile currentTile = currentRoom.getTile(xPosition, yPosition);
+
+        if(currentTile.isBlocked()){ // ska denna if-sats ligga efter att vi flyttat redan?
+            this.setDirection(!this.getDirection());
+        }
+
+        if(this.getDirection()){
+            this.moveRight(currentTile);
+        } else {
+            this.moveLeft(currentTile); //kolla vad som händer om vägen är blockad
+        }
     }
 
 }
