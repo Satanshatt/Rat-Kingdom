@@ -56,10 +56,14 @@ public class RoomGenerator {
     }
 
     public RoomGenerator generateObstacles(int numObstacles){
+        int maxNumObstacles = ((height-2)*(width-2))-2;
+        if(numObstacles>maxNumObstacles){
+            throw new IllegalArgumentException("Too many obstacles");
+        }
+
         Random random = new Random();
         int randomX;
         int randomY;
-
 
         for(int i=0; i<numObstacles;i++){
             do {
@@ -75,6 +79,10 @@ public class RoomGenerator {
     }
 
     public RoomGenerator generateEnemies(int numEnemies){
+        int maxNumEnemies = (height-2)*(width-2);
+        if(numEnemies>maxNumEnemies){
+            throw new IllegalArgumentException("Too many enemies");
+        }
         Random random = new Random();
         int randomX = 0;
         int randomY = 0;
